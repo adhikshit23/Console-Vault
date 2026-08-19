@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>document.documentElement.classList.add('js');</script>
+  <title>Play Boy</title>
+  <link rel="icon" type="image/png" href="81c1d0412d8991a3ae21e2a3d37c46ab.jpg">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #0b0d12;
+      color: #e5e7eb;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(800px circle at 80% -10%, rgba(59,130,246,0.35), transparent 60%),
+        radial-gradient(600px circle at -10% 60%, rgba(59,130,246,0.18), transparent 55%),
+        linear-gradient(180deg, #05060a 0%, #0b0d12 40%, #0f172a 100%);
+      z-index: -1;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    header {
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(8px);
+      padding: 7px 20px;
+      border-bottom: 1px solid rgba(59,130,246,0.15);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 55px;
+      object-fit: inherit;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-item {
+      position: relative;
+    }
+
+    .nav-item a {
+      padding: 8px 12px;
+      border-radius: 6px;
+      opacity: 0.85;
+      transition: 0.25s;
+    }
+
+    .nav-item a:hover {
+      background: rgba(59,130,246,0.15);
+      opacity: 1;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 110%;
+      left: 0;
+      background: #0f172a;
+      border: 1px solid rgba(59,130,246,0.25);
+      border-radius: 12px;
+      min-width: 160px;
+      padding: 8px 0;
+      list-style: none;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: 0.25s ease;
+      z-index: 1000;
+    }
+
+    .dropdown-menu li a {
+      padding: 10px 16px;
+      font-size: 14px;
+      display: block;
+    }
+
+    .dropdown-menu li a:hover {
+      background: rgba(59,130,246,0.2);
+    }
+
+    .nav-item.dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .hero {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .image-scroll {
+      display: flex;
+      gap: 22px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 12px;
+    }
+
+    .image-scroll img {
+      width: min(85vw, 820px);
+      max-height: 460px;
+      object-fit: cover;
+      border-radius: 16px;
+      scroll-snap-align: center;
+      box-shadow: 0 20px 45px rgba(59,130,246,0.25);
+    }
+
+    .image-scroll::-webkit-scrollbar { display: none; }
+
+    .hero-text h1 {
+      margin-top: 30px;
+      font-size: 42px;
+      font-weight: 800;
+    }
+
+    .hero-text p {
+      opacity: 0.75;
+    }
+
+    .cta-btn {
+      margin-top: 18px;
+      padding: 12px 28px;
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
+      border-radius: 10px;
+      font-weight: 700;
+      display: inline-block;
+      transition: 0.3s;
+    }
+
+    .cta-btn:hover {
+      box-shadow: 0 0 25px rgba(59,130,246,0.6);
+      transform: translateY(-1px);
+    }
+
+    .we-assure {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    .we-assure-box {
+      background: rgba(15,23,42,0.75);
+      backdrop-filter: blur(10px);
+      border-radius: 18px;
+      padding: 32px 26px;
+      border: 1px solid rgba(59,130,246,0.2);
+    }
+
+    .assure-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 22px;
+    }
+
+    .assure-card {
+      background: rgba(15,23,42,0.9);
+      border-radius: 14px;
+      padding: 26px 20px;
+      text-align: center;
+      border: 1px solid rgba(59,130,246,0.15);
+    }
+
+    .games-section {
+      max-width: 1200px;
+      margin: 50px auto;
+    }
+
+    .games-section h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 28px;
+      font-weight: 800;
+    }
+
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      justify-content: center;
+      gap: 26px;
+    }
+
+    .game-card {
+      width: 260px;
+      background: rgba(15,23,42,0.85);
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(59,130,246,0.2);
+      transition: 0.3s;
+      margin: auto;
+    }
+
+    .game-card img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      background: #0b0d12;
+    }
+
+    .game-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 45px rgba(59,130,246,0.4);
+    }
+
+    .game-info {
+      padding: 12px 14px;
+    }
+
+    .price {
+      font-size: 15px;
+      font-weight: 700;
+      color: rgb(88, 184, 215);
+    }
+
+    .more-games {
+      margin-top: 35px;
+      text-align: center;
+    }
+
+    .more-games a {
+      padding: 12px 34px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
+      font-weight: 700;
+      display: inline-block;
+    }
+
+    footer {
+      text-align: center;
+      padding: 26px;
+      background: rgba(0,0,0,0.8);
+      border-top: 1px solid rgba(59,130,246,0.15);
+      font-size: 14px;
+      color: #9ca3af;
+    }
+
+    /* === FLIP BOX WRAPPER === */
+.flip-box {
+  background: rgba(15,23,42,0.75);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 40px 50px;
+  border: 1px solid rgba(59,130,246,0.25);
+  box-shadow: 0 25px 60px rgba(59,130,246,0.3);
+  display: inline-block;
+}
+
+
+
+       /* ========= FLIP TEXT ========= */
+ 
+.flip-section {
+  margin: 80px 0;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+}
+
+#container {
+  color: white;
+  text-transform: uppercase;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+#flip {
+  height: 45px;
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+#flip > div {
+  animation: show 6s infinite;
+}
+
+#flip > div > div {
+  height: 45px;
+  line-height: 45px;
+  padding: 0 12px;
+  color: #fff;
+}
+
+#flip div:nth-child(1) div { background: #4ec7f3; }
+#flip div:nth-child(2) div { background: #42c58a; }
+#flip div:nth-child(3) div { background: #DC143C; }
+
+@keyframes show {
+  0%   { transform: translateY(0); }
+  30%  { transform: translateY(0); }
+
+  33%  { transform: translateY(-45px); }
+  63%  { transform: translateY(-45px); }
+
+  66%  { transform: translateY(-90px); }
+  96%  { transform: translateY(-90px); }
+
+  100% { transform: translateY(0); }
+}
+
+    /* ============================================================
+       PREMIUM UPGRADE — ANIMATIONS, SEARCH & MICRO-INTERACTIONS
+       ============================================================ */
+
+    /* ---- Smooth in-page scrolling (used when a search result
+           scrolls a game card into view) ---- */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* ---- Progressive-enhancement entrance/reveal system ----
+       Elements only start hidden once JS confirms it can animate
+       them back in, so the page still works fine with JS disabled. */
+    .js .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .js .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* cards need a unified transition so reveal + hover never fight */
+    .js .game-card.reveal,
+    .js .assure-card.reveal {
+      transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                  transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                  box-shadow 0.4s ease,
+                  border-color 0.4s ease;
+    }
+    .js .image-scroll img.reveal {
+      transform: scale(0.96);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .js .image-scroll img.reveal.is-visible {
+      transform: scale(1);
+    }
+
+    /* ---- Logo micro-interaction ---- */
+    .logo img {
+      transition: transform 0.3s ease;
+    }
+    .logo img:hover {
+      transform: scale(1.05);
+    }
+
+    /* ---- Animated underline sweep for top-level nav links ---- */
+    .nav-item > a {
+      position: relative;
+    }
+    .nav-item > a::after {
+      content: "";
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 4px;
+      height: 2px;
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
+      border-radius: 2px;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+    .nav-item > a:hover::after {
+      transform: scaleX(1);
+    }
+
+    /* ---- Dropdown items cascade in instead of appearing all at once ---- */
+    .dropdown-menu li {
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .dropdown-menu li:nth-child(1) { transition-delay: 0.05s; }
+    .dropdown-menu li:nth-child(2) { transition-delay: 0.1s; }
+    .dropdown-menu li:nth-child(3) { transition-delay: 0.15s; }
+    .nav-item.dropdown:hover .dropdown-menu li {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ---- Nav search button: expands smoothly on hover ---- */
+    .nav-search-btn {
+      display: inline-flex;
+      align-items: center;
+      height: 38px;
+      padding: 0 10px;
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.25);
+      border-radius: 8px;
+      color: #e5e7eb;
+      cursor: pointer;
+      overflow: hidden;
+      white-space: nowrap;
+      font-family: "Poppins", sans-serif;
+      transition: background 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                  box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                  padding 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                  transform 0.2s ease;
+    }
+    .nav-search-btn .search-icon {
+      flex-shrink: 0;
+    }
+    .nav-search-btn .search-label {
+      max-width: 0;
+      margin-left: 0;
+      opacity: 0;
+      overflow: hidden;
+      font-size: 14px;
+      font-weight: 600;
+      transition: max-width 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                  opacity 0.25s ease,
+                  margin-left 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .nav-search-btn:hover,
+    .nav-search-btn:focus-visible {
+      background: rgba(59, 130, 246, 0.22);
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.35);
+      padding: 0 16px;
+    }
+    .nav-search-btn:hover .search-label,
+    .nav-search-btn:focus-visible .search-label {
+      max-width: 140px;
+      opacity: 1;
+      margin-left: 8px;
+    }
+    .nav-search-btn:active {
+      transform: scale(0.96);
+    }
+
+    /* ---- Search overlay ---- */
+    .search-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 6, 10, 0.75);
+      backdrop-filter: blur(6px);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 10vh 20px 20px;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.35s ease, visibility 0.35s;
+      z-index: 2000;
+    }
+    .search-overlay.active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+    .search-panel {
+      width: min(600px, 100%);
+      max-height: 74vh;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(59, 130, 246, 0.25);
+      border-radius: 18px;
+      box-shadow: 0 25px 60px rgba(59, 130, 246, 0.35);
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transform: translateY(-24px) scale(0.97);
+      opacity: 0;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+    }
+    .search-overlay.active .search-panel {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+    .search-panel-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+      padding-bottom: 14px;
+      margin-bottom: 14px;
+    }
+    .search-panel-icon {
+      opacity: 0.7;
+      flex-shrink: 0;
+    }
+    .search-input {
+      flex: 1;
+      min-width: 0;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #e5e7eb;
+      font-family: "Poppins", sans-serif;
+      font-size: 16px;
+      padding: 6px 0;
+    }
+    .search-input::placeholder {
+      color: #6b7280;
+    }
+    .search-close-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 8px;
+      color: #e5e7eb;
+      cursor: pointer;
+      transition: background 0.25s ease, transform 0.35s ease, color 0.25s ease;
+    }
+    .search-close-btn:hover,
+    .search-close-btn:focus-visible {
+      background: rgba(239, 68, 68, 0.18);
+      color: #fecaca;
+      transform: rotate(90deg);
+    }
+    .search-results {
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding-right: 4px;
+    }
+    .search-results::-webkit-scrollbar {
+      width: 6px;
+    }
+    .search-results::-webkit-scrollbar-thumb {
+      background: rgba(59, 130, 246, 0.35);
+      border-radius: 6px;
+    }
+    .search-result-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid transparent;
+      border-radius: 12px;
+      padding: 10px 12px;
+      color: inherit;
+      font-family: inherit;
+      text-align: left;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateX(-12px);
+      transition: opacity 0.35s ease, transform 0.35s ease,
+                  background 0.25s ease, border-color 0.25s ease;
+    }
+    .search-result-item.is-visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .search-result-item:hover,
+    .search-result-item:focus-visible {
+      background: rgba(59, 130, 246, 0.12);
+      border-color: rgba(59, 130, 246, 0.3);
+      transform: translateX(4px);
+    }
+    .search-result-item img {
+      width: 52px;
+      height: 52px;
+      border-radius: 8px;
+      object-fit: cover;
+      background: #0b0d12;
+      flex-shrink: 0;
+    }
+    .search-result-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+    .search-result-title {
+      font-size: 14px;
+      font-weight: 600;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .search-result-price {
+      font-size: 13px;
+      font-weight: 700;
+      color: rgb(88, 184, 215);
+    }
+    .search-empty,
+    .search-hint {
+      text-align: center;
+      padding: 34px 10px;
+      color: #9ca3af;
+      font-size: 14px;
+    }
+
+    /* ---- Pulse highlight when a search result is opened from the panel ---- */
+    @keyframes searchPulse {
+      0%   { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.55); }
+      70%  { box-shadow: 0 0 0 18px rgba(59, 130, 246, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+    }
+    .game-card.search-highlight {
+      animation: searchPulse 1.4s ease-out 2;
+      border-color: rgba(59, 130, 246, 0.6);
+    }
+
+    /* ---- Card & button hover polish ---- */
+    .assure-card {
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                  box-shadow 0.35s ease, border-color 0.35s ease;
+    }
+    .assure-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 45px rgba(59, 130, 246, 0.3);
+      border-color: rgba(59, 130, 246, 0.4);
+    }
+    .game-card img {
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .game-card:hover img {
+      transform: scale(1.06);
+    }
+    .more-games a {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .more-games a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 25px rgba(59, 130, 246, 0.6);
+    }
+    .more-games a:active,
+    .cta-btn:active {
+      transform: translateY(0) scale(0.97);
+    }
+
+    /* ---- Sort-by-price fade helper (snappier exit, elegant re-entry) ---- */
+    .js .game-card.reveal.card-sorting {
+      transition: opacity 0.28s ease, transform 0.28s ease;
+      opacity: 0;
+      transform: translateY(14px) scale(0.96);
+    }
+
+    /* ---- Responsive tweaks for the nav & search panel ---- */
+    @media (max-width: 760px) {
+      nav {
+        flex-wrap: wrap;
+        row-gap: 10px;
+      }
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 14px 18px;
+      }
+      .search-panel {
+        padding: 18px;
+      }
+    }
+
+    /* ---- Respect the user's OS-level reduced-motion preference ---- */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .js .reveal,
+      .js .reveal.is-visible {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+<header>
+  <nav>
+    <div class="logo">
+      <img src="logo.png" alt="Game Nation Logo">
+    </div>
+    <ul class="nav-links">
+      <li class="nav-item dropdown">
+        <a href="#">Games ▼</a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Action</a></li>
+          <li><a href="#">Adventure</a></li>
+          <li><a href="#">RPG</a></li>
+        </ul>
+      </li>
+      <li class="nav-item"><a href="#">Consoles</a></li>
+      <li class="nav-item"><a href="#">Accessories</a></li>
+      <li class="nav-item"><a href="#">PC Components</a></li>
+      <li class="nav-item"><a href="#">Contact-Us</a></li>
+      <li class="nav-item nav-search-item">
+        <button type="button" class="nav-search-btn" id="searchToggleBtn" aria-haspopup="dialog" aria-expanded="false" aria-controls="searchOverlay">
+          <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <span class="search-label">Search Games</span>
+        </button>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<div class="search-overlay" id="searchOverlay" role="dialog" aria-modal="true" aria-label="Search games">
+  <div class="search-panel">
+    <div class="search-panel-header">
+      <svg class="search-panel-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="11" cy="11" r="7"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input type="text" id="searchInput" class="search-input" placeholder="Search for games… (e.g. FIFA, God, Last)" autocomplete="off">
+      <button type="button" class="search-close-btn" id="searchCloseBtn" aria-label="Close search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <div class="search-results" id="searchResults">
+      <p class="search-hint">Start typing to find games…</p>
+    </div>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="image-scroll">
+    <img class="reveal" src="https://relay-bl-in-records.sgp1.cdn.digitaloceanspaces.com/GameNation/AdAsset_113" alt="Promotional banner">
+    <img class="reveal" src="https://relay-bl-in-records.sgp1.cdn.digitaloceanspaces.com/GameNation/AdAsset_108" alt="Promotional banner">
+    <img class="reveal" src="https://relay-bl-in-records.sgp1.cdn.digitaloceanspaces.com/GameNation/AdAsset_116" alt="Promotional banner">
+  </div>
+</section>
+
+<section class="flip-section">
+  <div class="flip-box reveal">
+    <div id="container">
+      Sell Your
+      <div id="flip">
+        <div><div>PC</div></div>
+        <div><div>Consoles</div></div>
+        <div><div>Games</div></div>
+      </div>
+      Now!!
+    </div>
+  </div>
+</section>
+
+
+<section class="we-assure">
+  <div class="we-assure-box reveal">
+    <h2>We Assure</h2>
+    <div class="assure-grid">
+      <div class="assure-card reveal"><h3>Free Shipping</h3><p>Cash on Delivery</p></div>
+      <div class="assure-card reveal"><h3>Trade In</h3><p>Buy → Play → Sell → Repeat</p></div>
+      <div class="assure-card reveal"><h3>Support</h3><p>10AM – 6PM (Mon–Sat)</p></div>
+      <div class="assure-card reveal"><h3>Easy Returns</h3><p>7 Days Return Policy</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="games-section">
+  <h2 class="reveal">Featured Games</h2>
+
+  <div class="games-grid">
+    <div class="game-card reveal">
+      <img src="https://relay-bl-in-records.sgp1.cdn.digitaloceanspaces.com/GameNation/EA_3963" alt="EA Sports FC 24">
+      <div class="game-info">
+        <h3>EA Sports FC 24</h3>
+        <div class="price">₹3,999</div>
+      </div>
+    </div>
+
+    <div class="game-card reveal">
+      <img src="https://relay-bl-in-records.sgp1.cdn.digitaloceanspaces.com/GameNation/EA_129" alt="Red Dead Redemption 2">
+      <div class="game-info">
+        <h3>Red Dead Redemption 2</h3>
+        <div class="price">₹3,499</div>
+      </div>
+    </div>
+
+    <div class="game-card reveal">
+      <img src="https://relay-bl-in-records.sgp1.cdn.digitaloceanspaces.com/GameNation/EA_4169" alt="Last of Us II Remastered">
+      <div class="game-info">
+        <h3>Last of Us II Remastered</h3>
+        <div class="price">₹2,999</div>
+      </div>
+    </div>
+
+    <div class="game-card reveal">
+      <img src="https://relay-bl-in-records.sgp1.cdn.digitaloceanspaces.com/GameNation/EA_2787" alt="God of War Ragnarok">
+      <div class="game-info">
+        <h3>God of War Ragnarok</h3>
+        <div class="price">₹1,399</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="more-games">
+    <a href="#">More Games</a>
+  </div>
+</section>
+
+<footer class="reveal">© 2025 Play Boy — All Rights Reserved</footer>
+
+
+<script>
+  // ======== SELECT ELEMENTS ========
+  const imageScroll = document.querySelector(".image-scroll");
+  const gameCards = Array.from(document.querySelectorAll(".game-card"));
+  const gamesGrid = document.querySelector(".games-grid");
+  const moreGamesBtn = document.querySelector(".more-games a");
+  const gamesTitle = document.querySelector(".games-section h2");
+
+  // ======== MESSAGE SYSTEM (like login page) ========
+  const messageBox = document.createElement("p");
+  messageBox.className = "message";
+  document.body.appendChild(messageBox);
+
+  // Add minimal styling through JS (keeps UI intact)
+  const styleTag = document.createElement("style");
+  styleTag.textContent = `
+    .message {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(16px);
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      backdrop-filter: blur(8px);
+      transition: opacity 0.35s ease, transform 0.35s ease, visibility 0.35s;
+      z-index: 9999;
+    }
+    .message.success,
+    .message.error {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+    .message.success {
+      background: rgba(16, 185, 129, 0.18);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: #a7f3d0;
+    }
+    .message.error {
+      background: rgba(239, 68, 68, 0.18);
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      color: #fecaca;
+    }
+    .game-card.selected {
+      outline: 2px solid #3b82f6;
+      transform: translateY(-6px);
+      box-shadow: 0 20px 45px rgba(59,130,246,0.4);
+    }
+  `;
+  document.head.appendChild(styleTag);
+
+  const showMessage = (text, type) => {
+    messageBox.textContent = text;
+    messageBox.className = `message ${type}`;
+
+    // Hide after 2.5 seconds
+    setTimeout(() => {
+      messageBox.textContent = "";
+      messageBox.className = "message";
+    }, 2500);
+  };
+
+  // ======== FEATURE 1: AUTO SCROLL HERO IMAGES ========
+  let autoScrollInterval;
+  let isUserScrolling = false;
+
+  const startAutoScroll = () => {
+    autoScrollInterval = setInterval(() => {
+      if (!isUserScrolling) {
+        imageScroll.scrollBy({ left: 400, behavior: "smooth" });
+
+        // If reached end, go back to start
+        if (imageScroll.scrollLeft + imageScroll.clientWidth >= imageScroll.scrollWidth) {
+          imageScroll.scrollTo({ left: 0, behavior: "smooth" });
+        }
+      }
+    }, 3000);
+  };
+
+  imageScroll.addEventListener("scroll", () => {
+    isUserScrolling = true;
+    clearTimeout(imageScroll.scrollTimeout);
+
+    imageScroll.scrollTimeout = setTimeout(() => {
+      isUserScrolling = false;
+    }, 1500);
+  });
+
+  startAutoScroll();
+
+  // ======== FEATURE 2: SELECT / DESELECT GAME CARDS ========
+  gameCards.forEach((card) => {
+    card.addEventListener("click", () => {
+      card.classList.toggle("selected");
+
+      if (card.classList.contains("selected")) {
+        showMessage("Game selected!", "success");
+      } else {
+        showMessage("Selection removed.", "error");
+      }
+    });
+  });
+
+  // ======== FEATURE 3: SEARCH GAMES (NAV SEARCH OVERLAY) ========
+  const searchToggleBtn = document.getElementById("searchToggleBtn");
+  const searchOverlay = document.getElementById("searchOverlay");
+  const searchInput = document.getElementById("searchInput");
+  const searchResults = document.getElementById("searchResults");
+  const searchCloseBtn = document.getElementById("searchCloseBtn");
+
+  // Build the searchable index straight from the DOM so it always
+  // reflects the real game cards on the page (single source of truth).
+  const getGameIndex = () =>
+    gameCards.map((card) => ({
+      element: card,
+      title: card.querySelector("h3").textContent.trim(),
+      price: card.querySelector(".price").textContent.trim(),
+      image: card.querySelector("img").getAttribute("src"),
+    }));
+
+  const renderSearchResults = (query) => {
+    const allGames = getGameIndex();
+    const q = query.trim().toLowerCase();
+    const matches = q.length === 0
+      ? allGames
+      : allGames.filter((game) => game.title.toLowerCase().includes(q));
+
+    searchResults.innerHTML = "";
+
+    if (matches.length === 0) {
+      const empty = document.createElement("p");
+      empty.className = "search-empty";
+      empty.textContent = `No games found for "${query}"`;
+      searchResults.appendChild(empty);
+      return;
+    }
+
+    matches.forEach((game, index) => {
+      const item = document.createElement("button");
+      item.type = "button";
+      item.className = "search-result-item";
+      item.style.transitionDelay = `${Math.min(index, 6) * 40}ms`;
+      item.innerHTML = `
+        <img src="${game.image}" alt="${game.title}">
+        <span class="search-result-info">
+          <span class="search-result-title">${game.title}</span>
+          <span class="search-result-price">${game.price}</span>
+        </span>
+      `;
+      item.addEventListener("click", () => {
+        closeSearch();
+        highlightGame(game.element);
+      });
+      searchResults.appendChild(item);
+      requestAnimationFrame(() => item.classList.add("is-visible"));
+    });
+  };
+
+  const highlightGame = (card) => {
+    card.scrollIntoView({ behavior: "smooth", block: "center" });
+    card.classList.add("search-highlight");
+    setTimeout(() => card.classList.remove("search-highlight"), 2800);
+  };
+
+  const openSearch = () => {
+    searchOverlay.classList.add("active");
+    searchToggleBtn.setAttribute("aria-expanded", "true");
+    document.body.style.overflow = "hidden";
+    renderSearchResults("");
+    setTimeout(() => searchInput.focus(), 300);
+  };
+
+  const closeSearch = () => {
+    searchOverlay.classList.remove("active");
+    searchToggleBtn.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+    searchInput.value = "";
+  };
+
+  searchToggleBtn.addEventListener("click", () => {
+    searchOverlay.classList.contains("active") ? closeSearch() : openSearch();
+  });
+
+  searchCloseBtn.addEventListener("click", closeSearch);
+
+  searchOverlay.addEventListener("click", (event) => {
+    if (event.target === searchOverlay) closeSearch();
+  });
+
+  searchInput.addEventListener("input", (event) => {
+    renderSearchResults(event.target.value);
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && searchOverlay.classList.contains("active")) {
+      closeSearch();
+    }
+  });
+
+  // ======== FEATURE 4: "MORE GAMES" OPENS THE SEARCH EXPERIENCE ========
+  moreGamesBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    openSearch();
+  });
+
+  // ======== FEATURE 5: SORT BY PRICE (DOUBLE CLICK) ========
+  let sortAscending = true;
+
+  gamesTitle.addEventListener("dblclick", () => {
+    // Fade the cards out first, then reorder, then fade them back in
+    // with a small stagger so the sort feels smooth instead of instant.
+    gameCards.forEach((card) => card.classList.add("card-sorting"));
+
+    setTimeout(() => {
+      const sortedCards = [...gameCards].sort((a, b) => {
+        const priceA = parseInt(a.querySelector(".price").textContent.replace(/[₹,]/g, ""));
+        const priceB = parseInt(b.querySelector(".price").textContent.replace(/[₹,]/g, ""));
+        return sortAscending ? priceA - priceB : priceB - priceA;
+      });
+
+      gamesGrid.innerHTML = "";
+      sortedCards.forEach((card, index) => {
+        card.style.transitionDelay = `${index * 60}ms`;
+        gamesGrid.appendChild(card);
+        card.classList.remove("card-sorting");
+      });
+
+      showMessage(
+        sortAscending ? "Sorted: Low to High" : "Sorted: High to Low",
+        "success"
+      );
+
+      sortAscending = !sortAscending;
+
+      // Clean up the inline delay once the entrance transition has
+      // finished so it never lingers and affects hover animations.
+      setTimeout(() => {
+        sortedCards.forEach((card) => { card.style.transitionDelay = ""; });
+      }, sortedCards.length * 60 + 550);
+    }, 300);
+  });
+
+  // ======== FEATURE 6: ENTRANCE / SCROLL REVEAL ANIMATIONS ========
+  const revealEls = Array.from(document.querySelectorAll(".reveal"));
+
+  // Group reveal elements by their direct parent so siblings (the 3
+  // hero images, the 4 assure cards, the 4 game cards) stagger in
+  // together instead of all animating at the exact same instant.
+  const revealGroups = new Map();
+  revealEls.forEach((el) => {
+    const parent = el.parentElement;
+    if (!revealGroups.has(parent)) revealGroups.set(parent, []);
+    revealGroups.get(parent).push(el);
+  });
+
+  revealGroups.forEach((siblings) => {
+    if (siblings.length > 1) {
+      siblings.forEach((el, index) => {
+        el.style.transitionDelay = `${index * 90}ms`;
+      });
+    }
+  });
+
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        el.classList.add("is-visible");
+        el.addEventListener(
+          "transitionend",
+          () => { el.style.transitionDelay = ""; },
+          { once: true }
+        );
+        revealObserver.unobserve(el);
+      });
+    },
+    { threshold: 0.15, rootMargin: "0px 0px -60px 0px" }
+  );
+
+  revealEls.forEach((el) => revealObserver.observe(el));
+</script>
+
+
+</body>
+</html>
