@@ -1,0 +1,386 @@
+
+document.addEventListener("DOMContentLoaded", () => {
+  const LISTINGS_KEY = "consolevault_rental_listings";
+  const BOOKINGS_KEY = "consolevault_rental_bookings";
+
+  const seedListings = [
+    {
+      id: "RENT-SEED-1", consoleName: "Sony PlayStation 5 – Standard", type: "PS5", condition: "Like New",
+      city: "Karnal", hourlyRate: 250, minHours: 2, includedControllers: 1, extraControllerPrice: 100,
+      deposit: 1500, delivery: "Both", ownerName: "Rohan", ownerPhone: "+91 98765 43210",
+      notes: "Comes with FIFA 24 and God of War Ragnarok.", createdAt: new Date().toISOString()
+    },
+    {
+      id: "RENT-SEED-2", consoleName: "Xbox Series S", type: "Xbox", condition: "Good",
+      city: "Delhi", hourlyRate: 220, minHours: 2, includedControllers: 1, extraControllerPrice: 90,
+      deposit: 1200, delivery: "Pickup Only", ownerName: "Aditi", ownerPhone: "+91 91234 56780",
+      notes: "Game Pass Ultimate active — play almost anything.", createdAt: new Date().toISOString()
+    },
+    {
+      id: "RENT-SEED-3", consoleName: "Nintendo Switch OLED", type: "Switch", condition: "Like New",
+      city: "Chandigarh", hourlyRate: 180, minHours: 1, includedControllers: 1, extraControllerPrice: 80,
+      deposit: 1000, delivery: "Can Deliver", ownerName: "Karan", ownerPhone: "+91 99887 66554",
+      notes: "Great for parties — has Mario Kart 8 Deluxe.", createdAt: new Date().toISOString()
+    },
+    {
+      id: "RENT-SEED-4", consoleName: "Sony PlayStation 4 Slim", type: "PS4", condition: "Fair",
+      city: "Karnal", hourlyRate: 150, minHours: 2, includedControllers: 1, extraControllerPrice: 70,
+      deposit: 800, delivery: "Pickup Only", ownerName: "Mandeep", ownerPhone: "+91 90000 12345",
+      notes: "Budget-friendly option, works perfectly.", createdAt: new Date().toISOString()
+    },
+    {
+      id: "RENT-SEED-5", consoleName: "Sony PlayStation 5 Digital Edition", type: "PS5", condition: "Excellent",
+      city: "Panipat", hourlyRate: 280, minHours: 2, includedControllers: 2, extraControllerPrice: 100,
+      deposit: 1800, delivery: "Can Deliver", ownerName: "Priya", ownerPhone: "+91 98123 45678",
+      notes: "Includes two controllers and a curated game library.", createdAt: new Date().toISOString()
+    },
+    {
+      id: "RENT-SEED-6", consoleName: "Xbox Series X", type: "Xbox", condition: "Like New",
+      city: "Gurugram", hourlyRate: 300, minHours: 3, includedControllers: 1, extraControllerPrice: 110,
+      deposit: 2000, delivery: "Both", ownerName: "Arjun", ownerPhone: "+91 98960 11223",
+      notes: "4K-ready console with fast loading and a quiet setup.", createdAt: new Date().toISOString()
+    },
+    {
+      id: "RENT-SEED-7", consoleName: "Nintendo Switch Lite", type: "Switch", condition: "Good",
+      city: "Ambala", hourlyRate: 120, minHours: 2, includedControllers: 1, extraControllerPrice: 60,
+      deposit: 700, delivery: "Pickup Only", ownerName: "Simran", ownerPhone: "+91 98722 33445",
+      notes: "Lightweight handheld console with Animal Crossing included.", createdAt: new Date().toISOString()
+    },
+    {
+      id: "RENT-SEED-8", consoleName: "Sony PlayStation 4 Pro", type: "PS4", condition: "Good",
+      city: "Kurukshetra", hourlyRate: 190, minHours: 2, includedControllers: 2, extraControllerPrice: 75,
+      deposit: 1000, delivery: "Both", ownerName: "Vikram", ownerPhone: "+91 97654 32109",
+      notes: "Enhanced PS4 performance with two controllers included.", createdAt: new Date().toISOString()
+    },
+    {
+      id: "RENT-SEED-9", consoleName: "Sony PlayStation 5 Slim", type: "PS5", condition: "Like New",
+      city: "Chandigarh", hourlyRate: 290, minHours: 2, includedControllers: 1, extraControllerPrice: 110,
+      deposit: 1800, delivery: "Can Deliver", ownerName: "Neha", ownerPhone: "+91 99150 67890",
+      notes: "Compact PS5 Slim with HDMI cable and stand included.", createdAt: new Date().toISOString()
+    },
+    {
+      id: "RENT-SEED-10", consoleName: "Xbox One X", type: "Xbox", condition: "Fair",
+      city: "Sonipat", hourlyRate: 160, minHours: 3, includedControllers: 1, extraControllerPrice: 70,
+      deposit: 900, delivery: "Pickup Only", ownerName: "Kabir", ownerPhone: "+91 98111 22334",
+      notes: "A reliable 4K gaming console for a relaxed weekend.", createdAt: new Date().toISOString()
+    },
+    {
+      id: "RENT-SEED-11", consoleName: "Nintendo Switch V2", type: "Switch", condition: "Excellent",
+      city: "Delhi", hourlyRate: 170, minHours: 1, includedControllers: 2, extraControllerPrice: 80,
+      deposit: 1000, delivery: "Both", ownerName: "Ishita", ownerPhone: "+91 99901 45678",
+      notes: "Two Joy-Cons included—ideal for co-op games and gatherings.", createdAt: new Date().toISOString()
+    },
+    {
+      id: "RENT-SEED-12", consoleName: "Sony PlayStation 4 Standard", type: "PS4", condition: "Good",
+      city: "Karnal", hourlyRate: 140, minHours: 2, includedControllers: 1, extraControllerPrice: 65,
+      deposit: 750, delivery: "Pickup Only", ownerName: "Harpreet", ownerPhone: "+91 98888 76543",
+      notes: "Includes power cables and a comfortable single controller.", createdAt: new Date().toISOString()
+    }
+  ];
+
+  const readListings = () => {
+    try {
+      const stored = JSON.parse(localStorage.getItem(LISTINGS_KEY));
+      if (Array.isArray(stored) && stored.length) {
+        const existingIds = new Set(stored.map(listing => listing.id));
+        const missingSeeds = seedListings.filter(listing => !existingIds.has(listing.id));
+        if (missingSeeds.length) {
+          const mergedListings = [...missingSeeds, ...stored];
+          localStorage.setItem(LISTINGS_KEY, JSON.stringify(mergedListings));
+          return mergedListings;
+        }
+        return stored;
+      }
+    } catch (e) {}
+    localStorage.setItem(LISTINGS_KEY, JSON.stringify(seedListings));
+    return seedListings;
+  };
+  const writeListings = (listings) => localStorage.setItem(LISTINGS_KEY, JSON.stringify(listings));
+
+  const readBookings = () => {
+    try {
+      const stored = JSON.parse(localStorage.getItem(BOOKINGS_KEY));
+      return Array.isArray(stored) ? stored : [];
+    } catch (e) { return []; }
+  };
+  const writeBookings = (bookings) => localStorage.setItem(BOOKINGS_KEY, JSON.stringify(bookings));
+
+  const inr = (n) => "₹" + Number(n || 0).toLocaleString("en-IN");
+
+  // ---- Tabs ----
+  const browseTabBtn = document.getElementById("browseTabBtn");
+  const listTabBtn = document.getElementById("listTabBtn");
+  const browsePanel = document.getElementById("browsePanel");
+  const listPanel = document.getElementById("listPanel");
+
+  const showTab = (tab) => {
+    const isBrowse = tab === "browse";
+    browsePanel.classList.toggle("active", isBrowse);
+    listPanel.classList.toggle("active", !isBrowse);
+    browseTabBtn.classList.toggle("active", isBrowse);
+    listTabBtn.classList.toggle("active", !isBrowse);
+    if (!isBrowse) closeBookingPanel();
+  };
+  browseTabBtn.addEventListener("click", () => showTab("browse"));
+  listTabBtn.addEventListener("click", () => showTab("list"));
+  showTab(window.location.hash === "#list" ? "list" : "browse");
+
+  // ---- Prefill from logged-in user ----
+  let currentUser = null;
+  try { currentUser = JSON.parse(localStorage.getItem("playboy_current_user")); } catch (e) {}
+  if (currentUser && currentUser.name) {
+    document.getElementById("renterName").value = currentUser.name;
+    document.getElementById("listOwnerName").value = currentUser.name;
+    if (currentUser.email) {
+      // no email field needed, phone left blank intentionally
+    }
+  }
+
+  // ---- Browse grid ----
+  const rentalGrid = document.getElementById("rentalGrid");
+  const typeFilterNav = document.getElementById("typeFilterNav");
+  const cityFilterInput = document.getElementById("cityFilterInput");
+  let activeType = "all";
+
+  const renderGrid = () => {
+    const listings = readListings();
+    const cityQuery = cityFilterInput.value.trim().toLowerCase();
+    const filtered = listings.filter(l =>
+      (activeType === "all" || l.type === activeType) &&
+      (cityQuery === "" || l.city.toLowerCase().includes(cityQuery))
+    );
+
+    if (filtered.length === 0) {
+      rentalGrid.innerHTML = '<p class="rental-empty">No consoles match your filters yet. Try another type or city.</p>';
+      return;
+    }
+
+    rentalGrid.innerHTML = filtered.map(l => `
+      <div class="rental-card reveal is-visible">
+        <div class="rental-card-top">
+          <span class="rental-badge">Available</span>
+          <span class="rental-type-badge">${l.type}</span>
+        </div>
+        <h3>${l.consoleName}</h3>
+        <p class="rental-meta">${l.condition} · ${l.city}</p>
+        <p class="rental-owner">Listed by <strong>${l.ownerName}</strong></p>
+        <div class="rental-price-row">
+          <span class="rental-price">${inr(l.hourlyRate)}</span><small>/hr</small>
+        </div>
+        <div class="rental-details">
+          <span>${l.includedControllers} controller${l.includedControllers > 1 ? "s" : ""} free · extra ${inr(l.extraControllerPrice)} each</span>
+          <span>Min ${l.minHours} hr${l.minHours > 1 ? "s" : ""} · Deposit ${inr(l.deposit)} (refundable)</span>
+          <span>${l.delivery === "Pickup Only" ? "Pickup only" : l.delivery === "Can Deliver" ? "Owner can deliver" : "Pickup or delivery"}</span>
+        </div>
+        <button type="button" class="rental-book-btn" data-id="${l.id}">Rent Now</button>
+      </div>
+    `).join("");
+  };
+
+  typeFilterNav.querySelectorAll(".filter-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      typeFilterNav.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      activeType = btn.dataset.type;
+      renderGrid();
+    });
+  });
+  cityFilterInput.addEventListener("input", renderGrid);
+
+  // ---- Booking panel ----
+  const bookingPanel = document.getElementById("bookingPanel");
+  const bookingTitle = document.getElementById("bookingTitle");
+  const bookingMeta = document.getElementById("bookingMeta");
+  const bookingMinHours = document.getElementById("bookingMinHours");
+  const bookingForm = document.getElementById("bookingForm");
+  const bookingConfirmBox = document.getElementById("bookingConfirmBox");
+  const hoursValueEl = document.getElementById("hoursValue");
+  const controllersValueEl = document.getElementById("controllersValue");
+
+  let activeListing = null;
+  let hours = 1;
+  let extraControllers = 0;
+
+  const closeBookingPanel = () => {
+    bookingPanel.classList.remove("active");
+    bookingConfirmBox.classList.remove("active");
+    bookingForm.style.display = "";
+    activeListing = null;
+  };
+  document.getElementById("bookingCloseBtn").addEventListener("click", closeBookingPanel);
+
+  const updateSummary = () => {
+    if (!activeListing) return;
+    const rentalCost = activeListing.hourlyRate * hours;
+    const controllerCost = extraControllers * activeListing.extraControllerPrice;
+    const total = rentalCost + controllerCost;
+    hoursValueEl.textContent = hours;
+    controllersValueEl.textContent = extraControllers;
+    document.getElementById("summaryRateLabel").textContent = `${inr(activeListing.hourlyRate)}/hr × ${hours} hr${hours > 1 ? "s" : ""}`;
+    document.getElementById("summaryRentalCost").textContent = inr(rentalCost);
+    document.getElementById("summaryControllerLabel").textContent = `Extra controllers (${extraControllers})`;
+    document.getElementById("summaryControllerCost").textContent = inr(controllerCost);
+    document.getElementById("summaryDepositRow").textContent = `+ ${inr(activeListing.deposit)} refundable security deposit (paid separately)`;
+    document.getElementById("summaryTotal").textContent = inr(total);
+  };
+
+  document.getElementById("hoursMinus").addEventListener("click", () => {
+    if (!activeListing) return;
+    if (hours > activeListing.minHours) { hours--; updateSummary(); }
+  });
+  document.getElementById("hoursPlus").addEventListener("click", () => { hours++; updateSummary(); });
+  document.getElementById("controllersMinus").addEventListener("click", () => {
+    if (extraControllers > 0) { extraControllers--; updateSummary(); }
+  });
+  document.getElementById("controllersPlus").addEventListener("click", () => { extraControllers++; updateSummary(); });
+
+  rentalGrid.addEventListener("click", (e) => {
+    const btn = e.target.closest(".rental-book-btn");
+    if (!btn) return;
+    const listings = readListings();
+    activeListing = listings.find(l => l.id === btn.dataset.id);
+    if (!activeListing) return;
+
+    hours = activeListing.minHours;
+    extraControllers = 0;
+    bookingTitle.textContent = `Rent: ${activeListing.consoleName}`;
+    bookingMeta.textContent = `${activeListing.condition} · ${activeListing.city} · Listed by ${activeListing.ownerName}`;
+    bookingMinHours.textContent = activeListing.minHours;
+    bookingForm.style.display = "";
+    bookingConfirmBox.classList.remove("active");
+    updateSummary();
+
+    bookingPanel.classList.add("active");
+    bookingPanel.scrollIntoView({ behavior: "smooth", block: "center" });
+  });
+
+  bookingForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (!activeListing) return;
+
+    const rentalCost = activeListing.hourlyRate * hours;
+    const controllerCost = extraControllers * activeListing.extraControllerPrice;
+    const total = rentalCost + controllerCost;
+
+    const booking = {
+      id: "BK-" + Math.floor(Math.random() * 1000000),
+      listingId: activeListing.id,
+      consoleName: activeListing.consoleName,
+      ownerName: activeListing.ownerName,
+      ownerPhone: activeListing.ownerPhone,
+      hours, extraControllers,
+      rentalCost, controllerCost, total,
+      deposit: activeListing.deposit,
+      renterName: document.getElementById("renterName").value.trim(),
+      renterPhone: document.getElementById("renterPhone").value.trim(),
+      renterDate: document.getElementById("renterDate").value,
+      status: "Requested",
+      createdAt: new Date().toISOString()
+    };
+
+    const bookings = readBookings();
+    bookings.unshift(booking);
+    writeBookings(bookings);
+
+    bookingForm.style.display = "none";
+    bookingConfirmBox.classList.add("active");
+    bookingConfirmBox.innerHTML = `
+      <strong>Request sent!</strong> Your rental request for <strong>${activeListing.consoleName}</strong>
+      on ${booking.renterDate || "the selected date"} for ${hours} hour${hours > 1 ? "s" : ""}
+      (${extraControllers} extra controller${extraControllers === 1 ? "" : "s"}) has been recorded.<br><br>
+      <strong>Total payable to owner:</strong> ${inr(total)} + ${inr(activeListing.deposit)} refundable deposit<br>
+      <strong>Owner contact:</strong> ${activeListing.ownerName} · ${activeListing.ownerPhone}
+    `;
+
+    if (window.showMessage) window.showMessage("Rental request submitted", "success");
+    renderMyActivity();
+  });
+
+  // ---- List a console ----
+  const listForm = document.getElementById("listForm");
+  listForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const newListing = {
+      id: "RENT-" + Math.floor(Math.random() * 1000000),
+      consoleName: document.getElementById("listConsoleName").value.trim(),
+      type: document.getElementById("listConsoleType").value,
+      condition: document.getElementById("listCondition").value,
+      city: document.getElementById("listCity").value.trim(),
+      hourlyRate: Number(document.getElementById("listHourlyRate").value) || 250,
+      minHours: Number(document.getElementById("listMinHours").value) || 1,
+      includedControllers: Number(document.getElementById("listIncludedControllers").value) || 1,
+      extraControllerPrice: Number(document.getElementById("listExtraControllerPrice").value) || 0,
+      deposit: Number(document.getElementById("listDeposit").value) || 0,
+      delivery: document.getElementById("listDelivery").value,
+      ownerName: document.getElementById("listOwnerName").value.trim(),
+      ownerPhone: document.getElementById("listOwnerPhone").value.trim(),
+      notes: document.getElementById("listNotes").value.trim(),
+      createdAt: new Date().toISOString()
+    };
+
+    const listings = readListings();
+    listings.unshift(newListing);
+    writeListings(listings);
+
+    listForm.reset();
+    document.getElementById("listHourlyRate").value = 250;
+    document.getElementById("listMinHours").value = 2;
+    document.getElementById("listIncludedControllers").value = 1;
+    document.getElementById("listExtraControllerPrice").value = 100;
+    document.getElementById("listDeposit").value = 1000;
+
+    if (window.showMessage) window.showMessage("Your console is now listed", "success");
+    renderGrid();
+    renderMyActivity();
+    showTab("browse");
+  });
+
+  // ---- My activity ----
+  const renderMyActivity = () => {
+    const listings = readListings().filter(l => !l.id.startsWith("RENT-SEED-"));
+    const bookings = readBookings();
+
+    document.getElementById("listingCount").textContent = listings.length;
+    document.getElementById("bookingCount").textContent = bookings.length;
+    document.getElementById("listingPanelCount").textContent = `${listings.length} active`;
+    document.getElementById("bookingPanelCount").textContent = `${bookings.length} request${bookings.length === 1 ? "" : "s"}`;
+
+    const myListingsEl = document.getElementById("myListings");
+    myListingsEl.innerHTML = listings.length === 0
+      ? '<div class="activity-empty"><div><span class="activity-empty-icon">⌁</span><strong>Your console collection starts here</strong><span>List a console to start earning from it.</span></div></div>'
+      : listings.map(l => `
+        <div class="rental-activity-card">
+          <div class="activity-card-top">
+            <strong class="activity-card-title">${l.consoleName}</strong>
+            <span class="activity-card-type">${l.type}</span>
+          </div>
+          <div class="activity-card-meta">${l.condition} condition · ${l.city} · ${l.delivery === "Pickup Only" ? "Pickup" : l.delivery === "Can Deliver" ? "Delivery" : "Pickup & delivery"}</div>
+          <div class="activity-card-footer">
+            <span class="activity-card-value">${inr(l.hourlyRate)}<small>/hr</small></span>
+            <span class="rental-status live">Live</span>
+          </div>
+        </div>
+      `).join("");
+
+    const myBookingsEl = document.getElementById("myBookings");
+    myBookingsEl.innerHTML = bookings.length === 0
+      ? '<div class="activity-empty"><div><span class="activity-empty-icon">◈</span><strong>No rental requests yet</strong><span>Choose a console above when you are ready to play.</span></div></div>'
+      : bookings.map(b => `
+        <div class="rental-activity-card">
+          <div class="activity-card-top">
+            <strong class="activity-card-title">${b.consoleName}</strong>
+            <span class="activity-card-type">${b.renterDate || "Date pending"}</span>
+          </div>
+          <div class="activity-card-meta">${b.hours} hr${b.hours > 1 ? "s" : ""} rental · ${b.extraControllers} extra controller${b.extraControllers === 1 ? "" : "s"}</div>
+          <div class="activity-card-footer">
+            <span class="activity-card-value">${inr(b.total)} total</span>
+            <span class="rental-status">${b.status}</span>
+          </div>
+        </div>
+      `).join("");
+  };
+
+  renderGrid();
+  renderMyActivity();
+});

@@ -1,0 +1,9 @@
+import { Navigate, useLocation } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+
+// Route guard: logged-out visitors are sent to /login (preserving the attempted route).
+export default function RequireAuth({ children }) {
+  const { user } = useAuth();
+  const location = useLocation();
+  return user ? children : <Navigate to="/login" state={{ from: location }} replace />;
+}

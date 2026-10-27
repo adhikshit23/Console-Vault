@@ -1,0 +1,1987 @@
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      background: #030405;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: transparent;
+      color: #e5e7eb;
+      overflow-x: hidden;
+    }
+
+    /* ---- Background photo ----
+           Fixed full-bleed layer sitting under everything else. ---- */
+    #bgPhoto {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
+      pointer-events: none;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(800px circle at 80% -10%, rgba(59,130,246,0.22), transparent 60%),
+        radial-gradient(600px circle at -10% 60%, rgba(59,130,246,0.10), transparent 55%),
+        linear-gradient(180deg, rgba(1,1,2,0.72) 0%, rgba(3,4,5,0.66) 40%, rgba(6,9,17,0.78) 100%);
+      z-index: -1;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    header {
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(8px);
+      padding: 10px 20px;
+      border-bottom: 1px solid rgba(59,130,246,0.15);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    nav {
+      flex: 1;
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .menu-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      flex-shrink: 0;
+      padding: 0;
+      border-radius: 999px;
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.25);
+      color: #e5e7eb;
+      cursor: pointer;
+      transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    }
+
+    .menu-btn:hover,
+    .menu-btn:focus-visible {
+      background: rgba(59, 130, 246, 0.22);
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.35);
+    }
+
+    .menu-btn:active {
+      transform: scale(0.94);
+    }
+
+    .menu-icon line {
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+    }
+
+    .logo img {
+      height: 32px;
+      object-fit: contain;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-item {
+      position: relative;
+      /* Added for consistent vertical alignment within each nav item */
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-item a {
+      padding: 8px 12px;
+      border-radius: 999px;
+      opacity: 0.85;
+      transition: 0.25s;
+    }
+
+    .nav-item a:hover {
+      background: rgba(59,130,246,0.15);
+      opacity: 1;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 110%;
+      left: 0;
+      background: #0f172a;
+      border: 1px solid rgba(59,130,246,0.25);
+      border-radius: 16px;
+      min-width: 160px;
+      padding: 8px 0;
+      list-style: none;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: 0.25s ease;
+      z-index: 1000;
+    }
+
+    .dropdown-menu li a {
+      padding: 10px 16px;
+      font-size: 14px;
+      display: block;
+    }
+
+    .dropdown-menu li a:hover {
+      background: rgba(59,130,246,0.2);
+    }
+
+    .nav-item.dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .hero {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .image-scroll {
+      display: flex;
+      gap: 22px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 12px;
+    }
+
+    .image-scroll img {
+      width: min(94vw, 1080px);
+      max-height: 600px;
+      object-fit: cover;
+      border-radius: 16px;
+      scroll-snap-align: center;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.20);
+    }
+
+    .image-scroll::-webkit-scrollbar { display: none; }
+
+    .hero-text h1 {
+      margin-top: 30px;
+      font-size: 42px;
+      font-weight: 800;
+    }
+
+    .hero-text p {
+      opacity: 0.75;
+    }
+
+    .cta-btn {
+      margin-top: 18px;
+      padding: 12px 28px;
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
+      border-radius: 999px;
+      font-weight: 700;
+      display: inline-block;
+      transition: 0.3s;
+    }
+
+    .cta-btn:hover {
+      box-shadow: 0 0 25px rgba(59,130,246,0.6);
+      transform: translateY(-1px);
+    }
+
+    .we-assure {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    .we-assure-box {
+      background: rgba(15,23,42,0.75);
+      backdrop-filter: blur(10px);
+      border-radius: 18px;
+      padding: 32px 26px;
+      border: 1px solid rgba(59,130,246,0.2);
+    }
+
+    .we-assure-box > h2 {
+      text-align: center;
+      font-size: 28px;
+      margin-bottom: 16px;
+    }
+
+    .assure-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 22px;
+    }
+
+    .assure-card {
+      background: rgba(15,23,42,0.9);
+      border-radius: 14px;
+      padding: 26px 20px;
+      text-align: center;
+      border: 1px solid rgba(59,130,246,0.15);
+    }
+
+    .games-section {
+      max-width: 1200px;
+      margin: 50px auto;
+    }
+
+    .games-section h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 28px;
+      font-weight: 800;
+    }
+
+    .recently-sold {
+      max-width: 1200px;
+      margin: 50px auto 0;
+      padding: 0 20px;
+      text-align: center;
+    }
+
+    .recently-sold h2 {
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .recently-sold-sub {
+      max-width: 640px;
+      margin: 0 auto 28px;
+      font-size: 14px;
+      line-height: 1.6;
+      opacity: 0.7;
+    }
+
+    .sold-scroll {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 10px;
+    }
+
+    .sold-scroll::-webkit-scrollbar { display: none; }
+
+    .sold-card {
+      flex: 0 0 auto;
+      width: 210px;
+      scroll-snap-align: start;
+      text-align: left;
+      border-radius: 16px;
+      padding: 22px 18px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(59,130,246,0.15);
+    }
+
+    .sold-thumb {
+      width: 100%;
+      height: 130px;
+      object-fit: cover;
+      border-radius: 10px;
+      background: #0b0d12;
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .sold-info p {
+      font-size: 13.5px;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    .sold-info p strong {
+      color: #fff;
+    }
+
+    .sold-date {
+      display: block;
+      margin-top: 8px;
+      font-size: 12px;
+      opacity: 0.55;
+    }
+
+    /* ---- Consoles & Accessories carousel ---- */
+    .consoles-section {
+      max-width: 1200px;
+      margin: 50px auto 0;
+      padding: 0 20px;
+    }
+
+    .consoles-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    .consoles-header h2 {
+      font-size: 28px;
+      font-weight: 800;
+    }
+
+    .consoles-nav {
+      display: flex;
+      gap: 10px;
+    }
+
+    .consoles-arrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      background: rgba(59,130,246,0.1);
+      border: 1px solid rgba(59,130,246,0.25);
+      color: #e5e7eb;
+      cursor: pointer;
+      transition: background 0.25s ease, transform 0.2s ease;
+    }
+
+    .consoles-arrow:hover {
+      background: rgba(59,130,246,0.22);
+    }
+
+    .consoles-arrow:active {
+      transform: scale(0.92);
+    }
+
+    .consoles-scroll {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 10px;
+    }
+
+    .consoles-scroll::-webkit-scrollbar { display: none; }
+
+    .console-card {
+      position: relative;
+      flex: 0 0 auto;
+      width: 220px;
+      scroll-snap-align: start;
+      border-radius: 14px;
+      padding: 22px 18px 20px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(59,130,246,0.15);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .console-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(59,130,246,0.18);
+      border: 1px solid rgba(59,130,246,0.35);
+      color: #93c5fd;
+    }
+
+    .console-icon {
+      width: 100%;
+      height: 110px;
+      border-radius: 10px;
+      object-fit: cover;
+      background: #0b0d12;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .console-info h3 {
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.4;
+      margin-bottom: 10px;
+      min-height: 40px;
+    }
+
+    .console-price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .console-price {
+      font-size: 16px;
+      font-weight: 700;
+      color: rgb(88, 184, 215);
+    }
+
+    .console-old-price {
+      font-size: 12px;
+      opacity: 0.5;
+      text-decoration: line-through;
+    }
+
+    .console-save {
+      font-size: 12px;
+      color: #86efac;
+      margin-bottom: 14px;
+    }
+
+    .console-add-btn {
+      margin-top: auto;
+      width: 100%;
+      padding: 10px;
+      border-radius: 999px;
+      background: transparent;
+      border: 1px solid rgba(59,130,246,0.4);
+      color: #e5e7eb;
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      transition: background 0.25s ease, border-color 0.25s ease;
+    }
+
+    .console-add-btn:hover {
+      background: rgba(59,130,246,0.16);
+      border-color: rgba(59,130,246,0.6);
+    }
+
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      justify-content: center;
+      gap: 26px;
+    }
+
+    .game-card {
+      width: 260px;
+      background: rgba(15,23,42,0.85);
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(59,130,246,0.2);
+      transition: 0.3s;
+      margin: auto;
+    }
+
+    .game-card img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      background: #0b0d12;
+    }
+
+    .game-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 45px rgba(59,130,246,0.4);
+    }
+
+    .game-info {
+      padding: 12px 14px;
+    }
+
+    .price {
+      font-size: 15px;
+      font-weight: 700;
+      color: rgb(88, 184, 215);
+    }
+
+    .game-add-btn {
+      width: 100%;
+      margin-top: 12px;
+      padding: 10px 12px;
+      border: 1px solid rgba(59,130,246,0.42);
+      border-radius: 999px;
+      color: #e5e7eb;
+      background: rgba(59,130,246,0.1);
+      font: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+    }
+
+    .game-add-btn:hover {
+      background: rgba(59,130,246,0.22);
+      border-color: rgba(96,165,250,0.75);
+      transform: translateY(-1px);
+    }
+
+    .game-add-btn.added {
+      color: #bbf7d0;
+      border-color: rgba(34,197,94,0.45);
+      background: rgba(34,197,94,0.12);
+    }
+
+    .more-games {
+      margin-top: 35px;
+      text-align: center;
+    }
+
+    .more-games a {
+      padding: 12px 34px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
+      font-weight: 700;
+      display: inline-block;
+    }
+
+    footer {
+      text-align: center;
+      padding: 26px;
+      background: rgba(0,0,0,0.8);
+      border-top: 1px solid rgba(59,130,246,0.15);
+      font-size: 14px;
+      color: #9ca3af;
+    }
+
+    /* ==================== EXPANDED FOOTER ==================== */
+    footer.site-footer {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 50px 20px 26px;
+    }
+
+    /* ---- FAQ accordion ---- */
+    .footer-faq h2 {
+      font-size: 24px;
+      font-weight: 800;
+      color: #e5e7eb;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .faq-item {
+      background: rgba(15,23,42,0.55);
+      border: 1px solid rgba(59,130,246,0.18);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 10px;
+      text-align: left;
+      transition: border-color 0.25s ease;
+    }
+
+    .faq-item:hover {
+      border-color: rgba(59,130,246,0.35);
+    }
+
+    .faq-item summary {
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 15px;
+      color: #e5e7eb;
+      list-style: none;
+    }
+
+    .faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-item summary::after {
+      content: "+";
+      float: right;
+      font-weight: 700;
+      color: #60a5fa;
+      transition: transform 0.25s ease;
+    }
+
+    .faq-item[open] summary::after {
+      transform: rotate(45deg);
+    }
+
+    .faq-item p {
+      margin-top: 10px;
+      font-size: 14px;
+      line-height: 1.6;
+      opacity: 0.8;
+    }
+
+    /* ---- Trust / testimonial block ---- */
+    .footer-trust {
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .footer-trust-text {
+      font-size: 14px;
+      line-height: 1.7;
+      opacity: 0.85;
+      margin-bottom: 14px;
+    }
+
+    .footer-trust-reviews {
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    .footer-trust-reviews a {
+      color: #60a5fa;
+      font-weight: 600;
+    }
+
+    .footer-tagline {
+      font-weight: 700;
+      font-size: 17px;
+      color: #e5e7eb;
+      line-height: 1.5;
+    }
+
+    /* ---- Link columns ---- */
+    .footer-links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+      border-top: 1px solid rgba(59,130,246,0.15);
+      padding-top: 30px;
+      text-align: left;
+    }
+
+    .footer-col h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #e5e7eb;
+      margin-bottom: 12px;
+    }
+
+    .footer-col a {
+      display: block;
+      font-size: 13px;
+      color: #9ca3af;
+      margin-bottom: 9px;
+      transition: color 0.2s ease;
+    }
+
+    .footer-col a:hover {
+      color: #60a5fa;
+    }
+
+    .footer-copyright {
+      text-align: center;
+      font-size: 13px;
+      color: #9ca3af;
+      border-top: 1px solid rgba(59,130,246,0.10);
+      padding-top: 20px;
+    }
+
+    /* === FLIP BOX WRAPPER === */
+.flip-box {
+  background: rgba(15,23,42,0.75);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 40px 50px;
+  border: 1px solid rgba(59,130,246,0.25);
+  box-shadow: 0 25px 60px rgba(59,130,246,0.3);
+  display: inline-block;
+}
+
+
+
+       /* ========= FLIP TEXT ========= */
+ 
+.flip-section {
+  margin: 80px 0;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+}
+
+#container {
+  color: white;
+  text-transform: uppercase;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+#flip {
+  height: 45px;
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+#flip > div {
+  animation: show 6s infinite;
+}
+
+#flip > div > div {
+  height: 45px;
+  line-height: 45px;
+  padding: 0 12px;
+  color: #fff;
+}
+
+#flip div:nth-child(1) div { background: #4ec7f3; }
+#flip div:nth-child(2) div { background: #42c58a; }
+#flip div:nth-child(3) div { background: #DC143C; }
+
+@keyframes show {
+  0%   { transform: translateY(0); }
+  30%  { transform: translateY(0); }
+
+  33%  { transform: translateY(-45px); }
+  63%  { transform: translateY(-45px); }
+
+  66%  { transform: translateY(-90px); }
+  96%  { transform: translateY(-90px); }
+
+  100% { transform: translateY(0); }
+}
+
+    /* ============================================================
+       PREMIUM UPGRADE — ANIMATIONS, SEARCH & MICRO-INTERACTIONS
+       ============================================================ */
+
+    /* ---- Smooth in-page scrolling (used when a search result
+           scrolls a game card into view) ---- */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* ---- Progressive-enhancement entrance/reveal system ----
+       Elements only start hidden once JS confirms it can animate
+       them back in, so the page still works fine with JS disabled. */
+    .js .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .js .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* cards need a unified transition so reveal + hover never fight */
+    .js .game-card.reveal,
+    .js .assure-card.reveal {
+      transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                  transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                  box-shadow 0.4s ease,
+                  border-color 0.4s ease;
+    }
+    .js .image-scroll img.reveal {
+      transform: scale(0.96);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .js .image-scroll img.reveal.is-visible {
+      transform: scale(1);
+    }
+
+    /* ---- Logo micro-interaction ---- */
+    .logo img {
+      transition: transform 0.3s ease;
+    }
+    .logo img:hover {
+      transform: scale(1.05);
+    }
+
+    /* ---- Animated underline sweep for top-level nav links ---- */
+    .nav-item > a {
+      position: relative;
+    }
+    .nav-item > a::after {
+      content: "";
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 4px;
+      height: 2px;
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
+      border-radius: 2px;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+    .nav-item > a:hover::after {
+      transform: scaleX(1);
+    }
+
+    /* ---- Dropdown items cascade in instead of appearing all at once ---- */
+    .dropdown-menu li {
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .dropdown-menu li:nth-child(1) { transition-delay: 0.05s; }
+    .dropdown-menu li:nth-child(2) { transition-delay: 0.1s; }
+    .dropdown-menu li:nth-child(3) { transition-delay: 0.15s; }
+    .nav-item.dropdown:hover .dropdown-menu li {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ---- Nav search button: styles now handled by .header-island-btn ---- */
+    .nav-search-btn .search-icon {
+      flex-shrink: 0;
+    }
+    .nav-search-btn .search-label {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    /* ---- Search overlay ---- */
+    .search-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 6, 10, 0.75);
+      backdrop-filter: blur(6px);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 10vh 20px 20px;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.35s ease, visibility 0.35s;
+      z-index: 2000;
+    }
+    .search-overlay.active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+    .search-panel {
+      width: min(600px, 100%);
+      max-height: 74vh;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(59, 130, 246, 0.25);
+      border-radius: 18px;
+      box-shadow: 0 25px 60px rgba(59, 130, 246, 0.35);
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transform: translateY(-24px) scale(0.97);
+      opacity: 0;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+    }
+    .search-overlay.active .search-panel {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+    .search-panel-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+      padding-bottom: 14px;
+      margin-bottom: 14px;
+    }
+    .search-panel-icon {
+      opacity: 0.7;
+      flex-shrink: 0;
+    }
+    .search-input {
+      flex: 1;
+      min-width: 0;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #e5e7eb;
+      font-family: "Poppins", sans-serif;
+      font-size: 16px;
+      padding: 6px 0;
+    }
+    .search-input::placeholder {
+      color: #6b7280;
+    }
+    .search-close-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 50%;
+      color: #e5e7eb;
+      cursor: pointer;
+      transition: background 0.25s ease, transform 0.35s ease, color 0.25s ease;
+    }
+    .search-close-btn:hover,
+    .search-close-btn:focus-visible {
+      background: rgba(239, 68, 68, 0.18);
+      color: #fecaca;
+      transform: rotate(90deg);
+    }
+    .search-results {
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding-right: 4px;
+    }
+    .search-results::-webkit-scrollbar {
+      width: 6px;
+    }
+    .search-results::-webkit-scrollbar-thumb {
+      background: rgba(59, 130, 246, 0.35);
+      border-radius: 6px;
+    }
+    .search-result-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid transparent;
+      border-radius: 12px;
+      padding: 10px 12px;
+      color: inherit;
+      font-family: inherit;
+      text-align: left;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateX(-12px);
+      transition: opacity 0.35s ease, transform 0.35s ease,
+                  background 0.25s ease, border-color 0.25s ease;
+    }
+    .search-result-item.is-visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .search-result-item:hover,
+    .search-result-item:focus-visible {
+      background: rgba(59, 130, 246, 0.12);
+      border-color: rgba(59, 130, 246, 0.3);
+      transform: translateX(4px);
+    }
+    .search-result-item img {
+      width: 52px;
+      height: 52px;
+      border-radius: 8px;
+      object-fit: cover;
+      background: #0b0d12;
+      flex-shrink: 0;
+    }
+    .search-result-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+    .search-result-title {
+      font-size: 14px;
+      font-weight: 600;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .search-result-price {
+      font-size: 13px;
+      font-weight: 700;
+      color: rgb(88, 184, 215);
+    }
+    .search-empty,
+    .search-hint {
+      text-align: center;
+      padding: 34px 10px;
+      color: #9ca3af;
+      font-size: 14px;
+    }
+
+    /* ---- Pulse highlight when a search result is opened from the panel ---- */
+    @keyframes searchPulse {
+      0%   { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.55); }
+      70%  { box-shadow: 0 0 0 18px rgba(59, 130, 246, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+    }
+    .game-card.search-highlight {
+      animation: searchPulse 1.4s ease-out 2;
+      border-color: rgba(59, 130, 246, 0.6);
+    }
+
+    /* ---- Account overlay (opened from the hamburger button) ----
+            Same overlay/panel language as the search feature. ---- */
+    .account-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 6, 10, 0.75);
+      backdrop-filter: blur(6px);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 10vh 20px 20px;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.35s ease, visibility 0.35s;
+      z-index: 2000;
+    }
+    .account-overlay.active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+    .account-panel {
+      width: min(380px, 100%);
+      max-height: 74vh;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(59, 130, 246, 0.25);
+      border-radius: 18px;
+      box-shadow: 0 25px 60px rgba(59, 130, 246, 0.35);
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transform: translateX(-80px);
+      opacity: 0;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+    }
+    .account-overlay.active .account-panel {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    .account-panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+      padding-bottom: 14px;
+      margin-bottom: 16px;
+    }
+    .account-panel-title {
+      font-size: 16px;
+      font-weight: 700;
+    }
+    .account-main-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+      width: 100%;
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
+      border: none;
+      border-radius: 16px;
+      padding: 20px 22px;
+      color: #ffffff;
+      font-family: inherit;
+      text-align: left;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .account-main-btn:hover,
+    .account-main-btn:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 0 25px rgba(59,130,246,0.6);
+    }
+    .account-main-label {
+      font-size: 19px;
+      font-weight: 800;
+    }
+    .account-main-username {
+      font-size: 13px;
+      font-weight: 600;
+      opacity: 0.85;
+    }
+    .account-main-username:empty::before {
+      content: "Not logged in";
+    }
+    .account-sub-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .account-sub-btn {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 12px;
+      padding: 12px 16px;
+      color: inherit;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+      transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+    }
+    .account-sub-btn:hover,
+    .account-sub-btn:focus-visible {
+      background: rgba(59, 130, 246, 0.12);
+      border-color: rgba(59, 130, 246, 0.3);
+      transform: translateX(4px);
+    }
+
+    /* ---- Card & button hover polish ---- */
+    .assure-card {
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                  box-shadow 0.35s ease, border-color 0.35s ease;
+    }
+    .assure-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 45px rgba(59,130,246,0.3);
+      border-color: rgba(59,130,246,0.4);
+    }
+    .game-card img {
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .game-card:hover img {
+      transform: scale(1.06);
+    }
+    .more-games a {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .more-games a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 25px rgba(59,130,246,0.6);
+    }
+    .more-games a:active,
+    .cta-btn:active {
+      transform: translateY(0) scale(0.97);
+    }
+
+    /* ---- Sort-by-price fade helper (snappier exit, elegant re-entry) ---- */
+    .js .game-card.reveal.card-sorting {
+      transition: opacity 0.28s ease, transform 0.28s ease;
+      opacity: 0;
+      transform: translateY(14px) scale(0.96);
+    }
+
+    /* ---- Responsive tweaks for the nav & search panel ---- */
+    @media (max-width: 760px) {
+      nav {
+        flex-wrap: wrap;
+        row-gap: 10px;
+      }
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 14px 18px;
+      }
+      .search-panel {
+        padding: 18px;
+      }
+    }
+
+    /* ---- Respect the user's OS-level reduced-motion preference ---- */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .js .reveal,
+      .js .reveal.is-visible {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    /* ============================================================
+       LIQUID GLASS UI ENHANCEMENT
+       Visual-only enhancement — layout preserved
+       ------------------------------------------------------------
+       Every rule below only touches paint-level properties:
+       background, backdrop-filter, box-shadow and border *colours*.
+       Nothing here changes the box model — elements that never had a
+       border get their glass edge from an `inset 0 0 0 1px` shadow
+       instead of a real border, so no size, spacing or position can
+       shift. Existing transforms (hover lift, flip, reveal, rotate)
+       are never re-declared, so all current motion survives.
+
+       Glass hierarchy (strongest -> lightest):
+         search panel  ->  header / dropdown  ->  panels & cards
+         ->  buttons (accents only)
+       ============================================================ */
+
+    :root {
+      /* layered translucent films, reused across surfaces */
+      --lg-film: linear-gradient(135deg,
+                   rgba(255,255,255,0.10) 0%,
+                   rgba(255,255,255,0.035) 45%,
+                   rgba(255,255,255,0.07) 100%);
+      --lg-film-soft: linear-gradient(135deg,
+                   rgba(255,255,255,0.07) 0%,
+                   rgba(255,255,255,0.02) 50%,
+                   rgba(255,255,255,0.045) 100%);
+    }
+
+    /* ---- Background: a little more atmosphere so the glass has
+            something to refract. Same palette, same mood, one extra
+            very soft blue pool near the bottom. ---- */
+    body::before {
+      background:
+        radial-gradient(800px circle at 80% -10%, rgba(59,130,246,0.20), transparent 60%),
+        radial-gradient(600px circle at -10% 60%, rgba(59,130,246,0.09), transparent 55%),
+        radial-gradient(900px circle at 62% 108%, rgba(37,99,235,0.10), transparent 62%),
+        linear-gradient(180deg, rgba(1,1,2,0.72) 0%, rgba(3,4,5,0.66) 40%, rgba(6,9,17,0.78) 100%);
+    }
+
+    /* ---- Header: transparent floating strip.
+            The visible glass now lives on <nav> itself, so the bar
+            reads as a floating island instead of a full-width strip.
+            Sticky position kept; a transform + transition let it
+            slide off-screen on scroll-down and glide back on scroll-up. ---- */
+    header {
+      background: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border-bottom: none;
+      box-shadow: none;
+      padding: 16px 20px;
+      transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    header.nav-hidden {
+      transform: translateY(-140%);
+    }
+
+    /* ---- Nav: the actual "island" — carries the glass, the pill/rounded
+            shape and its own floating shadow so it reads as a capsule
+            rather than a bar. Internal flex layout is unchanged. ---- */
+    nav {
+      background-color: rgba(6,9,16,0.07);
+      background-image:
+        linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 30%, rgba(255,255,255,0.005) 70%, rgba(255,255,255,0.02) 100%),
+        linear-gradient(90deg, rgba(59,130,246,0.08) 0%, rgba(59,130,246,0) 42%, rgba(59,130,246,0.08) 100%);
+      backdrop-filter: blur(22px) saturate(180%);
+      -webkit-backdrop-filter: blur(22px) saturate(180%);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 28px;
+      padding: 0 20px;
+      height: 48px;
+      box-sizing: border-box;
+      box-shadow:
+        0 18px 40px rgba(0,0,0,0.40),
+        inset 0 1px 0 rgba(255,255,255,0.16),
+        inset 0 -1px 0 rgba(255,255,255,0.03),
+        inset 0 -14px 26px -18px rgba(59,130,246,0.18);
+    }
+
+    /* ---- Edge islands: now flex items, not absolutely positioned ---- */
+    .nav-edge-btn {
+      border-radius: 28px;
+      z-index: 1001;
+      flex-shrink: 0;
+    }
+    .nav-edge-btn:active {
+      transform: scale(0.95);
+    }
+    /* Legacy classes kept for compat, no longer set position */
+    .nav-edge-left {}
+    .nav-edge-right {}
+
+    /* ---- Menu (hamburger) button: same glass accent as the search button ---- */
+    .menu-btn {
+      background-color: rgba(59,130,246,0.10);
+      background-image: linear-gradient(180deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.02) 55%, rgba(255,255,255,0.04) 100%);
+      backdrop-filter: blur(18px) saturate(190%);
+      -webkit-backdrop-filter: blur(18px) saturate(190%);
+      border: 1px solid rgba(255,255,255,0.14);
+      box-shadow:
+        0 6px 16px rgba(0,0,0,0.25),
+        inset 0 0 0 1px rgba(255,255,255,0.04),
+        inset 0 1px 0 rgba(255,255,255,0.16);
+    }
+    .menu-btn:hover,
+    .menu-btn:focus-visible {
+      background-color: rgba(59,130,246,0.26);
+      box-shadow:
+        0 0 20px rgba(59,130,246,0.35),
+        0 8px 22px rgba(0,0,0,0.28),
+        inset 0 0 0 1px rgba(255,255,255,0.05),
+        inset 0 1px 0 rgba(255,255,255,0.22);
+    }
+
+    /* ---- Nav links: the hover chip becomes a small glass pill.
+            Same 8px/12px padding, same 6px radius, same 0.25s feel. ---- */
+    .nav-item a {
+      /* a fully transparent gradient in the resting state so the hover
+         sheen can interpolate smoothly instead of snapping in */
+      background-image: linear-gradient(180deg, rgba(255,255,255,0), rgba(255,255,255,0));
+    }
+    .nav-item a:hover {
+      background-color: rgba(59,130,246,0.16);
+      background-image: linear-gradient(180deg, rgba(255,255,255,0.24), rgba(255,255,255,0.03) 60%, rgba(255,255,255,0.08) 100%);
+      backdrop-filter: blur(6px) saturate(180%);
+      -webkit-backdrop-filter: blur(6px) saturate(180%);
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.16),
+        inset 0 1px 0 rgba(255,255,255,0.28),
+        0 8px 20px rgba(0,0,0,0.28);
+    }
+
+    /* ---- Dropdown menu: medium glass.
+            Same absolute position, min-width, padding and cascade.
+            Note: the header is a backdrop root, so a nested
+            backdrop-filter is a no-op in Chromium — the panel therefore
+            carries its own denser translucent film (verified over the
+            brightest hero banner) and keeps the blur only as a bonus for
+            engines that do resolve it. ---- */
+    .dropdown-menu {
+      background-color: rgba(9,14,28,0.32);
+      background-image:
+        var(--lg-film),
+        linear-gradient(180deg, rgba(59,130,246,0.10), rgba(59,130,246,0) 62%);
+      backdrop-filter: blur(18px) saturate(190%);
+      -webkit-backdrop-filter: blur(18px) saturate(190%);
+      border: 1px solid rgba(255,255,255,0.20);
+      box-shadow:
+        0 24px 48px rgba(0,0,0,0.50),
+        0 4px 14px rgba(37,99,235,0.22),
+        inset 0 1px 0 rgba(255,255,255,0.22),
+        inset 0 -1px 0 rgba(255,255,255,0.06);
+    }
+    .dropdown-menu li a:hover {
+      background-color: rgba(59,130,246,0.20);
+      background-image: linear-gradient(90deg, rgba(255,255,255,0.10), rgba(255,255,255,0.015));
+      box-shadow: inset 2px 0 0 rgba(148,197,255,0.45);
+    }
+
+    /* ---- Nav search button: glass handled by .header-island-btn ---- */
+
+    /* ---- Search overlay: a soft glass sheet over the whole page.
+            Same fixed inset, same padding, same fade behaviour. ---- */
+    .search-overlay {
+      background:
+        radial-gradient(900px circle at 50% 0%, rgba(37,99,235,0.14), transparent 62%),
+        rgba(5,6,10,0.35);
+      backdrop-filter: blur(10px) saturate(135%);
+      -webkit-backdrop-filter: blur(10px) saturate(135%);
+    }
+
+    /* ---- Search panel: the strongest glass on the page.
+            Width, max-height, padding, radius and entrance animation
+            are all left exactly as they were. ---- */
+    .search-panel {
+      background-color: rgba(13,20,38,0.30);
+      background-image:
+        linear-gradient(135deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.03) 44%, rgba(255,255,255,0.06) 100%),
+        radial-gradient(130% 80% at 50% -12%, rgba(96,165,250,0.14), transparent 62%);
+      backdrop-filter: blur(18px) saturate(170%);
+      -webkit-backdrop-filter: blur(18px) saturate(170%);
+      border: 1px solid rgba(255,255,255,0.18);
+      box-shadow:
+        0 40px 80px rgba(0,0,0,0.55),
+        0 18px 45px rgba(59,130,246,0.30),
+        inset 0 1px 0 rgba(255,255,255,0.22),
+        inset 0 -1px 0 rgba(255,255,255,0.06),
+        inset 0 0 70px rgba(96,165,250,0.05);
+    }
+    .search-panel-header {
+      border-bottom: 1px solid rgba(255,255,255,0.14);
+    }
+    .search-close-btn {
+      background-color: rgba(255,255,255,0.07);
+      background-image: linear-gradient(180deg, rgba(255,255,255,0.22), rgba(255,255,255,0.03));
+      backdrop-filter: blur(10px) saturate(170%);
+      -webkit-backdrop-filter: blur(10px) saturate(170%);
+      border: 1px solid rgba(255,255,255,0.20);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.26);
+    }
+    .search-close-btn:hover,
+    .search-close-btn:focus-visible {
+      background-color: rgba(239,68,68,0.20);
+      background-image: linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.02));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.24);
+    }
+    .search-results::-webkit-scrollbar-thumb {
+      background: rgba(148,197,255,0.30);
+    }
+
+    /* ---- Account overlay & panel: same glass treatment as search ---- */
+    .account-overlay {
+      background:
+        radial-gradient(900px circle at 50% 0%, rgba(37,99,235,0.14), transparent 62%),
+        rgba(5,6,10,0.35);
+      backdrop-filter: blur(10px) saturate(135%);
+      -webkit-backdrop-filter: blur(10px) saturate(135%);
+    }
+    .account-panel {
+      background-color: rgba(13,20,38,0.30);
+      background-image:
+        linear-gradient(135deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.03) 44%, rgba(255,255,255,0.06) 100%),
+        radial-gradient(130% 80% at 50% -12%, rgba(96,165,250,0.14), transparent 62%);
+      backdrop-filter: blur(18px) saturate(170%);
+      -webkit-backdrop-filter: blur(18px) saturate(170%);
+      border: 1px solid rgba(255,255,255,0.18);
+      box-shadow:
+        0 40px 80px rgba(0,0,0,0.55),
+        0 18px 45px rgba(59,130,246,0.30),
+        inset 0 1px 0 rgba(255,255,255,0.22),
+        inset 0 -1px 0 rgba(255,255,255,0.06),
+        inset 0 0 70px rgba(96,165,250,0.05);
+    }
+    .account-panel-header {
+      border-bottom: 1px solid rgba(255,255,255,0.14);
+    }
+    .account-main-btn {
+      backdrop-filter: blur(10px) saturate(180%);
+      -webkit-backdrop-filter: blur(10px) saturate(180%);
+      background-image:
+        linear-gradient(180deg, rgba(255,255,255,0.20) 0%, rgba(255,255,255,0.02) 20%, rgba(255,255,255,0) 55%),
+        linear-gradient(135deg, #2563eb, #3b82f6);
+      box-shadow:
+        0 10px 24px rgba(37,99,235,0.30),
+        inset 0 0 0 1px rgba(255,255,255,0.12),
+        inset 0 1px 0 rgba(255,255,255,0.28),
+        inset 0 -8px 16px -12px rgba(0,0,0,0.35);
+    }
+    .account-main-btn:hover,
+    .account-main-btn:focus-visible {
+      box-shadow:
+        0 0 20px rgba(59,130,246,0.50),
+        0 12px 28px rgba(37,99,235,0.30),
+        inset 0 0 0 1px rgba(255,255,255,0.16),
+        inset 0 1px 0 rgba(255,255,255,0.32),
+        inset 0 -8px 16px -12px rgba(0,0,0,0.30);
+    }
+    .account-sub-btn {
+      background-color: rgba(255,255,255,0.04);
+      background-image: linear-gradient(135deg, rgba(255,255,255,0.09) 0%, rgba(255,255,255,0.012) 60%);
+      border-color: rgba(255,255,255,0.07);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.07);
+    }
+    .account-sub-btn:hover,
+    .account-sub-btn:focus-visible {
+      background-color: rgba(59,130,246,0.16);
+      background-image: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.02) 60%);
+      border-color: rgba(148,197,255,0.34);
+    }
+
+    /* ---- Search result rows: glass layering + a hover reflection.
+            Layout, 52px thumbnails and the stagger-in are untouched;
+            box-shadow is appended to the existing transition list so the
+            reflection fades in as smoothly as the tint. ---- */
+    .search-result-item {
+      background-color: rgba(255,255,255,0.04);
+      background-image: linear-gradient(135deg, rgba(255,255,255,0.09) 0%, rgba(255,255,255,0.012) 60%);
+      border: 1px solid rgba(255,255,255,0.07);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.07);
+      transition: opacity 0.35s ease, transform 0.35s ease,
+                  background 0.25s ease, border-color 0.25s ease,
+                  box-shadow 0.25s ease;
+    }
+    .search-result-item:hover,
+    .search-result-item:focus-visible {
+      background-color: rgba(59,130,246,0.16);
+      background-image: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.02) 60%);
+      border-color: rgba(148,197,255,0.34);
+      box-shadow:
+        0 10px 24px rgba(0,0,0,0.30),
+        inset 0 1px 0 rgba(255,255,255,0.20);
+    }
+    .search-result-item img {
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.10), 0 4px 12px rgba(0,0,0,0.35);
+    }
+
+    /* ---- "We Assure" panel: enhanced glass, same 18px radius / padding ---- */
+    .we-assure-box {
+      background-color: rgba(15,23,42,0.24);
+      background-image:
+        var(--lg-film),
+        radial-gradient(120% 100% at 0% 0%, rgba(59,130,246,0.10), transparent 58%);
+      backdrop-filter: blur(14px) saturate(140%);
+      -webkit-backdrop-filter: blur(14px) saturate(140%);
+      border: 1px solid rgba(255,255,255,0.14);
+      box-shadow:
+        0 26px 56px rgba(0,0,0,0.34),
+        0 4px 18px rgba(37,99,235,0.14),
+        inset 0 1px 0 rgba(255,255,255,0.14),
+        inset 0 -1px 0 rgba(255,255,255,0.04);
+    }
+
+    /* ---- Assure cards: slightly translucent glass tiles.
+            No backdrop-filter on purpose — they sit on the glass panel
+            above, whose surface is already smooth, so translucent layers
+            read identically for none of the GPU cost. Grid, gap, padding
+            and the -6px hover lift are untouched. ---- */
+    .assure-card {
+      background-color: rgba(15,23,42,0.22);
+      background-image: var(--lg-film-soft);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow:
+        0 10px 24px rgba(0,0,0,0.22),
+        inset 0 1px 0 rgba(255,255,255,0.12);
+    }
+    .assure-card:hover {
+      border-color: rgba(148,197,255,0.34);
+      box-shadow:
+        0 22px 45px rgba(59,130,246,0.28),
+        0 8px 20px rgba(0,0,0,0.26),
+        inset 0 1px 0 rgba(255,255,255,0.20);
+    }
+
+    /* ---- Recently Sold cards: same soft glass tile as assure cards ---- */
+    .sold-card {
+      background-color: rgba(15,23,42,0.22);
+      background-image: var(--lg-film-soft);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow:
+        0 10px 24px rgba(0,0,0,0.22),
+        inset 0 1px 0 rgba(255,255,255,0.12);
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                  box-shadow 0.35s ease, border-color 0.35s ease;
+    }
+    .sold-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(148,197,255,0.34);
+      box-shadow:
+        0 22px 45px rgba(59,130,246,0.28),
+        0 8px 20px rgba(0,0,0,0.26),
+        inset 0 1px 0 rgba(255,255,255,0.20);
+    }
+
+    /* ---- Consoles & Accessories: same soft glass tile, plus the pill arrows ---- */
+    .console-card {
+      background-color: rgba(15,23,42,0.22);
+      background-image: var(--lg-film-soft);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow:
+        0 10px 24px rgba(0,0,0,0.22),
+        inset 0 1px 0 rgba(255,255,255,0.12);
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                  box-shadow 0.35s ease, border-color 0.35s ease;
+    }
+    .console-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(148,197,255,0.34);
+      box-shadow:
+        0 22px 45px rgba(59,130,246,0.28),
+        0 8px 20px rgba(0,0,0,0.26),
+        inset 0 1px 0 rgba(255,255,255,0.20);
+    }
+    .consoles-arrow {
+      background-color: rgba(59,130,246,0.10);
+      background-image: linear-gradient(180deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.02) 55%, rgba(255,255,255,0.04) 100%);
+      backdrop-filter: blur(18px) saturate(190%);
+      -webkit-backdrop-filter: blur(18px) saturate(190%);
+      border: 1px solid rgba(255,255,255,0.14);
+      box-shadow:
+        0 6px 16px rgba(0,0,0,0.25),
+        inset 0 0 0 1px rgba(255,255,255,0.04),
+        inset 0 1px 0 rgba(255,255,255,0.16);
+    }
+    .consoles-arrow:hover {
+      background-color: rgba(59,130,246,0.26);
+      box-shadow:
+        0 0 20px rgba(59,130,246,0.35),
+        0 8px 22px rgba(0,0,0,0.28),
+        inset 0 0 0 1px rgba(255,255,255,0.05),
+        inset 0 1px 0 rgba(255,255,255,0.22);
+    }
+
+    /* ---- PC Hardwares: reuses the console-card/consoles-scroll glass
+            shell, matched to the site's existing blue accent (same
+            tones as the Consoles & Accessories badge/price/button). ---- */
+    .pc-hw-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      padding: 4px 10px;
+      border-radius: 5px;
+      background: rgba(59,130,246,0.18);
+      border: 1px solid rgba(59,130,246,0.35);
+      color: #93c5fd;
+      text-transform: uppercase;
+    }
+
+    .pc-hw-price {
+      font-size: 16px;
+      font-weight: 700;
+      color: rgb(88,184,215);
+    }
+
+    .pc-hw-add-btn {
+      margin-top: auto;
+      width: 100%;
+      padding: 10px;
+      border-radius: 999px;
+      background: transparent;
+      border: 1px solid rgba(59,130,246,0.4);
+      color: #e5e7eb;
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .pc-hw-add-btn:hover {
+      background: rgba(59,130,246,0.16);
+      border-color: rgba(59,130,246,0.6);
+    }
+
+    /* ---- Flip box: richer glass, flip animation untouched ---- */
+    .flip-box {
+      background-color: rgba(15,23,42,0.26);
+      background-image:
+        var(--lg-film),
+        radial-gradient(120% 90% at 50% 0%, rgba(96,165,250,0.12), transparent 60%);
+      backdrop-filter: blur(15px) saturate(145%);
+      -webkit-backdrop-filter: blur(15px) saturate(145%);
+      border: 1px solid rgba(255,255,255,0.16);
+      box-shadow:
+        0 28px 60px rgba(0,0,0,0.38),
+        0 10px 34px rgba(59,130,246,0.26),
+        inset 0 1px 0 rgba(255,255,255,0.18),
+        inset 0 -1px 0 rgba(255,255,255,0.05);
+    }
+
+    /* ---- Game cards: premium glass shell around the artwork.
+            `position: relative` is added only to anchor the decorative
+            glaze; with no offsets it cannot move the card. Width, grid
+            placement, 320px cover art, text position, the -6px hover
+            lift stays as it was. ---- */
+    .game-card {
+      position: relative;
+      background-color: rgba(15,23,42,0.28);
+      background-image: var(--lg-film-soft);
+      border: 1px solid rgba(255,255,255,0.13);
+      box-shadow:
+        0 16px 34px rgba(0,0,0,0.30),
+        inset 0 1px 0 rgba(255,255,255,0.10);
+    }
+    /* thin specular glaze over the cover art — decorative only, and
+       pointer-events:none so the click/select handler still receives
+       every click on the card */
+    .game-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.05) 9%, rgba(255,255,255,0) 26%),
+        linear-gradient(205deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0) 42%);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06);
+      opacity: 0.85;
+      transition: opacity 0.35s ease;
+    }
+    .game-card:hover::after {
+      opacity: 1;
+    }
+    .game-card:hover {
+      border-color: rgba(148,197,255,0.38);
+      box-shadow:
+        0 24px 50px rgba(59,130,246,0.38),
+        0 10px 26px rgba(0,0,0,0.34),
+        inset 0 1px 0 rgba(255,255,255,0.18);
+    }
+
+    /* ---- Hero banners: light contact shadow only — the old wide,
+            dark, blue-tinted shadow was what made the whole row read
+            as a solid "island" behind the pictures, so it's been
+            pulled way back instead of stacked with the base rule. ---- */
+    .image-scroll img {
+      box-shadow: 0 10px 22px rgba(0,0,0,0.18);
+    }
+
+    /* ---- CTA / More Games: existing blue gradient kept, with a glass
+            sheen on top. The 1px edge is an inset ring rather than a real
+            border, so the buttons keep their exact size. ---- */
+    .cta-btn,
+    .more-games a {
+      backdrop-filter: blur(10px) saturate(180%);
+      -webkit-backdrop-filter: blur(10px) saturate(180%);
+      background-image:
+        linear-gradient(180deg, rgba(255,255,255,0.20) 0%, rgba(255,255,255,0.02) 20%, rgba(255,255,255,0) 55%),
+        linear-gradient(135deg, #2563eb, #3b82f6);
+      box-shadow:
+        0 10px 24px rgba(37,99,235,0.30),
+        inset 0 0 0 1px rgba(255,255,255,0.12),
+        inset 0 1px 0 rgba(255,255,255,0.28),
+        inset 0 -8px 16px -12px rgba(0,0,0,0.35);
+    }
+    .cta-btn:hover,
+    .more-games a:hover {
+      box-shadow:
+        0 0 20px rgba(59,130,246,0.50),
+        0 12px 28px rgba(37,99,235,0.30),
+        inset 0 0 0 1px rgba(255,255,255,0.16),
+        inset 0 1px 0 rgba(255,255,255,0.32),
+        inset 0 -8px 16px -12px rgba(0,0,0,0.30);
+    }
+
+    /* ---- Footer: subtle glass, same padding and text colour ---- */
+    footer {
+      background-color: rgba(5,8,15,0.32);
+      background-image:
+        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0) 55%),
+        linear-gradient(90deg, rgba(59,130,246,0.08) 0%, rgba(59,130,246,0) 45%, rgba(59,130,246,0.08) 100%);
+      backdrop-filter: blur(13px) saturate(140%);
+      -webkit-backdrop-filter: blur(13px) saturate(140%);
+      border-top: 1px solid rgba(148,197,255,0.16);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.10);
+    }
+
+    /* ---- Toast message: frosted pill.
+            These selectors are boosted with `body` because the toast's own
+            rules are injected by the existing script *after* this
+            stylesheet — no JavaScript was changed. Position, size, timing
+            and behaviour are all left to the original rules. ---- */
+    body .message {
+      backdrop-filter: blur(16px) saturate(160%);
+      -webkit-backdrop-filter: blur(16px) saturate(160%);
+    }
+    body .message.success {
+      background-color: rgba(16,185,129,0.16);
+      background-image: linear-gradient(180deg, rgba(255,255,255,0.14), rgba(255,255,255,0.02));
+      border: 1px solid rgba(167,243,208,0.35);
+      box-shadow:
+        0 18px 38px rgba(0,0,0,0.35),
+        0 6px 18px rgba(16,185,129,0.22),
+        inset 0 1px 0 rgba(255,255,255,0.22);
+    }
+    body .message.error {
+      background-color: rgba(239,68,68,0.16);
+      background-image: linear-gradient(180deg, rgba(255,255,255,0.14), rgba(255,255,255,0.02));
+      border: 1px solid rgba(254,202,202,0.32);
+      box-shadow:
+        0 18px 38px rgba(0,0,0,0.35),
+        0 6px 18px rgba(239,68,68,0.22),
+        inset 0 1px 0 rgba(255,255,255,0.22);
+    }
+
+    /* ---- Fallback: browsers without backdrop-filter get denser
+            surfaces instead of blur, so nothing becomes hard to read.
+            Only background *colours* change here. ---- */
+    @supports not ((backdrop-filter: blur(2px)) or (-webkit-backdrop-filter: blur(2px))) {
+      nav                  { background-color: rgba(7,10,18,0.94); }
+      .dropdown-menu       { background-color: rgba(11,17,33,0.97); }
+      .nav-search-btn      { background-color: rgba(30,58,110,0.85); }
+      .menu-btn            { background-color: rgba(30,58,110,0.85); }
+      .search-overlay      { background-color: rgba(5,6,10,0.92); }
+      .search-panel        { background-color: rgba(13,20,38,0.97); }
+      .account-overlay     { background-color: rgba(5,6,10,0.92); }
+      .account-panel       { background-color: rgba(13,20,38,0.97); }
+      .we-assure-box       { background-color: rgba(15,23,42,0.92); }
+      .assure-card         { background-color: rgba(15,23,42,0.90); }
+      .console-card        { background-color: rgba(15,23,42,0.90); }
+      .consoles-arrow      { background-color: rgba(30,58,110,0.85); }
+      .flip-box            { background-color: rgba(15,23,42,0.92); }
+      .game-card           { background-color: rgba(15,23,42,0.92); }
+      footer               { background-color: rgba(5,8,15,0.94); }
+      body .message.success { background-color: rgba(6,59,46,0.94); }
+      body .message.error   { background-color: rgba(69,10,10,0.94); }
+    }
+    /* ---- Search island hover state: the label used to expand the
+            button's own width, which crept left into the middle
+            island. Instead it now floats up as a small glass tooltip
+            beneath the button — icon does the "reacting" instead of
+            the pill growing sideways, so nothing ever overlaps. ---- */
+    .nav-search-btn.nav-edge-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      overflow: visible;
+    }
+    .nav-search-btn.nav-edge-btn:hover,
+    .nav-search-btn.nav-edge-btn:focus-visible {
+      padding: 0;
+    }
+    .nav-search-btn.nav-edge-btn .search-icon {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .nav-search-btn.nav-edge-btn:hover .search-icon,
+    .nav-search-btn.nav-edge-btn:focus-visible .search-icon {
+      transform: scale(1.15) rotate(-10deg);
+    }
+    .nav-search-btn.nav-edge-btn .search-label {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      max-width: none;
+      margin: 12px 0 0;
+      padding: 9px 16px;
+      border-radius: 12px;
+      background-color: rgba(8,12,22,0.96);
+      background-image: linear-gradient(180deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.02) 100%);
+      border: 1px solid rgba(59,130,246,0.35);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.45);
+      font-size: 13px;
+      font-weight: 600;
+      color: #e5e7eb;
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(-8px) scale(0.9);
+      transform-origin: top right;
+      transition: opacity 0.3s ease,
+                  transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  visibility 0.3s;
+    }
+    .nav-search-btn.nav-edge-btn .search-label::before {
+      content: "";
+      position: absolute;
+      top: -5px;
+      right: 20px;
+      width: 10px;
+      height: 10px;
+      background-color: rgba(8,12,22,0.96);
+      border-left: 1px solid rgba(59,130,246,0.35);
+      border-top: 1px solid rgba(59,130,246,0.35);
+      transform: rotate(45deg);
+    }
+    .nav-search-btn.nav-edge-btn:hover .search-label,
+    .nav-search-btn.nav-edge-btn:focus-visible .search-label {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+
+    /* Menu island: give the icon a touch more room in the bigger button */
+    .menu-btn.nav-edge-btn .menu-icon {
+      width: 22px;
+      height: 20px;
+    }
+
+    /* On narrow screens the nav wraps onto several rows and grows tall,
+       so match-the-nav-height would stretch the edge islands into long
+       pills. Cap them to a fixed circle pinned by the logo row instead. */
+    @media (max-width: 760px) {
+      .nav-edge-btn {
+        top: 26px;
+        bottom: auto;
+        height: 56px;
+        width: 56px;
+        border-radius: 999px;
+      }
+    }
+
+    /* Persistent cart control: a separate island beside search, with its
+       own fixed slot so the two controls never overlap. */
+    .cart-nav-btn {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      bottom: 16px;
+      width: 64px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 28px;
+      color: #e5e7eb;
+      background-color: rgba(59,130,246,0.10);
+      background-image: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.02) 55%, rgba(255,255,255,0.04));
+      box-shadow: 0 6px 16px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.16);
+      text-decoration: none;
+      z-index: 1001;
+      transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .cart-nav-btn:hover,
+    .cart-nav-btn:focus-visible {
+      background-color: rgba(59,130,246,0.26);
+      box-shadow: 0 0 20px rgba(59,130,246,0.35), 0 8px 22px rgba(0,0,0,0.28);
+      transform: translateY(-1px);
+    }
+    .cart-nav-btn svg { width: 21px; height: 21px; }
+    .nav-search-btn.nav-edge-right { right: 92px; }
+    .cart-count {
+      min-width: 19px;
+      height: 19px;
+      padding: 0 5px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      color: #fff;
+      background: #2563eb;
+      box-shadow: 0 0 12px rgba(37,99,235,0.55);
+      font-size: 10px;
+      font-weight: 800;
+    }
+    .cart-label {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      margin-top: 12px;
+      padding: 9px 16px;
+      border: 1px solid rgba(59,130,246,0.35);
+      border-radius: 12px;
+      color: #e5e7eb;
+      background: rgba(8,12,22,0.96);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.45);
+      font-size: 13px;
+      font-weight: 600;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-8px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .cart-nav-btn:hover .cart-label,
+    .cart-nav-btn:focus-visible .cart-label { opacity: 1; transform: translateY(0); }
+
+    /* Keep the centre island inside the space reserved for the menu, search
+       and cart islands. This prevents collisions at intermediate widths. */
+    header nav {
+      width: min(1100px, calc(100% - 260px));
+    }
+
+    .console-add-btn,
+    .pc-hw-add-btn,
+    .game-add-btn {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cart-pop {
+      animation: cart-confirm 620ms cubic-bezier(0.22, 1.35, 0.36, 1);
+    }
+
+    @keyframes cart-confirm {
+      0% { transform: scale(1); }
+      28% { transform: scale(0.94); }
+      62% { transform: scale(1.045); box-shadow: 0 0 0 7px rgba(59,130,246,0), 0 0 24px rgba(34,197,94,0.45); }
+      100% { transform: scale(1); }
+    }
+
+    @media (max-width: 760px) {
+      header nav { width: calc(100% - 144px); }
+      .cart-nav-btn {
+        top: 26px;
+        right: 10px;
+        bottom: auto;
+        width: 56px;
+        height: 56px;
+        border-radius: 999px;
+      }
+      .nav-search-btn.nav-edge-right { right: 74px; }
+    }
