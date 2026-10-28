@@ -1,0 +1,33 @@
+.field-error {
+  color: #fca5a5;
+  font-size: 12px;
+  font-weight: 600;
+  margin: 4px 0 8px;
+  line-height: 1.4;
+}
+input[aria-invalid="true"],
+textarea[aria-invalid="true"] {
+  border-color: rgba(239, 68, 68, 0.7) !important;
+}
+
+.async-state { text-align: center; padding: 40px 20px; grid-column: 1 / -1; }
+.async-state p { margin-bottom: 16px; opacity: 0.85; }
+.async-spinner {
+  width: 38px; height: 38px; margin: 0 auto 14px; border-radius: 50%;
+  border: 3px solid rgba(255,255,255,0.18); border-top-color: #3b82f6;
+  animation: cv-spin 0.8s linear infinite;
+}
+@keyframes cv-spin { to { transform: rotate(360deg); } }
+
+.cv-toast {
+  position: fixed; bottom: 20px; left: 50%;
+  transform: translateX(-50%) translateY(16px);
+  padding: 12px 18px; border-radius: 10px; font-size: 13px; font-weight: 600;
+  opacity: 0; visibility: hidden; pointer-events: none;
+  backdrop-filter: blur(8px);
+  transition: opacity 0.35s ease, transform 0.35s ease, visibility 0.35s;
+  z-index: 9999;
+}
+.cv-toast.success, .cv-toast.error { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+.cv-toast.success { background: rgba(16,185,129,0.18); border: 1px solid rgba(16,185,129,0.35); color: #a7f3d0; }
+.cv-toast.error { background: rgba(239,68,68,0.18); border: 1px solid rgba(239,68,68,0.35); color: #fecaca; }

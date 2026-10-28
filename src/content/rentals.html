@@ -1,0 +1,204 @@
+
+  <div class="page-hero">
+    <h1>Rent a Console</h1>
+    <p>Borrow a PS5, Xbox or Switch from fellow gamers near you, or list your own and earn while it's idle.</p>
+  </div>
+
+  <div class="rent-tabs">
+    <button type="button" class="rent-tab-btn" id="browseTabBtn">Browse &amp; Rent</button>
+    <button type="button" class="rent-tab-btn" id="listTabBtn">List Your Console</button>
+  </div>
+
+  <section class="rent-panel" id="browsePanel">
+    <div class="rent-note">
+      <strong>How renting works:</strong> Every listing includes one controller free. Pick your hours, add extra controllers if you need them, and submit a request — the price updates instantly. Meet in a safe public place, check the console works before paying, and pay the refundable deposit directly to the owner.
+    </div>
+
+    <div class="filter-nav" id="typeFilterNav">
+      <button class="filter-btn active" data-type="all">All Consoles</button>
+      <button class="filter-btn" data-type="PS5">PS5</button>
+      <button class="filter-btn" data-type="PS4">PS4</button>
+      <button class="filter-btn" data-type="Xbox">Xbox</button>
+      <button class="filter-btn" data-type="Switch">Switch</button>
+      <button class="filter-btn" data-type="PC">Gaming PC</button>
+      <button class="filter-btn" data-type="Other">Other</button>
+    </div>
+
+    <div class="rent-filter-row">
+      <input type="text" id="cityFilterInput" placeholder="Filter by city / area...">
+    </div>
+
+    <div class="rental-grid" id="rentalGrid">
+    </div>
+
+    <div class="rental-booking-panel" id="bookingPanel">
+      <button type="button" class="rental-close-panel" id="bookingCloseBtn" aria-label="Close">×</button>
+      <h3 id="bookingTitle">Rent this console</h3>
+      <p class="rental-meta" id="bookingMeta"></p>
+
+      <form class="cv-form" id="bookingForm" style="margin-top:18px;">
+        <div class="cv-form-group">
+          <label>Number of Hours (min <span id="bookingMinHours">1</span>)</label>
+          <div class="rental-stepper">
+            <button type="button" id="hoursMinus">−</button>
+            <span id="hoursValue">1</span>
+            <button type="button" id="hoursPlus">+</button>
+          </div>
+        </div>
+
+        <div class="cv-form-group">
+          <label>Extra Controllers (1 already included free)</label>
+          <div class="rental-stepper">
+            <button type="button" id="controllersMinus">−</button>
+            <span id="controllersValue">0</span>
+            <button type="button" id="controllersPlus">+</button>
+          </div>
+        </div>
+
+        <div class="cv-form-group">
+          <label>Your Name</label>
+          <input type="text" id="renterName" required>
+        </div>
+        <div class="cv-form-group">
+          <label>Your Phone Number</label>
+          <input type="tel" id="renterPhone" required>
+        </div>
+        <div class="cv-form-group">
+          <label>Preferred Date</label>
+          <input type="date" id="renterDate" required>
+        </div>
+
+        <div class="rental-summary-box">
+          <div class="rental-summary-row"><span id="summaryRateLabel">₹250/hr × 1 hr</span><span id="summaryRentalCost">₹250</span></div>
+          <div class="rental-summary-row"><span id="summaryControllerLabel">Extra controllers (0)</span><span id="summaryControllerCost">₹0</span></div>
+          <div class="rental-summary-row deposit-note" id="summaryDepositRow"></div>
+          <div class="rental-summary-row total"><span>Payable to Owner</span><span id="summaryTotal">₹250</span></div>
+        </div>
+
+        <button type="submit" class="cv-btn-primary">Request to Rent</button>
+      </form>
+
+      <div class="rental-confirm-box" id="bookingConfirmBox"></div>
+    </div>
+  </section>
+
+  <section class="rent-panel" id="listPanel">
+    <div class="content-page">
+      <h2 style="margin-top:0;">List Your Console for Rent</h2>
+      <p>Set your own hourly rate, decide how many controllers come included, and start earning from your console when you're not using it.</p>
+
+      <form class="cv-form" id="listForm" style="margin-top:20px;">
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
+          <div class="cv-form-group">
+            <label>Console Name</label>
+            <input type="text" id="listConsoleName" placeholder="e.g. Sony PlayStation 5 Standard" required>
+          </div>
+          <div class="cv-form-group">
+            <label>Console Type</label>
+            <select id="listConsoleType" required>
+              <option value="PS5">PlayStation 5</option>
+              <option value="PS4">PlayStation 4</option>
+              <option value="Xbox">Xbox Series X/S</option>
+              <option value="Switch">Nintendo Switch</option>
+              <option value="PC">Gaming PC</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
+          <div class="cv-form-group">
+            <label>Condition</label>
+            <select id="listCondition">
+              <option value="Like New">Like New</option>
+              <option value="Good" selected>Good</option>
+              <option value="Fair">Fair</option>
+            </select>
+          </div>
+          <div class="cv-form-group">
+            <label>Your City / Area</label>
+            <input type="text" id="listCity" placeholder="e.g. Karnal" required>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
+          <div class="cv-form-group">
+            <label>Hourly Rate (₹)</label>
+            <input type="number" id="listHourlyRate" min="1" value="250" required>
+          </div>
+          <div class="cv-form-group">
+            <label>Minimum Rental Hours</label>
+            <input type="number" id="listMinHours" min="1" value="2" required>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
+          <div class="cv-form-group">
+            <label>Controllers Included Free</label>
+            <input type="number" id="listIncludedControllers" min="1" value="1" required>
+          </div>
+          <div class="cv-form-group">
+            <label>Price per Extra Controller (₹)</label>
+            <input type="number" id="listExtraControllerPrice" min="0" value="100" required>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
+          <div class="cv-form-group">
+            <label>Refundable Security Deposit (₹)</label>
+            <input type="number" id="listDeposit" min="0" value="1000">
+          </div>
+          <div class="cv-form-group">
+            <label>Handover Option</label>
+            <select id="listDelivery">
+              <option value="Pickup Only">Renter Picks Up</option>
+              <option value="Can Deliver">I Can Deliver Nearby</option>
+              <option value="Both">Both Options</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
+          <div class="cv-form-group">
+            <label>Your Name</label>
+            <input type="text" id="listOwnerName" required>
+          </div>
+          <div class="cv-form-group">
+            <label>Contact Number</label>
+            <input type="tel" id="listOwnerPhone" required>
+          </div>
+        </div>
+
+        <div class="cv-form-group">
+          <label>Additional Notes (optional)</label>
+          <textarea id="listNotes" rows="3" placeholder="e.g. Comes with 2 games, available evenings only..."></textarea>
+        </div>
+
+        <button type="submit" class="cv-btn-primary">List My Console</button>
+      </form>
+    </div>
+  </section>
+
+  <div class="rental-activity-section content-page">
+    <div class="activity-header">
+      <div>
+        <p class="activity-kicker">Rental dashboard</p>
+        <h2>My Rental Activity</h2>
+        <p class="activity-header-copy">Keep an eye on every console you list and every rental you request.</p>
+      </div>
+      <div class="activity-stats" aria-label="Rental activity summary">
+        <div class="activity-stat"><strong id="listingCount">0</strong><span>Listings</span></div>
+        <div class="activity-stat"><strong id="bookingCount">0</strong><span>Requests</span></div>
+      </div>
+    </div>
+    <div class="rental-activity-grid">
+      <div class="activity-panel">
+        <h3 class="activity-panel-heading"><span class="activity-panel-icon">⌘</span>My Listings <span class="activity-panel-count" id="listingPanelCount">0 active</span></h3>
+        <div id="myListings" class="activity-feed"></div>
+      </div>
+      <div class="activity-panel">
+        <h3 class="activity-panel-heading"><span class="activity-panel-icon">↗</span>My Booking Requests <span class="activity-panel-count" id="bookingPanelCount">0 requests</span></h3>
+        <div id="myBookings" class="activity-feed"></div>
+      </div>
+    </div>
+  </div>
