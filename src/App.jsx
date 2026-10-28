@@ -27,14 +27,12 @@ const guard = (el) => <RequireAuth>{el}</RequireAuth>;
 
 export default function App() {
   const dispatch = useDispatch();
-  // load the catalog once at startup (search overlay needs it on every page)
   useEffect(() => {
     dispatch(fetchCatalog());
   }, [dispatch]);
 
   return (
     <Routes>
-      {/* login has its own page layout + stylesheet */}
       <Route path="/login" element={<Login />} />
 
       <Route element={<Layout />}>
@@ -56,7 +54,7 @@ export default function App() {
         <Route path="/pc-components" element={<ProductList categories={["pc"]} filters={[]} names={{ all: "All PC Components" }} subtitle="Explore our featured collection of new and pre-owned pc components." />} />
         <Route path="/rentals" element={<Rentals />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/checkout" element={guard(<Checkout />)} />
         <Route path="/order-confirmation" element={<OrderConfirmation />} />
         <Route path="/orders" element={guard(<Orders />)} />
         <Route path="/account" element={guard(<Account />)} />

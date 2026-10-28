@@ -1,9 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-// Async state: fetching the catalog is a thunk with idle/loading/succeeded/failed
-// states. The data module is loaded with a dynamic import after a short delay, which
-// stands in for a real API call. Swap the body for fetch("/api/products") later.
-// Add ?failcatalog=1 to the URL to see the error + retry UI.
 export const fetchCatalog = createAsyncThunk("catalog/fetch", async () => {
   await new Promise((r) => setTimeout(r, 500));
   if (window.location.href.includes("failcatalog=1")) {

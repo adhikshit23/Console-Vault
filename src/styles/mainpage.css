@@ -16,8 +16,6 @@
       overflow-x: hidden;
     }
 
-    /* ---- Background photo ----
-           Fixed full-bleed layer sitting under everything else. ---- */
     #bgPhoto {
       position: fixed;
       inset: 0;
@@ -114,7 +112,6 @@
 
     .nav-item {
       position: relative;
-      /* Added for consistent vertical alignment within each nav item */
       display: flex;
       align-items: center;
     }
@@ -330,7 +327,6 @@
       opacity: 0.55;
     }
 
-    /* ---- Consoles & Accessories carousel ---- */
     .consoles-section {
       max-width: 1200px;
       margin: 50px auto 0;
@@ -564,7 +560,6 @@
       color: #9ca3af;
     }
 
-    /* ==================== EXPANDED FOOTER ==================== */
     footer.site-footer {
       display: flex;
       flex-direction: column;
@@ -574,7 +569,6 @@
       padding: 50px 20px 26px;
     }
 
-    /* ---- FAQ accordion ---- */
     .footer-faq h2 {
       font-size: 24px;
       font-weight: 800;
@@ -628,7 +622,6 @@
       opacity: 0.8;
     }
 
-    /* ---- Trust / testimonial block ---- */
     .footer-trust {
       max-width: 720px;
       margin: 0 auto;
@@ -659,7 +652,6 @@
       line-height: 1.5;
     }
 
-    /* ---- Link columns ---- */
     .footer-links {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -696,7 +688,6 @@
       padding-top: 20px;
     }
 
-    /* === FLIP BOX WRAPPER === */
 .flip-box {
   background: rgba(15,23,42,0.75);
   backdrop-filter: blur(12px);
@@ -709,7 +700,6 @@
 
 
 
-       /* ========= FLIP TEXT ========= */
  
 .flip-section {
   margin: 80px 0;
@@ -759,19 +749,11 @@
   100% { transform: translateY(0); }
 }
 
-    /* ============================================================
-       PREMIUM UPGRADE — ANIMATIONS, SEARCH & MICRO-INTERACTIONS
-       ============================================================ */
 
-    /* ---- Smooth in-page scrolling (used when a search result
-           scrolls a game card into view) ---- */
     html {
       scroll-behavior: smooth;
     }
 
-    /* ---- Progressive-enhancement entrance/reveal system ----
-       Elements only start hidden once JS confirms it can animate
-       them back in, so the page still works fine with JS disabled. */
     .js .reveal {
       opacity: 0;
       transform: translateY(28px);
@@ -782,7 +764,6 @@
       opacity: 1;
       transform: translateY(0);
     }
-    /* cards need a unified transition so reveal + hover never fight */
     .js .game-card.reveal,
     .js .assure-card.reveal {
       transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
@@ -798,7 +779,6 @@
       transform: scale(1);
     }
 
-    /* ---- Logo micro-interaction ---- */
     .logo img {
       transition: transform 0.3s ease;
     }
@@ -806,7 +786,6 @@
       transform: scale(1.05);
     }
 
-    /* ---- Animated underline sweep for top-level nav links ---- */
     .nav-item > a {
       position: relative;
     }
@@ -827,7 +806,6 @@
       transform: scaleX(1);
     }
 
-    /* ---- Dropdown items cascade in instead of appearing all at once ---- */
     .dropdown-menu li {
       opacity: 0;
       transform: translateY(6px);
@@ -841,7 +819,6 @@
       transform: translateY(0);
     }
 
-    /* ---- Nav search button: styles now handled by .header-island-btn ---- */
     .nav-search-btn .search-icon {
       flex-shrink: 0;
     }
@@ -850,7 +827,6 @@
       font-weight: 600;
     }
 
-    /* ---- Search overlay ---- */
     .search-overlay {
       position: fixed;
       inset: 0;
@@ -1013,7 +989,6 @@
       font-size: 14px;
     }
 
-    /* ---- Pulse highlight when a search result is opened from the panel ---- */
     @keyframes searchPulse {
       0%   { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.55); }
       70%  { box-shadow: 0 0 0 18px rgba(59, 130, 246, 0); }
@@ -1024,8 +999,6 @@
       border-color: rgba(59, 130, 246, 0.6);
     }
 
-    /* ---- Account overlay (opened from the hamburger button) ----
-            Same overlay/panel language as the search feature. ---- */
     .account-overlay {
       position: fixed;
       inset: 0;
@@ -1138,7 +1111,6 @@
       transform: translateX(4px);
     }
 
-    /* ---- Card & button hover polish ---- */
     .assure-card {
       transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
                   box-shadow 0.35s ease, border-color 0.35s ease;
@@ -1166,14 +1138,12 @@
       transform: translateY(0) scale(0.97);
     }
 
-    /* ---- Sort-by-price fade helper (snappier exit, elegant re-entry) ---- */
     .js .game-card.reveal.card-sorting {
       transition: opacity 0.28s ease, transform 0.28s ease;
       opacity: 0;
       transform: translateY(14px) scale(0.96);
     }
 
-    /* ---- Responsive tweaks for the nav & search panel ---- */
     @media (max-width: 760px) {
       nav {
         flex-wrap: wrap;
@@ -1189,7 +1159,6 @@
       }
     }
 
-    /* ---- Respect the user's OS-level reduced-motion preference ---- */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
@@ -1204,25 +1173,8 @@
       }
     }
 
-    /* ============================================================
-       LIQUID GLASS UI ENHANCEMENT
-       Visual-only enhancement — layout preserved
-       ------------------------------------------------------------
-       Every rule below only touches paint-level properties:
-       background, backdrop-filter, box-shadow and border *colours*.
-       Nothing here changes the box model — elements that never had a
-       border get their glass edge from an `inset 0 0 0 1px` shadow
-       instead of a real border, so no size, spacing or position can
-       shift. Existing transforms (hover lift, flip, reveal, rotate)
-       are never re-declared, so all current motion survives.
-
-       Glass hierarchy (strongest -> lightest):
-         search panel  ->  header / dropdown  ->  panels & cards
-         ->  buttons (accents only)
-       ============================================================ */
 
     :root {
-      /* layered translucent films, reused across surfaces */
       --lg-film: linear-gradient(135deg,
                    rgba(255,255,255,0.10) 0%,
                    rgba(255,255,255,0.035) 45%,
@@ -1233,9 +1185,6 @@
                    rgba(255,255,255,0.045) 100%);
     }
 
-    /* ---- Background: a little more atmosphere so the glass has
-            something to refract. Same palette, same mood, one extra
-            very soft blue pool near the bottom. ---- */
     body::before {
       background:
         radial-gradient(800px circle at 80% -10%, rgba(59,130,246,0.20), transparent 60%),
@@ -1244,11 +1193,6 @@
         linear-gradient(180deg, rgba(1,1,2,0.72) 0%, rgba(3,4,5,0.66) 40%, rgba(6,9,17,0.78) 100%);
     }
 
-    /* ---- Header: transparent floating strip.
-            The visible glass now lives on <nav> itself, so the bar
-            reads as a floating island instead of a full-width strip.
-            Sticky position kept; a transform + transition let it
-            slide off-screen on scroll-down and glide back on scroll-up. ---- */
     header {
       background: transparent;
       backdrop-filter: none;
@@ -1263,9 +1207,6 @@
       transform: translateY(-140%);
     }
 
-    /* ---- Nav: the actual "island" — carries the glass, the pill/rounded
-            shape and its own floating shadow so it reads as a capsule
-            rather than a bar. Internal flex layout is unchanged. ---- */
     nav {
       background-color: rgba(6,9,16,0.07);
       background-image:
@@ -1285,7 +1226,6 @@
         inset 0 -14px 26px -18px rgba(59,130,246,0.18);
     }
 
-    /* ---- Edge islands: now flex items, not absolutely positioned ---- */
     .nav-edge-btn {
       border-radius: 28px;
       z-index: 1001;
@@ -1294,11 +1234,9 @@
     .nav-edge-btn:active {
       transform: scale(0.95);
     }
-    /* Legacy classes kept for compat, no longer set position */
     .nav-edge-left {}
     .nav-edge-right {}
 
-    /* ---- Menu (hamburger) button: same glass accent as the search button ---- */
     .menu-btn {
       background-color: rgba(59,130,246,0.10);
       background-image: linear-gradient(180deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.02) 55%, rgba(255,255,255,0.04) 100%);
@@ -1320,11 +1258,7 @@
         inset 0 1px 0 rgba(255,255,255,0.22);
     }
 
-    /* ---- Nav links: the hover chip becomes a small glass pill.
-            Same 8px/12px padding, same 6px radius, same 0.25s feel. ---- */
     .nav-item a {
-      /* a fully transparent gradient in the resting state so the hover
-         sheen can interpolate smoothly instead of snapping in */
       background-image: linear-gradient(180deg, rgba(255,255,255,0), rgba(255,255,255,0));
     }
     .nav-item a:hover {
@@ -1338,13 +1272,6 @@
         0 8px 20px rgba(0,0,0,0.28);
     }
 
-    /* ---- Dropdown menu: medium glass.
-            Same absolute position, min-width, padding and cascade.
-            Note: the header is a backdrop root, so a nested
-            backdrop-filter is a no-op in Chromium — the panel therefore
-            carries its own denser translucent film (verified over the
-            brightest hero banner) and keeps the blur only as a bonus for
-            engines that do resolve it. ---- */
     .dropdown-menu {
       background-color: rgba(9,14,28,0.32);
       background-image:
@@ -1365,10 +1292,7 @@
       box-shadow: inset 2px 0 0 rgba(148,197,255,0.45);
     }
 
-    /* ---- Nav search button: glass handled by .header-island-btn ---- */
 
-    /* ---- Search overlay: a soft glass sheet over the whole page.
-            Same fixed inset, same padding, same fade behaviour. ---- */
     .search-overlay {
       background:
         radial-gradient(900px circle at 50% 0%, rgba(37,99,235,0.14), transparent 62%),
@@ -1377,9 +1301,6 @@
       -webkit-backdrop-filter: blur(10px) saturate(135%);
     }
 
-    /* ---- Search panel: the strongest glass on the page.
-            Width, max-height, padding, radius and entrance animation
-            are all left exactly as they were. ---- */
     .search-panel {
       background-color: rgba(13,20,38,0.30);
       background-image:
@@ -1416,7 +1337,6 @@
       background: rgba(148,197,255,0.30);
     }
 
-    /* ---- Account overlay & panel: same glass treatment as search ---- */
     .account-overlay {
       background:
         radial-gradient(900px circle at 50% 0%, rgba(37,99,235,0.14), transparent 62%),
@@ -1476,10 +1396,6 @@
       border-color: rgba(148,197,255,0.34);
     }
 
-    /* ---- Search result rows: glass layering + a hover reflection.
-            Layout, 52px thumbnails and the stagger-in are untouched;
-            box-shadow is appended to the existing transition list so the
-            reflection fades in as smoothly as the tint. ---- */
     .search-result-item {
       background-color: rgba(255,255,255,0.04);
       background-image: linear-gradient(135deg, rgba(255,255,255,0.09) 0%, rgba(255,255,255,0.012) 60%);
@@ -1502,7 +1418,6 @@
       box-shadow: 0 0 0 1px rgba(255,255,255,0.10), 0 4px 12px rgba(0,0,0,0.35);
     }
 
-    /* ---- "We Assure" panel: enhanced glass, same 18px radius / padding ---- */
     .we-assure-box {
       background-color: rgba(15,23,42,0.24);
       background-image:
@@ -1518,11 +1433,6 @@
         inset 0 -1px 0 rgba(255,255,255,0.04);
     }
 
-    /* ---- Assure cards: slightly translucent glass tiles.
-            No backdrop-filter on purpose — they sit on the glass panel
-            above, whose surface is already smooth, so translucent layers
-            read identically for none of the GPU cost. Grid, gap, padding
-            and the -6px hover lift are untouched. ---- */
     .assure-card {
       background-color: rgba(15,23,42,0.22);
       background-image: var(--lg-film-soft);
@@ -1539,7 +1449,6 @@
         inset 0 1px 0 rgba(255,255,255,0.20);
     }
 
-    /* ---- Recently Sold cards: same soft glass tile as assure cards ---- */
     .sold-card {
       background-color: rgba(15,23,42,0.22);
       background-image: var(--lg-film-soft);
@@ -1559,7 +1468,6 @@
         inset 0 1px 0 rgba(255,255,255,0.20);
     }
 
-    /* ---- Consoles & Accessories: same soft glass tile, plus the pill arrows ---- */
     .console-card {
       background-color: rgba(15,23,42,0.22);
       background-image: var(--lg-film-soft);
@@ -1598,9 +1506,6 @@
         inset 0 1px 0 rgba(255,255,255,0.22);
     }
 
-    /* ---- PC Hardwares: reuses the console-card/consoles-scroll glass
-            shell, matched to the site's existing blue accent (same
-            tones as the Consoles & Accessories badge/price/button). ---- */
     .pc-hw-badge {
       position: absolute;
       top: 12px;
@@ -1642,7 +1547,6 @@
       border-color: rgba(59,130,246,0.6);
     }
 
-    /* ---- Flip box: richer glass, flip animation untouched ---- */
     .flip-box {
       background-color: rgba(15,23,42,0.26);
       background-image:
@@ -1658,11 +1562,6 @@
         inset 0 -1px 0 rgba(255,255,255,0.05);
     }
 
-    /* ---- Game cards: premium glass shell around the artwork.
-            `position: relative` is added only to anchor the decorative
-            glaze; with no offsets it cannot move the card. Width, grid
-            placement, 320px cover art, text position, the -6px hover
-            lift stays as it was. ---- */
     .game-card {
       position: relative;
       background-color: rgba(15,23,42,0.28);
@@ -1672,9 +1571,6 @@
         0 16px 34px rgba(0,0,0,0.30),
         inset 0 1px 0 rgba(255,255,255,0.10);
     }
-    /* thin specular glaze over the cover art — decorative only, and
-       pointer-events:none so the click/select handler still receives
-       every click on the card */
     .game-card::after {
       content: "";
       position: absolute;
@@ -1699,17 +1595,10 @@
         inset 0 1px 0 rgba(255,255,255,0.18);
     }
 
-    /* ---- Hero banners: light contact shadow only — the old wide,
-            dark, blue-tinted shadow was what made the whole row read
-            as a solid "island" behind the pictures, so it's been
-            pulled way back instead of stacked with the base rule. ---- */
     .image-scroll img {
       box-shadow: 0 10px 22px rgba(0,0,0,0.18);
     }
 
-    /* ---- CTA / More Games: existing blue gradient kept, with a glass
-            sheen on top. The 1px edge is an inset ring rather than a real
-            border, so the buttons keep their exact size. ---- */
     .cta-btn,
     .more-games a {
       backdrop-filter: blur(10px) saturate(180%);
@@ -1733,7 +1622,6 @@
         inset 0 -8px 16px -12px rgba(0,0,0,0.30);
     }
 
-    /* ---- Footer: subtle glass, same padding and text colour ---- */
     footer {
       background-color: rgba(5,8,15,0.32);
       background-image:
@@ -1745,11 +1633,6 @@
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.10);
     }
 
-    /* ---- Toast message: frosted pill.
-            These selectors are boosted with `body` because the toast's own
-            rules are injected by the existing script *after* this
-            stylesheet — no JavaScript was changed. Position, size, timing
-            and behaviour are all left to the original rules. ---- */
     body .message {
       backdrop-filter: blur(16px) saturate(160%);
       -webkit-backdrop-filter: blur(16px) saturate(160%);
@@ -1773,9 +1656,6 @@
         inset 0 1px 0 rgba(255,255,255,0.22);
     }
 
-    /* ---- Fallback: browsers without backdrop-filter get denser
-            surfaces instead of blur, so nothing becomes hard to read.
-            Only background *colours* change here. ---- */
     @supports not ((backdrop-filter: blur(2px)) or (-webkit-backdrop-filter: blur(2px))) {
       nav                  { background-color: rgba(7,10,18,0.94); }
       .dropdown-menu       { background-color: rgba(11,17,33,0.97); }
@@ -1795,11 +1675,6 @@
       body .message.success { background-color: rgba(6,59,46,0.94); }
       body .message.error   { background-color: rgba(69,10,10,0.94); }
     }
-    /* ---- Search island hover state: the label used to expand the
-            button's own width, which crept left into the middle
-            island. Instead it now floats up as a small glass tooltip
-            beneath the button — icon does the "reacting" instead of
-            the pill growing sideways, so nothing ever overlaps. ---- */
     .nav-search-btn.nav-edge-btn {
       display: flex;
       align-items: center;
@@ -1865,15 +1740,11 @@
       transform: translateY(0) scale(1);
     }
 
-    /* Menu island: give the icon a touch more room in the bigger button */
     .menu-btn.nav-edge-btn .menu-icon {
       width: 22px;
       height: 20px;
     }
 
-    /* On narrow screens the nav wraps onto several rows and grows tall,
-       so match-the-nav-height would stretch the edge islands into long
-       pills. Cap them to a fixed circle pinned by the logo row instead. */
     @media (max-width: 760px) {
       .nav-edge-btn {
         top: 26px;
@@ -1884,8 +1755,6 @@
       }
     }
 
-    /* Persistent cart control: a separate island beside search, with its
-       own fixed slot so the two controls never overlap. */
     .cart-nav-btn {
       position: absolute;
       top: 16px;
@@ -1949,8 +1818,6 @@
     .cart-nav-btn:hover .cart-label,
     .cart-nav-btn:focus-visible .cart-label { opacity: 1; transform: translateY(0); }
 
-    /* Keep the centre island inside the space reserved for the menu, search
-       and cart islands. This prevents collisions at intermediate widths. */
     header nav {
       width: min(1100px, calc(100% - 260px));
     }

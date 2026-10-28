@@ -1,4 +1,3 @@
-// Shared loading / error UI for async state (catalog thunk).
 export default function AsyncBoundary({ status, error, onRetry, children }) {
   if (status === "idle" || status === "loading") {
     return (

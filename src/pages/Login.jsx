@@ -36,7 +36,6 @@ export default function Login() {
 
   useEffect(() => () => clearTimeout(timer.current), []);
 
-  // If already authenticated, redirect to destination or home
   useEffect(() => {
     if (user) {
       const destination = location.state?.from?.pathname || "/";
@@ -44,7 +43,6 @@ export default function Login() {
     }
   }, [user, navigate, location.state]);
 
-  // Hook up Get Started button scroll behavior
   useEffect(() => {
     const btn = document.getElementById("getStartedBtn");
     if (!btn) return undefined;
@@ -99,7 +97,6 @@ export default function Login() {
             </Link>
           </div>
 
-          {/* radio tabs: the CSS (:checked ~ form) needs these as siblings of the forms */}
           <input type="radio" name="tab" id="login" defaultChecked onChange={clear} />
           <input type="radio" name="tab" id="signup" onChange={clear} />
           <div className="tabs">

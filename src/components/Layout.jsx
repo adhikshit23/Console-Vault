@@ -25,7 +25,6 @@ function Header() {
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
 
-  // Close dropdown on click outside or Escape
   useEffect(() => {
     if (!accountMenuOpen) return undefined;
     const handleClickOutside = (e) => {
@@ -44,12 +43,10 @@ function Header() {
     };
   }, [accountMenuOpen]);
 
-  // Close dropdown whenever an overlay opens
   useEffect(() => {
     if (overlay) setAccountMenuOpen(false);
   }, [overlay]);
 
-  // navbar hides while scrolling down (site.js behaviour)
   useEffect(() => {
     let last = window.scrollY;
     const onScroll = () => {
@@ -82,7 +79,6 @@ function Header() {
 
   return (
     <header className={hidden ? "nav-hidden" : undefined}>
-      {/* LEFT CLUSTER: Hamburger → Search */}
       <div className="header-left-cluster">
         <button
           type="button"
@@ -127,7 +123,6 @@ function Header() {
         </button>
       </div>
 
-      {/* CENTER: Nav island */}
       <nav>
         <div className="logo">
           <Link to="/"><img src="logo.png" alt="ConsoleVault Logo" /></Link>
@@ -149,7 +144,6 @@ function Header() {
         </ul>
       </nav>
 
-      {/* RIGHT CLUSTER: Cart → Account */}
       <div className="header-right-cluster">
         <button
           type="button"
@@ -168,7 +162,6 @@ function Header() {
           <span className="cart-count" id="cartCount">{count}</span>
         </button>
 
-        {/* Account Icon Button & Dropdown */}
         <div className="account-dropdown-wrapper" ref={dropdownRef}>
           <button
             type="button"
@@ -246,7 +239,7 @@ function Header() {
             </div>
           )}
         </div>
-      </div>{/* end header-right-cluster */}
+      </div>
     </header>
   );
 }
@@ -419,18 +412,14 @@ export default function Layout() {
   const { toast, open, close } = useUI();
   useStyles(mainCss + "\n" + sharedCss + "\n" + pageCss);
 
-  // new page: scroll to top, close overlays, re-run reveal animations
   useEffect(() => {
     window.scrollTo(0, 0);
     close();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
   useReveal([pathname]);
 
-  // /cart opens the cart panel (replaces addtocart.html?open=1)
   useEffect(() => {
     if (pathname === "/cart") open("cart");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
   return (

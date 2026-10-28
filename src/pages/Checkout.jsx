@@ -25,7 +25,6 @@ export default function Checkout() {
   const initial = useMemo(() => ({ name: user?.name || "", email: user?.email || "", address: "" }), [user]);
   const form = useForm(initial, rules);
 
-  // empty cart -> back to the store (same as the old checkout.html)
   if (items.length === 0) return <Navigate to="/" replace />;
 
   const submit = form.handleSubmit(() => {

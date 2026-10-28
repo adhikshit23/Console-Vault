@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 
-// Same staggered scroll-reveal as site.js / mainpage.js, re-run whenever the route/content changes.
 export default function useReveal(deps = []) {
   useEffect(() => {
     const els = Array.from(document.querySelectorAll(".reveal:not(.is-visible)"));
@@ -27,6 +26,5 @@ export default function useReveal(deps = []) {
     );
     els.forEach((el) => io.observe(el));
     return () => io.disconnect();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 }

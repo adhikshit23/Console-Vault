@@ -1,7 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// Same localStorage key + item shape as the original cart.js, so a cart built on
-// the old pages still shows up here (and vice-versa).
 export const CART_KEY = "consolevault_cart";
 
 const load = () => {

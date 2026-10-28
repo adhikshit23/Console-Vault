@@ -1,4 +1,3 @@
-/* Shared ConsoleVault navbar, flex clusters, and cart-row rules. */
 header nav {
   flex: 1 1 auto;
   width: auto;
@@ -10,7 +9,6 @@ header nav {
   align-items: center;
 }
 
-/* ---- Header flex layout: [left-cluster | nav | right-cluster] ---- */
 .header-left-cluster,
 .header-right-cluster {
   display: flex;
@@ -19,14 +17,12 @@ header nav {
   flex-shrink: 0;
 }
 
-/* Account dropdown wrapper sits inside right-cluster; needs relative for popover */
 .account-dropdown-wrapper {
   position: relative;
   display: flex;
   align-items: center;
 }
 
-/* ---- Shared style for ALL header island buttons ---- */
 .header-island-btn {
   display: inline-flex;
   align-items: center;
@@ -64,10 +60,8 @@ header nav {
 }
 .header-island-btn:active { transform: scale(0.95); }
 
-/* Hamburger: square pill */
 .menu-btn.header-island-btn { min-width: 48px; width: 48px; padding: 0; }
 
-/* Search: icon + text */
 .nav-search-btn.header-island-btn {
   padding: 0 16px;
 }
@@ -76,10 +70,8 @@ header nav {
   font-weight: 600;
 }
 
-/* Cart: icon + badge */
 .cart-nav-btn.header-island-btn { padding: 0 16px; min-width: 52px; }
 
-/* Account: icon + first-name */
 .account-nav-btn.header-island-btn {
   padding: 0 18px;
   gap: 7px;
@@ -94,9 +86,6 @@ header nav {
 }
 .account-icon { flex-shrink: 0; }
 
-/* The legacy stylesheet positioned the cart independently of the header.
-   Keep it in the right cluster so the order remains:
-   hamburger, search, navigation, cart, account. */
 .cart-nav-btn {
   position: static;
   top: auto;
@@ -107,7 +96,6 @@ header nav {
   z-index: auto;
 }
 
-/* ---- Responsive: mobile ---- */
 @media (max-width: 760px) {
   .header-left-cluster, .header-right-cluster { gap: 6px; }
   .nav-search-btn.header-island-btn .search-label,
@@ -117,7 +105,6 @@ header nav {
   .account-dropdown-popover { width: min(280px, 92vw); right: -6px; }
 }
 
-/* ---- Account Dropdown Popover ---- */
 .account-dropdown-popover {
   position: absolute;
   top: calc(100% + 10px);
@@ -305,8 +292,6 @@ header nav {
 }
 .cart-empty { text-align: center; padding: 70px 20px; opacity: .6; }
 
-/* ---- Cart overlay (was missing entirely — this is why the cart
-        panel rendered inline and "open" on every page by default) ---- */
 .cart-overlay {
   position: fixed;
   inset: 0;
@@ -420,7 +405,6 @@ header nav {
   .cart-panel { width: 100%; }
 }
 
-/* ---- Cart Quantity Controls ---- */
 .cart-qty-controls {
   display: flex;
   align-items: center;
@@ -458,7 +442,6 @@ header nav {
   text-align: center;
 }
 
-/* Keep every product action in the same visual slot, regardless of title length. */
 .game-card {
   display: flex;
   flex-direction: column;
@@ -477,7 +460,6 @@ header nav {
   margin-top: 12px;
 }
 
-/* More Games renders its cards dynamically; keep their artwork and actions aligned. */
 #productGrid .game-card {
   height: 100%;
   margin: 0 auto;
@@ -503,7 +485,6 @@ header nav {
   margin-top: auto;
 }
 
-/* Match the menu and search islands' liquid-glass surface. */
 .cart-nav-btn {
   backdrop-filter: blur(18px) saturate(190%);
   -webkit-backdrop-filter: blur(18px) saturate(190%);
@@ -521,7 +502,6 @@ header nav {
     inset 0 1px 0 rgba(255,255,255,0.22);
 }
 
-/* ---- Shared Page Layouts ---- */
 .page-main {
   padding: 140px 20px 60px;
   max-width: 1200px;
@@ -581,7 +561,6 @@ header nav {
   gap: 24px;
 }
 
-/* ---- Form Styles for Checkout/Contact ---- */
 .cv-form {
   display: flex;
   flex-direction: column;
