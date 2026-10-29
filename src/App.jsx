@@ -16,7 +16,7 @@ import Account from "./pages/Account";
 import Settings from "./pages/Settings";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
-
+import Sell from "./pages/Sell";
 const GAME_FILTERS = [
   { cat: "action", label: "Action" },
   { cat: "adventure", label: "Adventure" },
@@ -56,7 +56,8 @@ export default function App() {
         <Route path="/pc-components" element={<ProductList categories={["pc"]} filters={[]} names={{ all: "All PC Components" }} subtitle="Explore our featured collection of new and pre-owned pc components." />} />
         <Route path="/rentals" element={<Rentals />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/checkout" element={guard(<Checkout />)} />
+        <Route path="/sell" element={<Sell />} />
         <Route path="/order-confirmation" element={<OrderConfirmation />} />
         <Route path="/orders" element={guard(<Orders />)} />
         <Route path="/account" element={guard(<Account />)} />

@@ -1,0 +1,1047 @@
+.sell-page {
+--sell-green: #a3e635;
+--sell-bg: #0d0f12;
+--sell-card: #171a20;
+--sell-border: #2a3038;
+background: var(--sell-bg);
+color: #f5f7fa;
+min-height: 100vh;
+padding: 36px clamp(16px, 5vw, 72px) 60px;
+}
+
+.sell-page * {
+box-sizing: border-box;
+}
+
+.sell-hero {
+max-width: 1200px;
+margin: 0 auto;
+padding: clamp(32px, 6vw, 76px);
+background:
+radial-gradient(ellipse at 85% 20%, #34451c 0, transparent 45%),
+linear-gradient(135deg, #1b2118, #15191c 60%, #101216);
+border: 1px solid #343d2b;
+border-radius: 24px;
+}
+
+.sell-eyebrow,
+.sell-section-heading > span {
+color: var(--sell-green);
+font-size: 11px;
+font-weight: 800;
+letter-spacing: 2px;
+}
+
+.sell-hero h1 {
+margin: 18px 0;
+max-width: 750px;
+font-size: clamp(36px, 6vw, 66px);
+line-height: 1.08;
+letter-spacing: -2px;
+}
+
+.sell-hero h1 span {
+color: var(--sell-green);
+}
+
+.sell-hero > p {
+max-width: 620px;
+color: #b6bec8;
+line-height: 1.8;
+font-size: 15px;
+margin-bottom: 28px;
+}
+
+.sell-primary-btn {
+display: inline-flex;
+justify-content: center;
+align-items: center;
+gap: 8px;
+padding: 13px 20px;
+background: var(--sell-green);
+color: #12170c;
+border: 0;
+border-radius: 9px;
+text-decoration: none;
+font-size: 14px;
+font-weight: 800;
+cursor: pointer;
+transition: transform 0.2s, background 0.2s;
+}
+
+.sell-primary-btn:hover {
+background: #b8f45d;
+transform: translateY(-2px);
+}
+
+.sell-stats {
+display: flex;
+flex-wrap: wrap;
+gap: 48px;
+margin-top: 48px;
+padding-top: 28px;
+border-top: 1px solid #ffffff1c;
+}
+
+.sell-stats div {
+display: flex;
+flex-direction: column;
+gap: 7px;
+}
+
+.sell-stats strong {
+font-size: 24px;
+color: white;
+}
+
+.sell-stats span {
+color: #9ba4af;
+font-size: 12px;
+}
+
+.sell-form-section,
+.sell-marketplace {
+max-width: 1200px;
+margin: 64px auto 0;
+scroll-margin-top: 35px;
+}
+
+.sell-section-heading {
+margin-bottom: 24px;
+}
+
+.sell-section-heading h2 {
+font-size: clamp(25px, 4vw, 36px);
+margin: 10px 0;
+color: #f7f8fa;
+}
+
+.sell-section-heading p {
+color: #9da6b2;
+font-size: 14px;
+line-height: 1.7;
+}
+
+.sell-form {
+display: flex;
+flex-direction: column;
+gap: 20px;
+padding: clamp(20px, 4vw, 34px);
+background: var(--sell-card);
+border: 1px solid var(--sell-border);
+border-radius: 18px;
+}
+
+.sell-form label {
+display: flex;
+flex-direction: column;
+gap: 9px;
+color: #e5e9ef;
+font-size: 13px;
+font-weight: 600;
+}
+
+.sell-form input,
+.sell-form select,
+.sell-form textarea,
+.sell-filters input,
+.sell-filters select {
+width: 100%;
+min-width: 0;
+padding: 13px 14px;
+background: #101318;
+color: #f5f7fa;
+border: 1px solid #343b46;
+border-radius: 9px;
+outline: none;
+font: inherit;
+font-size: 13px;
+}
+
+.sell-form input:focus,
+.sell-form select:focus,
+.sell-form textarea:focus,
+.sell-filters input:focus,
+.sell-filters select:focus {
+border-color: var(--sell-green);
+box-shadow: 0 0 0 3px #a3e63517;
+}
+
+.sell-form input::placeholder,
+.sell-form textarea::placeholder,
+.sell-filters input::placeholder {
+color: #697381;
+}
+
+.sell-form select option,
+.sell-filters select option {
+background: #171a20;
+}
+
+.sell-form textarea {
+resize: vertical;
+min-height: 110px;
+}
+
+.sell-form-row {
+display: grid;
+grid-template-columns: repeat(2, minmax(0, 1fr));
+gap: 20px;
+}
+
+.sell-form-actions {
+display: flex;
+align-items: center;
+flex-wrap: wrap;
+gap: 12px;
+}
+
+.sell-cancel-btn {
+padding: 12px 18px;
+color: #e5e9ef;
+background: #282d35;
+border: 1px solid #3c434d;
+border-radius: 9px;
+cursor: pointer;
+}
+
+.sell-filters {
+display: grid;
+grid-template-columns: minmax(0, 1fr) 220px;
+gap: 14px;
+margin: 24px 0;
+}
+
+.sell-message {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 12px;
+margin-bottom: 20px;
+padding: 12px 15px;
+background: #172719;
+border: 1px solid #3e8749;
+border-radius: 9px;
+color: #a8f0b2;
+font-size: 13px;
+}
+
+.sell-message button {
+color: inherit;
+background: transparent;
+border: 0;
+font-size: 22px;
+cursor: pointer;
+}
+
+.sell-product-grid {
+display: grid;
+grid-template-columns: repeat(3, minmax(0, 1fr));
+gap: 20px;
+}
+
+.sell-product-card {
+min-width: 0;
+overflow: hidden;
+background: var(--sell-card);
+border: 1px solid var(--sell-border);
+border-radius: 15px;
+transition: border-color 0.2s, transform 0.2s;
+}
+
+.sell-product-card:hover {
+transform: translateY(-4px);
+border-color: #647b43;
+}
+
+.sell-product-image {
+position: relative;
+display: flex;
+align-items: center;
+justify-content: center;
+height: 210px;
+overflow: hidden;
+background: #20242b;
+}
+
+.sell-product-image img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+
+.sell-image-placeholder {
+font-size: 48px;
+}
+
+.sell-condition {
+position: absolute;
+top: 12px;
+left: 12px;
+padding: 6px 9px;
+background: #101318e8;
+border: 1px solid #ffffff24;
+border-radius: 6px;
+color: #f5f7fa;
+font-size: 10px;
+font-weight: 700;
+}
+
+.sell-product-info {
+padding: 18px;
+}
+
+.sell-category {
+color: var(--sell-green);
+font-size: 10px;
+text-transform: uppercase;
+font-weight: 800;
+letter-spacing: 1px;
+}
+
+.sell-product-info h3 {
+margin: 10px 0;
+font-size: 17px;
+line-height: 1.4;
+}
+
+.sell-price {
+color: white;
+font-size: 22px;
+}
+
+.sell-product-info > p {
+min-height: 40px;
+margin: 12px 0;
+color: #9da6b2;
+font-size: 12px;
+line-height: 1.7;
+overflow-wrap: anywhere;
+}
+
+.sell-card-footer {
+display: flex;
+flex-direction: column;
+gap: 13px;
+padding-top: 14px;
+border-top: 1px solid var(--sell-border);
+}
+
+.sell-status {
+align-self: flex-start;
+padding: 5px 8px;
+background: #20331f;
+border-radius: 5px;
+color: #a8e98b;
+font-size: 10px;
+font-weight: 800;
+}
+
+.sell-status.is-sold {
+background: #3a2525;
+color: #ffb1a8;
+}
+
+.sell-card-actions {
+display: flex;
+flex-wrap: wrap;
+gap: 7px;
+}
+
+.sell-card-actions button {
+padding: 7px 9px;
+color: #e5e9ef;
+background: #242a32;
+border: 1px solid #39414c;
+border-radius: 6px;
+font-size: 11px;
+cursor: pointer;
+}
+
+.sell-card-actions button:hover {
+border-color: var(--sell-green);
+}
+
+.sell-card-actions .sell-delete-btn {
+color: #ffaaa5;
+}
+
+.sell-empty {
+padding: 48px 20px;
+text-align: center;
+background: var(--sell-card);
+border: 1px dashed #343b46;
+border-radius: 15px;
+}
+
+.sell-empty > span {
+font-size: 35px;
+}
+
+.sell-empty h3 {
+margin: 12px 0;
+}
+
+.sell-empty p,
+.sell-demo-note {
+color: #9da6b2;
+font-size: 12px;
+line-height: 1.7;
+}
+
+.sell-demo-note {
+max-width: 1200px;
+margin: 35px auto 0;
+text-align: center;
+}
+
+@media (max-width: 900px) {
+.sell-product-grid {
+grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+}
+
+@media (max-width: 600px) {
+.sell-page {
+padding: 20px 14px 40px;
+}
+
+.sell-hero {
+padding: 28px 20px;
+border-radius: 16px;
+}
+
+.sell-hero h1 {
+letter-spacing: -1px;
+}
+
+.sell-stats {
+gap: 22px;
+margin-top: 32px;
+}
+
+.sell-form-row,
+.sell-filters {
+grid-template-columns: 1fr;
+}
+
+.sell-product-grid {
+grid-template-columns: 1fr;
+}
+
+.sell-product-image {
+height: 230px;
+}
+}
+
+/* ===== ConsoleVault Sell Page Premium Upgrade ===== */
+
+.sell-page {
+background:
+radial-gradient(ellipse at 10% 0%, #202b18 0%, transparent 35%),
+var(--sell-bg, #0d0f12);
+}
+
+.sell-hero {
+position: relative;
+overflow: hidden;
+box-shadow: 0 18px 55px rgba(0, 0, 0, 0.24);
+transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.sell-hero:hover {
+border-color: #596d3d;
+box-shadow: 0 22px 65px rgba(163, 230, 53, 0.06);
+}
+
+.sell-eyebrow,
+.sell-section-heading > span {
+display: inline-block;
+text-transform: uppercase;
+}
+
+.sell-hero h1 {
+font-weight: 850;
+text-wrap: balance;
+}
+
+.sell-primary-btn {
+box-shadow: 0 5px 18px rgba(163, 230, 53, 0.12);
+transition:
+transform 0.2s ease,
+background 0.2s ease,
+box-shadow 0.2s ease;
+}
+
+.sell-primary-btn:hover {
+background: #b8f45d;
+transform: translateY(-2px);
+box-shadow: 0 8px 25px rgba(163, 230, 53, 0.2);
+}
+
+.sell-form {
+box-shadow: 0 15px 40px rgba(0, 0, 0, 0.16);
+}
+
+.sell-form input,
+.sell-form select,
+.sell-form textarea,
+.sell-filters input,
+.sell-filters select {
+transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sell-form input:focus,
+.sell-form select:focus,
+.sell-form textarea:focus,
+.sell-filters input:focus,
+.sell-filters select:focus {
+border-color: var(--sell-green, #a3e635);
+box-shadow: 0 0 0 3px rgba(163, 230, 53, 0.1);
+}
+
+.sell-product-card {
+display: flex;
+flex-direction: column;
+box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+transition:
+transform 0.25s ease,
+border-color 0.25s ease,
+box-shadow 0.25s ease;
+}
+
+.sell-product-card:hover {
+transform: translateY(-6px);
+border-color: #71894a;
+box-shadow: 0 18px 40px rgba(0, 0, 0, 0.26);
+}
+
+.sell-product-image {
+background:
+radial-gradient(circle at center, #303a2a, #20242b 70%);
+}
+
+.sell-product-image img {
+transition: transform 0.35s ease;
+}
+
+.sell-product-card:hover .sell-product-image img {
+transform: scale(1.045);
+}
+
+.sell-product-info {
+display: flex;
+flex-direction: column;
+flex: 1;
+}
+
+.sell-product-info h3 {
+overflow-wrap: anywhere;
+}
+
+.sell-price {
+font-weight: 800;
+letter-spacing: -0.5px;
+}
+
+.sell-card-footer {
+margin-top: auto;
+}
+
+.sell-card-actions button {
+transition:
+border-color 0.2s ease,
+background 0.2s ease;
+}
+
+.sell-card-actions button:hover {
+background: #303a2a;
+}
+
+.sell-status {
+letter-spacing: 0.3px;
+}
+
+.sell-message {
+animation: sellMessageIn 0.25s ease-out;
+}
+
+@keyframes sellMessageIn {
+from {
+opacity: 0;
+transform: translateY(6px);
+}
+
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+
+/* Smart price estimator */
+
+.sell-price-estimate {
+display: flex;
+flex-direction: column;
+gap: 7px;
+margin-top: 10px;
+padding: 15px 16px;
+background: linear-gradient(135deg, #1e2a19, #171d17);
+border: 1px solid #465d31;
+border-radius: 11px;
+}
+
+.sell-price-estimate span {
+color: #a3e635;
+font-size: 11px;
+font-weight: 800;
+letter-spacing: 1px;
+text-transform: uppercase;
+}
+
+.sell-price-estimate strong {
+color: #f5f7fa;
+font-size: 23px;
+line-height: 1.3;
+}
+
+.sell-price-estimate p {
+margin: 0;
+color: #aab4a1;
+font-size: 12px;
+line-height: 1.6;
+}
+
+.sell-price-estimate button {
+align-self: flex-start;
+padding: 8px 11px;
+color: #17200e;
+background: #a3e635;
+border: 0;
+border-radius: 7px;
+font-size: 12px;
+font-weight: 800;
+cursor: pointer;
+transition: background 0.2s ease;
+}
+
+.sell-price-estimate button:hover {
+background: #b8f45d;
+}
+
+@media (prefers-reduced-motion: reduce) {
+.sell-product-card,
+.sell-product-image img,
+.sell-primary-btn {
+transition: none;
+}
+
+.sell-message {
+animation: none;
+}
+}
+
+@media (max-width: 600px) {
+.sell-product-card:hover {
+transform: none;
+}
+
+.sell-product-image {
+height: 230px;
+}
+
+.sell-stats {
+justify-content: space-between;
+gap: 18px;
+}
+}
+/* Market Price Checker */
+
+.market-price-checker {
+  align-self: stretch;
+  min-width: 0;
+}
+
+.market-price-label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  margin-bottom: 8px;
+}
+
+.market-price-checker h3 {
+  margin: 8px 0;
+}
+
+.market-price-checker > p {
+  line-height: 1.6;
+}
+
+.market-price-checker > .sell-primary-btn {
+  margin-top: 8px;
+  cursor: pointer;
+}
+
+.market-price-message {
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.market-price-results {
+  display: grid;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.market-price-result {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  border: 1px solid rgba(128, 128, 128, 0.3);
+  border-radius: 12px;
+}
+
+.market-price-result > div {
+  min-width: 0;
+}
+
+.market-price-result span,
+.market-price-result small {
+  display: block;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.market-price-result h4 {
+  margin: 8px 0;
+}
+
+.market-price-result strong {
+  display: block;
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.market-price-result button {
+  flex-shrink: 0;
+  padding: 9px 12px;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.market-price-disclaimer {
+  display: block;
+  margin-top: 14px;
+  line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+  .market-price-result {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+
+
+/* =========================================
+   CONSOLEVAULT — PREMIUM BLUE THEME
+   Add this at the END of sell.css
+   ========================================= */
+
+.sell-page {
+  --sell-green: #58b8ff;
+  --sell-bg: #080e1a;
+  --sell-card: #111b2b;
+  --sell-border: #263952;
+
+  background:
+    radial-gradient(
+      ellipse at 10% 0%,
+      rgba(37, 99, 235, 0.16),
+      transparent 38%
+    ),
+    var(--sell-bg);
+
+  color: #f5f8ff;
+}
+
+/* HERO SECTION */
+
+.sell-hero {
+  background:
+    radial-gradient(
+      ellipse at 85% 15%,
+      rgba(37, 99, 235, 0.27),
+      transparent 45%
+    ),
+    linear-gradient(
+      135deg,
+      #142b49,
+      #101b2e 60%,
+      #0b1220
+    );
+
+  border-color: #29496f;
+  box-shadow: 0 18px 55px rgba(0, 0, 0, 0.25);
+}
+
+.sell-hero:hover {
+  border-color: #398bdf;
+  box-shadow: 0 22px 65px rgba(37, 99, 235, 0.12);
+}
+
+.sell-eyebrow,
+.sell-section-heading > span {
+  color: #58b8ff;
+}
+
+.sell-hero h1 span {
+  color: #58b8ff;
+}
+
+/* PRIMARY BUTTONS */
+
+.sell-primary-btn {
+  background: linear-gradient(135deg, #38a5ff, #2878ed);
+  color: #ffffff;
+  box-shadow: 0 5px 18px rgba(37, 99, 235, 0.22);
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.sell-primary-btn:hover {
+  background: linear-gradient(135deg, #61b8ff, #3989ff);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
+}
+
+/* FORM AND INPUTS */
+
+.sell-form {
+  background: linear-gradient(145deg, #121e30, #0f1929);
+  border-color: #263b55;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.18);
+}
+
+.sell-form input,
+.sell-form select,
+.sell-form textarea,
+.sell-filters input,
+.sell-filters select {
+  background: #0a1322;
+  color: #f5f8ff;
+  border-color: #30435d;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sell-form input:focus,
+.sell-form select:focus,
+.sell-form textarea:focus,
+.sell-filters input:focus,
+.sell-filters select:focus {
+  border-color: #409eff;
+  box-shadow: 0 0 0 3px rgba(56, 161, 255, 0.15);
+}
+
+.sell-form select option,
+.sell-filters select option {
+  background: #111b2b;
+  color: #f5f8ff;
+}
+
+.sell-cancel-btn {
+  background: #1c2b40;
+  border-color: #354b68;
+  color: #e5efff;
+}
+
+.sell-cancel-btn:hover {
+  background: #263b55;
+}
+
+/* PRODUCT CARDS */
+
+.sell-product-card {
+  background: linear-gradient(155deg, #142136, #101827);
+  border-color: #263952;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.sell-product-card:hover {
+  transform: translateY(-6px);
+  border-color: #398bdf;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+}
+
+.sell-product-image {
+  background: radial-gradient(
+    circle at center,
+    #243c5b,
+    #111b2b 72%
+  );
+}
+
+.sell-category {
+  color: #58b8ff;
+}
+
+.sell-price {
+  color: #ffffff;
+  font-weight: 800;
+}
+
+.sell-product-info > p {
+  color: #a7b6ca;
+}
+
+/* CARD ACTIONS */
+
+.sell-card-actions button {
+  background: #1b2a40;
+  border-color: #334966;
+  color: #e5efff;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.sell-card-actions button:hover {
+  background: #263d5b;
+  border-color: #58b8ff;
+}
+
+.sell-card-actions .sell-delete-btn {
+  color: #ffaaa5;
+}
+
+.sell-card-footer {
+  border-color: #263952;
+}
+
+/* PRODUCT STATUS */
+
+.sell-status {
+  background: rgba(37, 99, 235, 0.16);
+  color: #7ec7ff;
+}
+
+.sell-status.is-sold {
+  background: rgba(239, 68, 68, 0.13);
+  color: #ffb1a8;
+}
+
+/* EMPTY STATE */
+
+.sell-empty {
+  background: #111b2b;
+  border-color: #30435d;
+}
+
+/* SUCCESS MESSAGE */
+
+.sell-message {
+  background: rgba(37, 99, 235, 0.12);
+  border-color: #2867a5;
+  color: #9bd5ff;
+}
+
+/* SMART PRICE ESTIMATOR */
+
+.sell-price-estimate {
+  background: linear-gradient(135deg, #152d49, #111c2e);
+  border-color: #285787;
+}
+
+.sell-price-estimate span {
+  color: #58b8ff;
+}
+
+.sell-price-estimate p {
+  color: #b0c5dc;
+}
+
+.sell-price-estimate button {
+  background: linear-gradient(135deg, #38a5ff, #2878ed);
+  color: #ffffff;
+}
+
+.sell-price-estimate button:hover {
+  background: linear-gradient(135deg, #61b8ff, #3989ff);
+}
+
+/* MARKET PRICE CHECKER */
+
+.market-price-label {
+  color: #58b8ff;
+}
+
+.market-price-result {
+  background: rgba(17, 27, 43, 0.8);
+  border-color: #30435d;
+}
+
+.market-price-result strong {
+  color: #58b8ff;
+}
+
+.market-price-result button {
+  background: #2878ed;
+  color: #ffffff;
+  transition: background 0.2s ease;
+}
+
+.market-price-result button:hover {
+  background: #409eff;
+}
+
+.market-price-disclaimer {
+  color: #a7b6ca;
+}
+
+/* SECTION HEADINGS */
+
+.sell-section-heading h2 {
+  color: #f5f8ff;
+}
+
+.sell-section-heading p,
+.sell-demo-note {
+  color: #a7b6ca;
+}
+
+/* STATS */
+
+.sell-stats {
+  border-color: rgba(160, 195, 235, 0.16);
+}
+
+.sell-stats span {
+  color: #a7b6ca;
+}
+
+/* ACCESSIBILITY */
+
+.sell-primary-btn:focus-visible,
+.sell-card-actions button:focus-visible,
+.sell-price-estimate button:focus-visible,
+.market-price-result button:focus-visible {
+  outline: 2px solid #7ec7ff;
+  outline-offset: 3px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 600px) {
+  .sell-product-card:hover {
+    transform: none;
+  }
+}

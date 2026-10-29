@@ -57,9 +57,9 @@
     nav {
       flex: 1;
       max-width: 1200px;
-      margin: auto;
+      margin: 0 auto;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
     }
 
@@ -102,7 +102,7 @@
     }
 
     .logo img {
-      height: 32px;
+      height: 44px;
       object-fit: contain;
     }
 
@@ -700,11 +700,12 @@
 .flip-box {
   background: rgba(15,23,42,0.75);
   backdrop-filter: blur(12px);
-  border-radius: 20px;
-  padding: 40px 50px;
+  border-radius: 24px;
+  padding: 50px 70px;
   border: 1px solid rgba(59,130,246,0.25);
   box-shadow: 0 25px 60px rgba(59,130,246,0.3);
   display: inline-block;
+  max-width: 700px;
 }
 
 
@@ -715,17 +716,20 @@
   margin: 80px 0;
   text-align: center;
   font-family: "Roboto", sans-serif;
+  padding: 0 20px;
 }
 
 #container {
   color: white;
   text-transform: uppercase;
-  font-size: 36px;
-  font-weight: bold;
+  font-size: 42px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
 }
 
 #flip {
-  height: 45px;
+  height: 52px;
   overflow: hidden;
   display: inline-block;
   vertical-align: middle;
@@ -736,25 +740,25 @@
 }
 
 #flip > div > div {
-  height: 45px;
-  line-height: 45px;
+  height: 52px;
+  line-height: 52px;
   padding: 0 12px;
   color: #fff;
 }
 
-#flip div:nth-child(1) div { background: #4ec7f3; }
-#flip div:nth-child(2) div { background: #42c58a; }
-#flip div:nth-child(3) div { background: #DC143C; }
+#flip div:nth-child(1) div { background: linear-gradient(135deg, #38bdf8, #0ea5e9); border-radius: 8px; }
+#flip div:nth-child(2) div { background: linear-gradient(135deg, #34d399, #10b981); border-radius: 8px; }
+#flip div:nth-child(3) div { background: linear-gradient(135deg, #f43f5e, #e11d48); border-radius: 8px; }
 
 @keyframes show {
   0%   { transform: translateY(0); }
   30%  { transform: translateY(0); }
 
-  33%  { transform: translateY(-45px); }
-  63%  { transform: translateY(-45px); }
+  33%  { transform: translateY(-52px); }
+  63%  { transform: translateY(-52px); }
 
-  66%  { transform: translateY(-90px); }
-  96%  { transform: translateY(-90px); }
+  66%  { transform: translateY(-104px); }
+  96%  { transform: translateY(-104px); }
 
   100% { transform: translateY(0); }
 }
@@ -1985,3 +1989,283 @@
       }
       .nav-search-btn.nav-edge-right { right: 74px; }
     }
+
+
+    /* ConsoleVault Toast Notification */
+
+body .cv-toast {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 99999;
+
+  max-width: calc(100vw - 40px);
+  padding: 16px 22px;
+
+  background: #191b22;
+  color: #ffffff;
+
+  border: 1px solid #4b75ff;
+  border-left: 4px solid #4b75ff;
+  border-radius: 14px;
+
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+
+  font-size: 14px;
+  font-weight: 600;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-12px);
+
+  pointer-events: none;
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease,
+    visibility 0.25s ease;
+}
+/* ===== ConsoleVault Compact Toast ===== */
+
+body .cv-toast {
+  position: fixed;
+  top: 168px;
+  right: 20px;
+  z-index: 99999;
+
+  width: 360px;
+  max-width: calc(100vw - 32px);
+  min-height: 62px;
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 14px 42px 14px 14px;
+
+  background: #191a20;
+  color: #f5f5f5;
+
+  border: 1px solid #42c767;
+  border-radius: 15px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+
+  animation: cvToastIn 0.25s ease-out;
+}
+
+/* Success icon */
+body .cv-toast.success::before {
+  content: "✓";
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 32px;
+  width: 32px;
+  height: 32px;
+
+  border-radius: 50%;
+  background: #4bc66a;
+  color: #102719;
+
+  font-size: 19px;
+  font-weight: 700;
+}
+
+/* Error notification */
+body .cv-toast.error {
+  border-color: #ff5757;
+}
+
+body .cv-toast.error::before {
+  content: "!";
+  background: #ff5757;
+  color: white;
+}
+
+/* Close button */
+body .cv-toast button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+
+  width: 24px;
+  height: 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #101116;
+  color: #999;
+  border: none;
+  border-radius: 6px;
+
+  font-size: 17px;
+  cursor: pointer;
+}
+
+body .cv-toast button:hover {
+  background: #303139;
+  color: white;
+}
+/* Compact Toast — Top Right */
+
+body .cv-toast {
+  position: fixed !important;
+  top: 168px !important;
+  right: 20px !important;
+  left: auto !important;
+  bottom: auto !important;
+
+  width: 300px !important;
+  max-width: calc(100vw - 32px) !important;
+  min-height: 0 !important;
+  box-sizing: border-box;
+
+  padding: 12px 34px 12px 12px !important;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  background: #191a20;
+  color: #f5f5f5;
+
+  border: 1px solid #42c767;
+  border-radius: 14px;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Success icon */
+body .cv-toast.success::before {
+  flex: 0 0 30px;
+  width: 30px;
+  height: 30px;
+  font-size: 17px;
+}
+
+/* Close button */
+body .cv-toast button {
+  top: 7px;
+  right: 7px;
+  width: 21px;
+  height: 21px;
+  font-size: 15px;
+}
+
+/* Small bottom progress bar */
+body .cv-toast::after {
+  height: 2px;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  body .cv-toast {
+    top: 100px !important;
+    right: 10px !important;
+    left: auto !important;
+    width: 280px !important;
+  }
+}
+
+.home-sell-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 30px;
+  padding: 16px 42px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%);
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 800;
+  text-decoration: none;
+  border-radius: 999px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(167, 243, 208, 0.3);
+  box-shadow:
+    0 8px 32px rgba(16, 185, 129, 0.4),
+    0 4px 12px rgba(5, 150, 105, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.15);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.home-sell-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.22) 0%,
+    rgba(255, 255, 255, 0.05) 30%,
+    rgba(255, 255, 255, 0) 60%
+  );
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.home-sell-btn::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 40%;
+  height: 200%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.15) 50%,
+    transparent 100%
+  );
+  transform: skewX(-20deg);
+  animation: sellBtnShimmer 3s infinite ease-in-out;
+  pointer-events: none;
+}
+
+@keyframes sellBtnShimmer {
+  0% { left: -60%; }
+  40% { left: 120%; }
+  100% { left: 120%; }
+}
+
+.home-sell-btn:hover {
+  background: linear-gradient(135deg, #34d399 0%, #10b981 50%, #059669 100%);
+  color: #ffffff;
+  transform: translateY(-4px) scale(1.03);
+  box-shadow:
+    0 14px 44px rgba(16, 185, 129, 0.55),
+    0 8px 20px rgba(5, 150, 105, 0.35),
+    0 0 40px rgba(52, 211, 153, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.12);
+  border-color: rgba(167, 243, 208, 0.5);
+}
+
+.home-sell-btn:active {
+  transform: translateY(-1px) scale(0.98);
+  box-shadow:
+    0 4px 16px rgba(16, 185, 129, 0.35),
+    inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Increase navbar height slightly */
+.navbar {
+min-height: 75px;
+padding-top: 10px;
+padding-bottom: 10px;
+}

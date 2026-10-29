@@ -10,10 +10,13 @@ export function UIProvider({ children }) {
   const timer = useRef();
 
   const showMessage = useCallback((text, type = "success") => {
-    clearTimeout(timer.current);
-    setToast({ text, type });
-    timer.current = setTimeout(() => setToast({ text: "", type: "" }), 2500);
-  }, []);
+  clearTimeout(timer.current);
+  setToast({ text, type });
+
+  timer.current = setTimeout(() => {
+    setToast({ text: "", type: "" });
+  }, 2000);
+}, []);
 
   const open = useCallback((name) => setOverlay(name), []);
   const close = useCallback(() => setOverlay(null), []);

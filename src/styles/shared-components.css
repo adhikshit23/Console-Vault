@@ -8,6 +8,7 @@ header nav {
   height: 48px;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 /* ---- Header flex layout: [left-cluster | nav | right-cluster] ---- */
@@ -67,17 +68,15 @@ header nav {
 /* Hamburger: square pill */
 .menu-btn.header-island-btn { min-width: 48px; width: 48px; padding: 0; }
 
-/* Search: icon + text */
+/* Search: icon only in right cluster */
 .nav-search-btn.header-island-btn {
-  padding: 0 16px;
-}
-.nav-search-btn.header-island-btn .search-label {
-  font-size: 14px;
-  font-weight: 600;
+  padding: 0;
+  min-width: 48px;
+  width: 48px;
 }
 
 /* Cart: icon + badge */
-.cart-nav-btn.header-island-btn { padding: 0 16px; min-width: 52px; }
+.cart-nav-btn.header-island-btn { padding: 0 14px; min-width: 52px; }
 
 /* Account: icon + first-name */
 .account-nav-btn.header-island-btn {
@@ -659,4 +658,94 @@ header nav {
   background: rgba(239, 68, 68, 0.25);
   border-color: rgba(239, 68, 68, 0.5);
   transform: translateY(-2px);
+}
+
+
+/* Advanced Cart Management */
+
+.cart-section-heading {
+  color: #e5e7eb;
+  font-size: 14px;
+  font-weight: 700;
+  margin: 8px 0 12px;
+}
+
+.cart-line-total {
+  color: #d1d5db;
+  font-size: 11px;
+  margin-top: 7px;
+}
+
+.cart-text-action {
+  border: none;
+  background: transparent;
+  color: #60a5fa;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 700;
+  margin-top: 8px;
+  padding: 0;
+  text-align: left;
+}
+
+.cart-text-action:hover {
+  color: #93c5fd;
+  text-decoration: underline;
+}
+
+.saved-section {
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  margin-top: 20px;
+  padding-top: 14px;
+}
+
+.saved-empty {
+  color: #9ca3af;
+  font-size: 12px;
+  padding: 12px 0;
+}
+
+.saved-cart-item {
+  border-color: rgba(96, 165, 250, 0.22);
+  background: rgba(59, 130, 246, 0.05);
+}
+
+.cart-undo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  border-radius: 10px;
+  background: rgba(34, 197, 94, 0.1);
+  color: #d1fae5;
+  font-size: 11px;
+}
+
+.cart-undo span {
+  flex: 1;
+}
+
+.cart-undo button {
+  border: none;
+  background: transparent;
+  color: #86efac;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.cart-undo button:last-child {
+  font-size: 17px;
+}
+
+.cart-summary-note {
+  color: #9ca3af;
+  font-size: 11px;
+  line-height: 1.5;
+  margin: -5px 0 12px;
+}
+
+.cart-panel .cart-items {
+  padding-bottom: 15px;
 }

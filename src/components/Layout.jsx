@@ -3,7 +3,22 @@ import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useUI } from "../context/UIContext";
 import { useAuth } from "../context/AuthContext";
-import { clearCart, decrease, increase, removeItem, selectCartCount, selectCartItems, selectCartTotal } from "../store/cartSlice";
+import {
+  clearCart,
+  decrease,
+  increase,
+  removeItem,
+  restoreLastRemoved,
+  saveForLater,
+  moveToCart,
+  removeSavedItem,
+  clearRecentlyRemoved,
+  selectCartCount,
+  selectCartItems,
+  selectSavedItems,
+  selectRecentlyRemoved,
+  selectCartTotal
+} from "../store/cartSlice";
 import { selectCatalog } from "../store/catalogSlice";
 import { CATEGORY_ROUTE, rupees } from "../utils/product";
 import useReveal from "../hooks/useReveal";
@@ -82,7 +97,7 @@ function Header() {
 
   return (
     <header className={hidden ? "nav-hidden" : undefined}>
-      {/* LEFT CLUSTER: Hamburger → Search */}
+      {/* LEFT: Logo + Hamburger */}
       <div className="header-left-cluster">
         <button
           type="button"
@@ -106,32 +121,13 @@ function Header() {
           </svg>
         </button>
 
-        <button
-          type="button"
-          className="nav-search-btn header-island-btn"
-          id="searchToggleBtn"
-          aria-haspopup="dialog"
-          aria-expanded={overlay === "search"}
-          aria-controls="searchOverlay"
-          aria-label="Search catalog"
-          onClick={() => {
-            setAccountMenuOpen(false);
-            toggle("search");
-          }}
-        >
-          <svg className="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-            <circle cx="11" cy="11" r="7"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-          <span className="search-label">Search</span>
-        </button>
-      </div>
-
-      {/* CENTER: Nav island */}
-      <nav>
         <div className="logo">
           <Link to="/"><img src="logo.png" alt="ConsoleVault Logo" /></Link>
         </div>
+      </div>
+
+      {/* CENTER: Nav links */}
+      <nav>
         <ul className="nav-links">
           <li className="nav-item dropdown">
             <Link to="/games">Games ▼</Link>
@@ -149,8 +145,27 @@ function Header() {
         </ul>
       </nav>
 
-      {/* RIGHT CLUSTER: Cart → Account */}
+      {/* RIGHT CLUSTER: Search → Cart → Account */}
       <div className="header-right-cluster">
+        <button
+          type="button"
+          className="nav-search-btn header-island-btn"
+          id="searchToggleBtn"
+          aria-haspopup="dialog"
+          aria-expanded={overlay === "search"}
+          aria-controls="searchOverlay"
+          aria-label="Search catalog"
+          onClick={() => {
+            setAccountMenuOpen(false);
+            toggle("search");
+          }}
+        >
+          <svg className="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+
         <button
           type="button"
           className="cart-nav-btn header-island-btn"
@@ -358,56 +373,306 @@ function AccountOverlay() {
     </div>
   );
 }
-
 function CartOverlay() {
   const { overlay, close, showMessage } = useUI();
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const items = useSelector(selectCartItems);
+  const savedItems = useSelector(selectSavedItems);
+  const recentlyRemoved = useSelector(selectRecentlyRemoved);
+
   const count = useSelector(selectCartCount);
   const total = useSelector(selectCartTotal);
+
   const active = overlay === "cart";
+
   const style = active
-    ? { opacity: 1, visibility: "visible", pointerEvents: "auto" }
-    : { opacity: 0, visibility: "hidden", pointerEvents: "none" };
+    ? {
+        opacity: 1,
+        visibility: "visible",
+        pointerEvents: "auto",
+      }
+    : {
+        opacity: 0,
+        visibility: "hidden",
+        pointerEvents: "none",
+      };
 
   return (
-    <div className={`cart-overlay${active ? " active" : ""}`} id="cartOverlay" role="dialog" aria-modal="true" aria-label="Shopping cart" style={style} onClick={(e) => e.target === e.currentTarget && close()}>
+    <div
+      className={`cart-overlay${active ? " active" : ""}`}
+      id="cartOverlay"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Shopping cart"
+      style={style}
+      onClick={(e) => {
+        if (e.target === e.currentTarget) close();
+      }}
+    >
       <div className="cart-panel">
+        {/* Header */}
         <div className="cart-panel-header">
           <div>
-            <span className="cart-panel-title">Your Cart</span>
-            <span className="cart-panel-subtitle" id="cartSubtitle">{count} {count === 1 ? "item" : "items"}</span>
+            <span className="cart-panel-title">
+              Your Cart
+            </span>
+
+            <span className="cart-panel-subtitle">
+              {count} {count === 1 ? "item" : "items"} ·{" "}
+              {rupees(total)}
+            </span>
           </div>
-          <button type="button" className="search-close-btn" id="cartCloseBtn" aria-label="Close cart" onClick={close}>×</button>
+
+          <button
+            type="button"
+            className="search-close-btn"
+            aria-label="Close cart"
+            onClick={close}
+          >
+            ×
+          </button>
         </div>
+
+        {/* Undo removed product */}
+        {recentlyRemoved && (
+          <div className="cart-undo">
+            <span>
+              Item removed from cart
+            </span>
+
+            <button
+              type="button"
+              onClick={() =>
+                dispatch(restoreLastRemoved())
+              }
+            >
+              UNDO
+            </button>
+
+            <button
+              type="button"
+              aria-label="Dismiss undo message"
+              onClick={() =>
+                dispatch(clearRecentlyRemoved())
+              }
+            >
+              ×
+            </button>
+          </div>
+        )}
+
         <div className="cart-items" id="cartItems">
+          {/* Active Cart */}
+          <h3 className="cart-section-heading">
+            Shopping Cart ({items.length})
+          </h3>
+
           {items.length === 0 ? (
-            <p className="cart-empty">Your cart is empty.<br />Add a game and it will appear here.</p>
+            <p className="cart-empty">
+              Your cart is empty.
+              <br />
+              Add a game or console to get started!
+            </p>
           ) : (
             items.map((item) => (
               <div className="cart-item" key={item.id}>
-                <img src={item.image} alt={item.name} />
+                <img
+                  src={item.image}
+                  alt={item.name}
+                />
+
                 <div className="cart-item-info">
-                  <div className="cart-item-name">{item.name}</div>
-                  <div className="cart-item-price">{rupees(item.price)}</div>
-                  <div className="cart-qty-controls">
-                    <button type="button" className="cart-qty-btn decrease" onClick={() => dispatch(decrease(item.id))}>-</button>
-                    <span className="cart-qty">{item.qty || 1}</span>
-                    <button type="button" className="cart-qty-btn increase" onClick={() => dispatch(increase(item.id))}>+</button>
+                  <div className="cart-item-name">
+                    {item.name}
                   </div>
+
+                  <div className="cart-item-price">
+                    {rupees(item.price)}
+                  </div>
+
+                  <div className="cart-qty-controls">
+                    <button
+                      type="button"
+                      className="cart-qty-btn decrease"
+                      aria-label={`Decrease ${item.name} quantity`}
+                      onClick={() =>
+                        dispatch(decrease(item.id))
+                      }
+                    >
+                      −
+                    </button>
+
+                    <span className="cart-qty">
+                      {item.qty || 1}
+                    </span>
+
+                    <button
+                      type="button"
+                      className="cart-qty-btn increase"
+                      aria-label={`Increase ${item.name} quantity`}
+                      onClick={() =>
+                        dispatch(increase(item.id))
+                      }
+                    >
+                      +
+                    </button>
+                  </div>
+
+                  <div className="cart-line-total">
+                    Item total:{" "}
+                    {rupees(
+                      (Number(item.price) || 0) *
+                        (item.qty || 1)
+                    )}
+                  </div>
+
+                  <button
+                    type="button"
+                    className="cart-text-action"
+                    onClick={() => {
+                      dispatch(saveForLater(item.id));
+                      showMessage(
+                        "Product saved for later",
+                        "success"
+                      );
+                    }}
+                  >
+                    ♡ Save for Later
+                  </button>
                 </div>
-                <button type="button" className="cart-remove" aria-label={`Remove ${item.name}`} onClick={() => dispatch(removeItem(item.id))}>×</button>
+
+                <button
+                  type="button"
+                  className="cart-remove"
+                  aria-label={`Remove ${item.name}`}
+                  onClick={() => {
+                    dispatch(removeItem(item.id));
+                    showMessage(
+                      "Item removed. You can undo this action.",
+                      "success"
+                    );
+                  }}
+                >
+                  ×
+                </button>
               </div>
             ))
           )}
+
+          {/* Saved for Later */}
+          <div className="saved-section">
+            <h3 className="cart-section-heading">
+              ♡ Saved for Later ({savedItems.length})
+            </h3>
+
+            {savedItems.length === 0 ? (
+              <p className="saved-empty">
+                Products you save will appear here.
+              </p>
+            ) : (
+              savedItems.map((item) => (
+                <div
+                  className="cart-item saved-cart-item"
+                  key={item.id}
+                >
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                  />
+
+                  <div className="cart-item-info">
+                    <div className="cart-item-name">
+                      {item.name}
+                    </div>
+
+                    <div className="cart-item-price">
+                      {rupees(item.price)}
+                    </div>
+
+                    <button
+                      type="button"
+                      className="cart-text-action"
+                      onClick={() => {
+                        dispatch(moveToCart(item.id));
+                        showMessage(
+                          "Product moved back to cart",
+                          "success"
+                        );
+                      }}
+                    >
+                      ↗ Move to Cart
+                    </button>
+                  </div>
+
+                  <button
+                    type="button"
+                    className="cart-remove"
+                    aria-label={`Delete saved ${item.name}`}
+                    onClick={() =>
+                      dispatch(removeSavedItem(item.id))
+                    }
+                  >
+                    ×
+                  </button>
+                </div>
+              ))
+            )}
+          </div>
         </div>
+
+        {/* Cart Footer */}
         <div className="cart-footer">
-          <div className="cart-total-row"><span>Total</span><strong id="cartTotal">{rupees(total)}</strong></div>
-          <button type="button" className="cart-checkout-btn" id="cartCheckoutBtn" onClick={() => {
-            if (items.length) { close(); navigate("/checkout"); } else showMessage("Your cart is empty", "error");
-          }}>Proceed to Checkout</button>
-          <button type="button" className="cart-clear-btn" id="cartClearBtn" onClick={() => { dispatch(clearCart()); showMessage("Cart cleared", "success"); }}>Clear Cart</button>
+          <div className="cart-total-row">
+            <span>Subtotal</span>
+            <strong>{rupees(total)}</strong>
+          </div>
+
+          <p className="cart-summary-note">
+            Shipping and any applicable charges are
+            calculated at checkout.
+          </p>
+
+          <button
+            type="button"
+            className="cart-checkout-btn"
+            onClick={() => {
+              if (items.length > 0) {
+                close();
+                navigate("/checkout");
+              } else {
+                showMessage(
+                  "Add a product to your cart first",
+                  "error"
+                );
+              }
+            }}
+          >
+            Proceed to Checkout →
+          </button>
+
+          <button
+            type="button"
+            className="cart-clear-btn"
+            onClick={() => {
+              if (items.length > 0) {
+                dispatch(clearCart());
+                showMessage(
+                  "Cart cleared. Saved items are preserved.",
+                  "success"
+                );
+              } else {
+                showMessage(
+                  "Your cart is already empty",
+                  "error"
+                );
+              }
+            }}
+          >
+            Clear Cart
+          </button>
         </div>
       </div>
     </div>
@@ -417,17 +682,19 @@ function CartOverlay() {
 export default function Layout() {
   const { pathname } = useLocation();
   const { toast, open, close } = useUI();
+
   useStyles(mainCss + "\n" + sharedCss + "\n" + pageCss);
 
-  // new page: scroll to top, close overlays, re-run reveal animations
+  // Scroll to top and close overlays when page changes
   useEffect(() => {
     window.scrollTo(0, 0);
     close();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
+
   useReveal([pathname]);
 
-  // /cart opens the cart panel (replaces addtocart.html?open=1)
+  // Open cart when navigating to /cart
   useEffect(() => {
     if (pathname === "/cart") open("cart");
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -435,14 +702,33 @@ export default function Layout() {
 
   return (
     <>
-      <img id="bgPhoto" src="consolePh.jpg" alt="" aria-hidden="true" />
+      <img
+        id="bgPhoto"
+        src="consolePh.jpg"
+        alt=""
+        aria-hidden="true"
+      />
+
       <Header />
       <SearchOverlay />
       <AccountOverlay />
       <CartOverlay />
+
       <Outlet />
-      <Html as="footer" className="site-footer" html={footerInner} />
-      <p className={`cv-toast ${toast.type}`} role="status" aria-live="polite">{toast.text}</p>
+
+      <Html
+        as="footer"
+        className="site-footer"
+        html={footerInner}
+      />
+
+      <p
+        className={`cv-toast ${toast.type}`}
+        role="status"
+        aria-live="polite"
+      >
+        {toast.text}
+      </p>
     </>
   );
 }
