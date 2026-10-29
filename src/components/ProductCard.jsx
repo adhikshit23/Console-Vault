@@ -10,7 +10,6 @@ function ProductCard({ product, index, highlight }) {
   const item = makeProduct(product, "game");
   const inCart = useSelector((s) => selectCartItems(s).some((i) => i.id === item.id));
 
-  // cards appear after the async catalog load, so reveal them on mount (as the old pages did)
   const ref = useRef(null);
   useEffect(() => {
     const el = ref.current;

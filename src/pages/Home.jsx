@@ -3,8 +3,6 @@ import Html from "../components/Html";
 import { useUI } from "../context/UIContext";
 import homeHtml from "../content/home.html?raw";
 
-// The home page body is the original markup; this component re-creates mainpage.js
-// (hero auto-scroll, carousels, double-click-to-sort) the React way via refs/effects.
 export default function Home() {
   const rootRef = useRef(null);
   const { showMessage } = useUI();
@@ -14,7 +12,6 @@ export default function Home() {
     if (!root) return undefined;
     const cleanups = [];
 
-    // hero image auto-scroll
     const imageScroll = root.querySelector(".image-scroll");
     if (imageScroll) {
       let userScrolling = false;
@@ -35,7 +32,6 @@ export default function Home() {
       cleanups.push(() => { clearInterval(iv); clearTimeout(t); imageScroll.removeEventListener("scroll", onScroll); });
     }
 
-    // consoles / PC hardware carousels
     [["consolesScroll", "consolesPrev", "consolesNext"], ["pcHwScroll", "pcHwPrev", "pcHwNext"]].forEach(([s, p, n]) => {
       const scroller = root.querySelector("#" + s);
       const prev = root.querySelector("#" + p);
@@ -49,7 +45,6 @@ export default function Home() {
       cleanups.push(() => { prev.removeEventListener("click", back); next.removeEventListener("click", fwd); });
     });
 
-    // double-click the games heading to sort by price
     const title = root.querySelector(".games-section h2");
     const grid = root.querySelector(".games-grid");
     if (title && grid) {
@@ -72,7 +67,6 @@ export default function Home() {
     return () => cleanups.forEach((fn) => fn());
   }, [showMessage]);
 
-  // Html renders a wrapper <div>; the wrapper has no styling so layout is unchanged.
   return (
     <div ref={rootRef} style={{ display: "contents" }}>
       <Html html={homeHtml} as="div" style={{ display: "contents" }} />

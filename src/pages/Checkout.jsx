@@ -50,20 +50,17 @@ export default function Checkout() {
 
   const form = useForm(initial, rules);
 
-  
-const handleAddressSelect = useCallback(
-  (address) => {
-    form.setValues((previous) => ({
-      ...previous,
-      address,
-    }));
-  },
-  [form.setValues]
-);
+  const handleAddressSelect = useCallback(
+    (address) => {
+      form.setValues((previous) => ({
+        ...previous,
+        address,
+      }));
+    },
+    [form.setValues]
+  );
 
-  if (items.length === 0) {
-    return <Navigate to="/" replace />;
-  }
+  if (items.length === 0) return <Navigate to="/" replace />;
 
   const placeOrder = (paymentStatus) => {
     const orderId = "CV-" + Date.now().toString().slice(-8);
@@ -159,7 +156,7 @@ const handleAddressSelect = useCallback(
               onChange={form.handleChange}
               onBlur={form.handleBlur}
             />
-<AddressMap onAddressSelect={handleAddressSelect} />
+            <AddressMap onAddressSelect={handleAddressSelect} />
             <h3 style={{ marginTop: 28 }}>Payment Method</h3>
 
             <div style={{ display: "grid", gap: 12 }}>

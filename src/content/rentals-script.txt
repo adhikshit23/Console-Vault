@@ -107,7 +107,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const inr = (n) => "₹" + Number(n || 0).toLocaleString("en-IN");
 
-  // ---- Tabs ----
   const browseTabBtn = document.getElementById("browseTabBtn");
   const listTabBtn = document.getElementById("listTabBtn");
   const browsePanel = document.getElementById("browsePanel");
@@ -125,18 +124,15 @@ document.addEventListener("DOMContentLoaded", () => {
   listTabBtn.addEventListener("click", () => showTab("list"));
   showTab(window.location.hash === "#list" ? "list" : "browse");
 
-  // ---- Prefill from logged-in user ----
   let currentUser = null;
   try { currentUser = JSON.parse(localStorage.getItem("playboy_current_user")); } catch (e) {}
   if (currentUser && currentUser.name) {
     document.getElementById("renterName").value = currentUser.name;
     document.getElementById("listOwnerName").value = currentUser.name;
     if (currentUser.email) {
-      // no email field needed, phone left blank intentionally
     }
   }
 
-  // ---- Browse grid ----
   const rentalGrid = document.getElementById("rentalGrid");
   const typeFilterNav = document.getElementById("typeFilterNav");
   const cityFilterInput = document.getElementById("cityFilterInput");
@@ -187,7 +183,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   cityFilterInput.addEventListener("input", renderGrid);
 
-  // ---- Booking panel ----
   const bookingPanel = document.getElementById("bookingPanel");
   const bookingTitle = document.getElementById("bookingTitle");
   const bookingMeta = document.getElementById("bookingMeta");
@@ -296,7 +291,6 @@ document.addEventListener("DOMContentLoaded", () => {
     renderMyActivity();
   });
 
-  // ---- List a console ----
   const listForm = document.getElementById("listForm");
   listForm.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -336,7 +330,6 @@ document.addEventListener("DOMContentLoaded", () => {
     showTab("browse");
   });
 
-  // ---- My activity ----
   const renderMyActivity = () => {
     const listings = readListings().filter(l => !l.id.startsWith("RENT-SEED-"));
     const bookings = readBookings();

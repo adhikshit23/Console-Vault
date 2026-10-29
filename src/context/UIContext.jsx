@@ -1,11 +1,9 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 
-// Global (Context) UI state: which overlay is open + the toast message.
-// Local state (form fields, filters) stays inside the components that own it.
 const UIContext = createContext(null);
 
 export function UIProvider({ children }) {
-  const [overlay, setOverlay] = useState(null); // "search" | "account" | "cart" | null
+  const [overlay, setOverlay] = useState(null);
   const [toast, setToast] = useState({ text: "", type: "" });
   const timer = useRef();
 
@@ -22,7 +20,6 @@ export function UIProvider({ children }) {
   const close = useCallback(() => setOverlay(null), []);
   const toggle = useCallback((name) => setOverlay((o) => (o === name ? null : name)), []);
 
-  // Same behaviour as the original pages: body scroll locked while an overlay is open, Esc closes.
   useEffect(() => {
     document.body.style.overflow = overlay ? "hidden" : "";
   }, [overlay]);

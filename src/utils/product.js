@@ -1,4 +1,3 @@
-// Mirrors productFromButton() in the original cart.js so ids match the old cart data.
 export const makeProduct = ({ title, price, image }, category = "game") => ({
   id: `${category}-${title}-${price}`.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
   name: title,
@@ -9,7 +8,6 @@ export const makeProduct = ({ title, price, image }, category = "game") => ({
 
 export const rupees = (n) => `₹${(Number(n) || 0).toLocaleString("en-IN")}`;
 
-// catalog category -> route
 export const CATEGORY_ROUTE = {
   action: "/games",
   adventure: "/games",

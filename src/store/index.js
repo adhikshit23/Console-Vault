@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import cartReducer, { CART_KEY , SAVED_CART_KEY} from "./cartSlice";
+import cartReducer, { CART_KEY, SAVED_CART_KEY } from "./cartSlice";
 import catalogReducer from "./catalogSlice";
 import ordersReducer, { ORDERS_KEY } from "./ordersSlice";
 
@@ -7,7 +7,6 @@ export const store = configureStore({
   reducer: { cart: cartReducer, catalog: catalogReducer, orders: ordersReducer },
 });
 
-// Persist cart + orders using the same keys as the original static pages.
 let last = {
   cart: null,
   saved: null,

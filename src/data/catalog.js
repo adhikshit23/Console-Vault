@@ -1,4 +1,3 @@
-// Product catalog (same data as the original catalog.js).
 const CATALOG = [
 
     { title: "EA Sports FC 24", price: "₹3,999", image: "https://relay-bl-in-records.sgp1.cdn.digitaloceanspaces.com/GameNation/EA_3963", category: "action", page: "Moregames.html" },

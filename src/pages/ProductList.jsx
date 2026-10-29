@@ -5,10 +5,6 @@ import { fetchCatalog, selectCatalog } from "../store/catalogSlice";
 import ProductCard from "../components/ProductCard";
 import AsyncBoundary from "../components/AsyncBoundary";
 
-// One reusable list page for Games / Consoles / Accessories / PC components.
-//   categories: which catalog categories belong on this page
-//   filters:    [{cat, label}] filter buttons ("all" is always first)
-//   names:      page title per active filter
 export default function ProductList({ categories, filters, names, subtitle }) {
   const dispatch = useDispatch();
   const { items, status, error } = useSelector(selectCatalog);
@@ -25,7 +21,6 @@ export default function ProductList({ categories, filters, names, subtitle }) {
     [items, categories, active]
   );
 
-  // search result -> scroll to + highlight the card, then drop the param (as catalog.js did)
   useEffect(() => {
     if (!highlight || status !== "succeeded") return undefined;
     const t = setTimeout(() => {
@@ -42,7 +37,6 @@ export default function ProductList({ categories, filters, names, subtitle }) {
       setParams(next, { replace: true });
     }, 450);
     return () => clearTimeout(t);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [highlight, status]);
 
   return (

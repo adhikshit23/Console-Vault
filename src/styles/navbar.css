@@ -1,0 +1,417 @@
+/* ═══════════════════════════════════════════════════════════════════
+   ConsoleVault — Premium Desktop Navbar
+   Glassmorphism · Deep-blue gradients · Electric-blue accents
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Sticky Header Shell ── */
+header.cv-header {
+  /* Reset ALL old header tag styles from mainpage.css */
+  all: unset;
+  display: block;
+  box-sizing: border-box;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  padding: 12px 32px;
+  background: rgba(5, 9, 20, 0.28);
+  backdrop-filter: blur(24px) saturate(190%);
+  -webkit-backdrop-filter: blur(24px) saturate(190%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: "Poppins", sans-serif;
+  color: #e5e7eb;
+  transition:
+    background 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.4s ease,
+    box-shadow 0.4s ease,
+    padding 0.3s ease;
+}
+
+/* ── Scrolled state: slightly deeper translucent glass with soft glow ── */
+header.cv-header.cv-header--scrolled {
+  background: rgba(5, 9, 20, 0.58);
+  border-bottom-color: rgba(59, 130, 246, 0.22);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.35),
+    0 2px 16px rgba(59, 130, 246, 0.14);
+  padding: 10px 32px;
+}
+
+/* ── Centered max-width container ── */
+.cv-header__container {
+  display: flex;
+  align-items: center;
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+  gap: 32px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   BRAND / LOGO  (far left)
+   ═══════════════════════════════════════════════════════════════════ */
+.cv-header__brand {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.cv-header__logo-link {
+  display: flex;
+  align-items: center;
+  padding: 4px 6px;
+  border-radius: 10px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  text-decoration: none;
+}
+
+.cv-header__logo-link:hover {
+  transform: scale(1.04);
+}
+
+.cv-header__logo-link:active {
+  transform: scale(0.97);
+}
+
+.cv-header__logo-img {
+  height: 46px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 2px 8px rgba(59, 130, 246, 0.2));
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   CENTER NAV LINKS
+   ═══════════════════════════════════════════════════════════════════ */
+/* ── Center Nav Links: reset old nav tag styles ── */
+header.cv-header nav.cv-header__nav {
+  all: unset;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 0;
+}
+
+.cv-header__nav-list {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cv-header__nav-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.cv-header__nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 16px;
+  border-radius: 10px;
+  color: rgba(229, 231, 235, 0.82);
+  font-size: 14px;
+  font-weight: 550;
+  font-family: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+  position: relative;
+  transition:
+    color 0.25s ease,
+    background 0.25s ease;
+}
+
+/* Hover underline glow */
+.cv-header__nav-link::after {
+  content: "";
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 2px;
+  height: 2px;
+  background: linear-gradient(90deg, #3b82f6, #60a5fa);
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.5);
+}
+
+.cv-header__nav-link:hover {
+  color: #ffffff;
+  background: rgba(59, 130, 246, 0.08);
+}
+
+.cv-header__nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* Chevron */
+.cv-header__chevron {
+  opacity: 0.55;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  flex-shrink: 0;
+}
+
+.cv-header__nav-item--dropdown:hover .cv-header__chevron {
+  transform: rotate(180deg);
+  opacity: 0.9;
+}
+
+/* ── Dropdown Menu ── */
+.cv-header__dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  min-width: 180px;
+  padding: 8px;
+  list-style: none;
+  margin: 0;
+  background: rgba(10, 16, 32, 0.85);
+  backdrop-filter: blur(22px) saturate(190%);
+  -webkit-backdrop-filter: blur(22px) saturate(190%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  box-shadow:
+    0 20px 48px rgba(0, 0, 0, 0.55),
+    0 4px 16px rgba(59, 130, 246, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 0.25s ease,
+    visibility 0.25s ease,
+    transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1100;
+}
+
+.cv-header__nav-item--dropdown:hover .cv-header__dropdown {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.cv-header__dropdown li {
+  margin: 0;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.cv-header__dropdown li:nth-child(1) { transition-delay: 0.04s; }
+.cv-header__dropdown li:nth-child(2) { transition-delay: 0.08s; }
+.cv-header__dropdown li:nth-child(3) { transition-delay: 0.12s; }
+
+.cv-header__nav-item--dropdown:hover .cv-header__dropdown li {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cv-header__dropdown li a {
+  display: block;
+  padding: 10px 16px;
+  border-radius: 8px;
+  color: rgba(229, 231, 235, 0.85);
+  font-size: 13.5px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease, padding-left 0.2s ease;
+}
+
+.cv-header__dropdown li a:hover {
+  background: rgba(59, 130, 246, 0.18);
+  color: #ffffff;
+  padding-left: 20px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   RIGHT ACTIONS  (search, cart, sign-in)
+   ═══════════════════════════════════════════════════════════════════ */
+.cv-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/* ── Icon Button (search & cart base) ── */
+.cv-header__icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(229, 231, 235, 0.85);
+  cursor: pointer;
+  font-family: inherit;
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.2s ease,
+    box-shadow 0.25s ease;
+}
+
+.cv-header__icon-btn:hover,
+.cv-header__icon-btn:focus-visible {
+  background: rgba(59, 130, 246, 0.14);
+  border-color: rgba(59, 130, 246, 0.3);
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.2);
+}
+
+.cv-header__icon-btn:active {
+  transform: translateY(0) scale(0.95);
+}
+
+.cv-header__icon-btn:focus-visible {
+  outline: 2px solid rgba(59, 130, 246, 0.6);
+  outline-offset: 2px;
+}
+
+/* ── Cart Badge ── */
+.cv-header__cart-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1;
+  box-shadow:
+    0 0 10px rgba(37, 99, 235, 0.6),
+    0 2px 6px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+  animation: cv-badge-pop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes cv-badge-pop {
+  0% { transform: scale(0.5); opacity: 0; }
+  60% { transform: scale(1.15); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* ── Sign In Button ── */
+.cv-header__signin-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: 12px;
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  background: rgba(59, 130, 246, 0.08);
+  color: rgba(229, 231, 235, 0.9);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.2s ease,
+    box-shadow 0.25s ease;
+}
+
+.cv-header__signin-btn:hover,
+.cv-header__signin-btn:focus-visible {
+  background: rgba(59, 130, 246, 0.18);
+  border-color: rgba(59, 130, 246, 0.45);
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow:
+    0 4px 18px rgba(59, 130, 246, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.cv-header__signin-btn--active {
+  background: rgba(59, 130, 246, 0.22);
+  border-color: rgba(59, 130, 246, 0.5);
+  color: #ffffff;
+  box-shadow: 0 0 16px rgba(59, 130, 246, 0.3);
+}
+
+.cv-header__signin-btn:active {
+  transform: translateY(0) scale(0.97);
+}
+
+.cv-header__signin-btn:focus-visible {
+  outline: 2px solid rgba(59, 130, 246, 0.6);
+  outline-offset: 2px;
+}
+
+.cv-header__signin-label {
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── Actions divider line (purely visual) ── */
+.cv-header__actions > .cv-header__icon-btn + .cv-header__cart-btn::before {
+  /* no visible separator; spacing via gap is enough */
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Account dropdown positioning fix
+   (reuse existing popover styles from shared-components.css)
+   ═══════════════════════════════════════════════════════════════════ */
+.cv-header__actions .account-dropdown-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.cv-header__actions .account-dropdown-popover {
+  top: calc(100% + 10px);
+  right: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   HIDE OLD HEADER ELEMENTS  (hamburger, old left/right clusters,
+   old nav shell, old cart-nav-btn, old header-island-btn)
+   Only applies inside the new .cv-header to avoid breaking overlays.
+   ═══════════════════════════════════════════════════════════════════ */
+.cv-header .header-left-cluster,
+.cv-header .header-right-cluster:not(.cv-header__actions),
+.cv-header .menu-btn,
+.cv-header .nav-search-btn:not(.cv-header__icon-btn),
+.cv-header .cart-nav-btn:not(.cv-header__icon-btn) {
+  display: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Reduced motion
+   ═══════════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  .cv-header,
+  .cv-header *,
+  .cv-header *::before,
+  .cv-header *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

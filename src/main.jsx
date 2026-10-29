@@ -7,8 +7,6 @@ import { UIProvider } from "./context/UIContext";
 import App from "./App";
 import "./styles/forms.css";
 
-// HashRouter (#/consoles ...) so the built app works on any static host without server rewrites.
-// StrictMode is intentionally off: the Rentals island attaches DOM listeners once on mount.
 createRoot(document.getElementById("root")).render(
   <Provider store={store}>
     <HashRouter>

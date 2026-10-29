@@ -17,6 +17,7 @@ import Settings from "./pages/Settings";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 import Sell from "./pages/Sell";
+
 const GAME_FILTERS = [
   { cat: "action", label: "Action" },
   { cat: "adventure", label: "Adventure" },
@@ -27,14 +28,12 @@ const guard = (el) => <RequireAuth>{el}</RequireAuth>;
 
 export default function App() {
   const dispatch = useDispatch();
-  // load the catalog once at startup (search overlay needs it on every page)
   useEffect(() => {
     dispatch(fetchCatalog());
   }, [dispatch]);
 
   return (
     <Routes>
-      {/* login has its own page layout + stylesheet */}
       <Route path="/login" element={<Login />} />
 
       <Route element={<Layout />}>

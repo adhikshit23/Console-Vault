@@ -1,9 +1,5 @@
 import { createContext, useCallback, useContext, useMemo, useState } from "react";
 
-// Global (Context) state: who is logged in. Uses the same localStorage keys as login.js
-// so accounts created on the old pages keep working.
-// NOTE: passwords are plain text in localStorage – fine for a front-end-only prototype,
-// never for a real app.
 const USERS_KEY = "playboy_users";
 const CURRENT_KEY = "playboy_current_user";
 
@@ -19,7 +15,6 @@ const write = (key, value) => {
   try {
     localStorage.setItem(key, JSON.stringify(value));
   } catch {
-    /* ignore */
   }
 };
 
@@ -52,11 +47,10 @@ export function AuthProvider({ children }) {
   }, []);
 
   const logout = useCallback(() => {
-    if (!user) return; // Prevent multiple / redundant logout calls
+    if (!user) return;
     try {
       localStorage.removeItem(CURRENT_KEY);
     } catch {
-      /* ignore */
     }
     setUser(null);
   }, [user]);

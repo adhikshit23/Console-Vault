@@ -1,8 +1,3 @@
-// Reusable input component. Renders the SAME markup/classes as the original forms so the
-// existing CSS applies untouched:
-//   variant="auth" -> login.css style (<label class="text"> + <input>)
-//   variant="cv"   -> shared-components.css style (.cv-form-group)
-// It adds an error line (role="alert") under the control; styling lives in forms.css.
 export default function FormField({
   variant = "cv",
   label,

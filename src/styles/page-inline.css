@@ -1,6 +1,4 @@
-/* ---- from mainpage.html ---- */
 
-    /* ---- Rent-a-Console teaser (home page) ---- */
     .rent-section { max-width: 1200px; margin: 50px auto; padding: 0 20px; }
     .rent-box {
       background-color: rgba(15,23,42,0.24);
@@ -83,7 +81,6 @@
     .rental-hero-actions a:hover { transform: translateY(-2px); background: rgba(59,130,246,0.32); }
     @media (max-width: 600px) { .rental-hero-ad { min-height: 330px; padding: 40px 28px; } .rental-hero-content p { font-size: 14px; } }
   
-/* ---- from consoles.html ---- */
 
     .filter-nav {
       display: flex;
@@ -108,7 +105,6 @@
       color: #fff;
     }
   
-/* ---- from Moregames.html ---- */
 
     .filter-nav {
       display: flex;
@@ -133,7 +129,6 @@
       color: #fff;
     }
   
-/* ---- from rentals.html ---- */
 
     .filter-nav {
       display: flex;
@@ -159,7 +154,6 @@
       color: #fff;
     }
 
-    /* ---- Rental tabs ---- */
     .rent-tabs { display: flex; justify-content: center; gap: 16px; margin-bottom: 36px; flex-wrap: wrap; }
     .rent-tab-btn {
       padding: 12px 26px;
@@ -179,7 +173,6 @@
     .rent-panel { display: none; }
     .rent-panel.active { display: block; }
 
-    /* ---- Safety / info note ---- */
     .rent-note {
       margin: 0 0 30px;
       padding: 15px 18px;
@@ -210,7 +203,6 @@
     }
     .rent-filter-row input[type="text"]:focus { outline: none; border-color: #3b82f6; }
 
-    /* ---- Listing grid / cards ---- */
     .rental-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
@@ -265,7 +257,6 @@
     .rental-book-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(37,99,235,0.4); }
     .rental-empty { text-align: center; opacity: 0.6; padding: 40px 10px; }
 
-    /* ---- Booking panel ---- */
     .rental-booking-panel {
       display: none;
       margin-top: 10px;
@@ -316,7 +307,6 @@
       line-height: 1;
     }
 
-    /* ---- My activity ---- */
     .rental-activity-section.content-page { margin-top: 50px; padding: 0; overflow: hidden; background: radial-gradient(circle at 90% 0%, rgba(37,99,235,0.2), transparent 32%), linear-gradient(135deg, rgba(15,23,42,0.96), rgba(9,14,28,0.94)); }
     .activity-header { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 30px 32px; border-bottom: 1px solid rgba(148,163,184,0.14); }
     .activity-kicker { margin: 0 0 5px; color: #60a5fa; font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
@@ -354,7 +344,6 @@
       .rent-tab-btn { padding: 10px 18px; font-size: 13px; }
     }
   
-/* ---- from checkout.html ---- */
 
     .filter-nav {
       display: flex;
@@ -379,7 +368,6 @@
       color: #fff;
     }
   
-/* ---- from about.html ---- */
 
     .filter-nav {
       display: flex;

@@ -11,7 +11,7 @@ const rules = { name: [required("Display name")] };
 export default function Settings() {
   const { user, updateName } = useAuth();
   const { showMessage } = useUI();
-  const initial = useMemo(() => ({ name: user?.name || "" }), [user?.email]); // eslint-disable-line react-hooks/exhaustive-deps
+  const initial = useMemo(() => ({ name: user?.name || "" }), [user?.email]);
   const form = useForm(initial, rules);
   const submit = form.handleSubmit(({ name }) => {
     updateName(name.trim());

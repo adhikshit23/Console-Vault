@@ -7,8 +7,6 @@ import { useUI } from "../context/UIContext";
 
 const ADD_SELECTOR = ".console-add-btn, .pc-hw-add-btn, .game-add-btn";
 
-// Renders an original HTML section verbatim (so markup + CSS stay pixel-identical) and wires
-// the "Add to Cart" buttons inside it, in-page "#anchor" links and plain links to React state/router.
 export default function Html({ html, className, as: Tag = "div", style }) {
   const ref = useRef(null);
   const dispatch = useDispatch();
@@ -46,15 +44,14 @@ export default function Html({ html, className, as: Tag = "div", style }) {
       const href = link.getAttribute("href");
       if (href.startsWith("#/")) {
         e.preventDefault();
-        navigate(href.slice(1)); // route link -> React Router
+        navigate(href.slice(1));
       } else if (href.length > 1) {
-        e.preventDefault(); // in-page anchor (HashRouter owns the real hash)
+        e.preventDefault();
         document.getElementById(href.slice(1))?.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     }
   };
 
-  // keep "Add to Cart" / "✓ Added to Cart" labels in sync with the store (as cart.js did)
   useEffect(() => {
     const root = ref.current;
     if (!root) return;
@@ -65,7 +62,6 @@ export default function Html({ html, className, as: Tag = "div", style }) {
       btn.textContent = inCart ? "✓ Added to Cart" : "Add to Cart";
       btn.classList.toggle("added", inCart);
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [items, html]);
 
   return <Tag ref={ref} className={className} style={style} onClick={onClick} dangerouslySetInnerHTML={{ __html: html }} />;

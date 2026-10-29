@@ -1,9 +1,5 @@
 import { useCallback, useState } from "react";
 
-// Reusable form-validation hook.
-//   rules: { fieldName: [validator, validator, ...] }
-//   validator: (value, allValues) => string | undefined   (a returned string is the error)
-// Validators for the common cases live in utils/validators.js.
 export function useForm(initialValues, rules) {
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState({});
@@ -38,7 +34,6 @@ export function useForm(initialValues, rules) {
     const { name, value } = e.target;
     const next = { ...values, [name]: value };
     setValues(next);
-    // re-validate live once a field has been touched (also re-checks "confirm password")
     if (touched[name] || errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: validateField(name, value, next) }));
     }
@@ -59,7 +54,6 @@ export function useForm(initialValues, rules) {
     setTouched({});
   }, [initialValues]);
 
-  // handleSubmit(onValid) -> submit handler; only calls onValid when every rule passes
   const handleSubmit = (onValid) => (e) => {
     e.preventDefault();
     const found = validateAll();
